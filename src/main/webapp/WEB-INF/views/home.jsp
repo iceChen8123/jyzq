@@ -59,8 +59,8 @@ function getOnline(){
  	}
 }
 	$(document).ready(function() {
-		// getPie();
-		//getOnline();
+		//getPie();
+		getOnline();
 	});
 </script>
 </head>
@@ -79,11 +79,13 @@ function getOnline(){
 	<div id="test11" class="col-md-2" ></div>
 	<div id="test12" class="col-md-2" ></div>
 	</div>
-	<div class="panel panel-info col-md-2" >
+	<div class="col-md-2" >
+	<div class="panel panel-default">
 		<div class="panel-heading"><h3 class="panel-title">online</h3></div>
 		<div class="panel-body">
 		<ul id="onlineP">
 		</ul>
+		  </div>
 		  </div>
 	</div>
 </body>
