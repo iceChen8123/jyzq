@@ -1,4 +1,4 @@
-package com.ice.server;
+package com.ice.server.constant;
 
 public enum ChoiceType {
 

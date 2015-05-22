@@ -46,6 +46,8 @@ function changeSubject(v){
       	<c:forEach items="${choiceType }" var="ct">
         	<li><a href="${ct.choiceCode }" )">${ct.choiceName }</a></li>
       	</c:forEach>
+      	<li><a href="mailto:81231707@qq.com">Email我</a></li>
+      	<li><a href="qq:81231707">Q我</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
@@ -66,11 +68,11 @@ function changeSubject(v){
         <h4 class="modal-title" id="myModalLabel">HAPPY TITLE</h4>
       </div>
       <div class="modal-body">
-      	<form method="post" action="/choise/new" id="myForm" >
+      	<form method="post" id="myForm" >
 		  <div class="control-group" >
 		    <label for="choiceType" >发愁的事:</label>
 		    <c:forEach items="${choiceType }" var="ct">
-		    	<label class="radio-inline"><input type="radio" name="choiceType" value="${ct.choiceCode }">${ct.choiceName }</label>
+		    	<label class="radio-inline"><input type="radio" checked="checked" name="choiceType" value="${ct.choiceCode }">${ct.choiceName }</label>
 		    </c:forEach>
 		  </div>
 		  <div class="control-group">
@@ -85,7 +87,8 @@ function changeSubject(v){
 		  </div>
 		  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" >Save changes</button>
+        <button type="submit" class="btn btn-primary" formaction="/choice/help/helpme">大家来帮忙</button>
+        <button type="submit" class="btn btn-primary" formaction="/choice/help/comeon">直接帮我选</button>
       </div>
 		</form>
       </div>
