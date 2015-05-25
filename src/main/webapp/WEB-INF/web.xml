@@ -110,7 +110,7 @@
 	<!-- 随机验证码 -->
     <servlet>
         <servlet-name>ValidateCodeServlet</servlet-name>
-        <servlet-class>com.ctrip.paymentweb.common.servlet.ValidateCodeServlet</servlet-class>
+        <servlet-class>com.ice.jyzq.controller.ValidateCodeServlet</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>ValidateCodeServlet</servlet-name>

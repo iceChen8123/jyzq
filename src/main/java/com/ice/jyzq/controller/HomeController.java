@@ -1,9 +1,7 @@
 package com.ice.jyzq.controller;
 
-import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
@@ -38,16 +36,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/hello", method = RequestMethod.GET)
 	public String home(Locale locale, Model model) {
-		logger.info("Welcome home! The client locale is {}.", locale);
-
-		Date date = new Date();
-		DateFormat dateFormat = DateFormat.getDateTimeInstance(DateFormat.LONG, DateFormat.LONG, locale);
-
-		String formattedDate = dateFormat.format(date);
-
-		model.addAttribute("serverTime", formattedDate);
-		model.addAttribute("choiceType", CHOICE_TYPE_LIST);
-
+		// model.addAttribute("choiceType", CHOICE_TYPE_LIST);
 		return "home";
 	}
 }
