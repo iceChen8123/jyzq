@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fns" uri="/WEB-INF/tlds/fns.tld" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
 <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
@@ -18,6 +19,7 @@ $(document).ready(function() {
     });
 });
 function newtask(){
+	alert('<%=request.getContextPath()%>'); 
 	$('#myModal').modal('show');
 }
 function login(){
@@ -74,7 +76,7 @@ function changeSubject(v){
 		  <div class="control-group" >
 		    <label for="choiceType" >发愁的事:</label>
 		    <c:forEach items="${fns:getChoiceTypes()}" var="ct">
-		    	<label class="radio-inline"><input type="radio" name="choiceType" value="${ct.choiceCode }">${ct.choiceName }</label>
+		    	<label class="radio-inline"><input type="radio" name="choiceType" value="${ct.choiceCode }" checked="checked">${ct.choiceName }</label>
 		    </c:forEach>
 		  </div>
 		  <div class="control-group">
