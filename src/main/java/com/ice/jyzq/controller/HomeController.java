@@ -34,9 +34,8 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
-	@RequestMapping(value = "/hello", method = RequestMethod.GET)
+	@RequestMapping(value = "/hello", method = { RequestMethod.GET, RequestMethod.POST })
 	public String home(Locale locale, Model model) {
-		// model.addAttribute("choiceType", CHOICE_TYPE_LIST);
 		return "home";
 	}
 }

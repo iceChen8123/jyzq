@@ -6,7 +6,7 @@
 <body>
 <div class="col-md-2" ></div>
 <div class="col-md-6" >
-	<form:form action="login" commandName="user" method="post">
+	<form:form action="register" commandName="user" method="post">
 		<div class="control-group">
 			<label for="username">用户名</label>
 			<div class="controls">
@@ -23,7 +23,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<input id="btnSubmit" class="btn btn-primary" type="submit"
-					value="登录" />&nbsp;
+					value="保存" />&nbsp;
 			</div>
 		</div>
 	</form:form>

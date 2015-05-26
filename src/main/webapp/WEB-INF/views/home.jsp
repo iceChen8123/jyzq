@@ -58,13 +58,20 @@ function getOnline(){
  		$('#onlineP').append("<li>Cras justo odio</li>");
  	}
 }
+function showtips(){
+	if($('#message').val()){
+		alert($('#message').val());
+	}
+}
 	$(document).ready(function() {
 		//getPie();
-		getOnline();
+		// getOnline();
+		showtips();
 	});
 </script>
 </head>
 <body>
+<input id="message" value="${message }" hidden="true">
 	<div class="col-md-9" >
 	<div id="test1" class="col-md-2" ></div>
 	<div id="test2" class="col-md-2" ></div>

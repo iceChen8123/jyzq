@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fns" uri="/WEB-INF/tlds/fns.tld" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
@@ -19,11 +20,8 @@ $(document).ready(function() {
     });
 });
 function newtask(){
-	alert('<%=request.getContextPath()%>'); 
+	// alert('<%=request.getContextPath()%>'); 
 	$('#myModal').modal('show');
-}
-function login(){
-	$('#login').modal('show');
 }
 var choicenum = 2;
 function addChoice(){
@@ -55,9 +53,9 @@ function changeSubject(v){
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
-        <li><button type="button" class="btn btn-info btn-lg" onclick="login()">登录</button></li>
-        <li><button type="button" class="btn btn-warning btn-lg">注册</button></li>
-        <li><button type="button" class="btn btn-default btn-lg">退出</button></li>
+        <li><button type="button" class="btn btn-info btn-lg" ><a href="login">登录</a></button></li>
+        <li><button type="button" class="btn btn-warning btn-lg" ><a href="register">注册</a></button></li>
+        <li><button type="button" class="btn btn-default btn-lg" ><a href="logout">退出</a></button></li>
       </ul>
     </div>
   </div>
@@ -98,37 +96,4 @@ function changeSubject(v){
     </div>
   </div>
 </div>
-
-<div class="modal fade" id="login" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-<div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">Login</h4>
-      </div>
-      <div class="modal-body">
-            <form id="loginForm"  class="form login-form" action="login" method="post">
-                <div class="body">
-					<div class="control-group">
-						<label for="username">登录名</label>
-						<div class="controls">
-							<input type="text" id="username" name="username" class="required" value="${username}" placeholder="登录名">
-						</div>
-					</div>
-					<div class="control-group">
-						<label for="password">密码</label>
-						<div class="controls">
-							<input type="password" id="password" name="password" class="required" placeholder="密码"/>
-						</div>
-					</div>
-                </div>
-                <div class="footer">
-                    <input class="btn btn-primary" type="submit" value="登 录"/>
-                </div>
-            </form>
-            </div>
-        </div>
-    </div>
-</div>
-
 </html>

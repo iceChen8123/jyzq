@@ -7,7 +7,7 @@
 <html>
 <div class="container-fluid directional" >
 <div class="col-md-12" >
-  <h1>JYZQ</h1>
+  <h1><a href="hello">JYZQ</a></h1>
 </div>
 </div>
 <%@include file="/WEB-INF/views/include/navi.jsp"%>
