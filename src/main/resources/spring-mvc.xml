@@ -14,7 +14,9 @@
 		http://www.springframework.org/schema/context/spring-context-3.2.xsd">
     
     
+    
     <description>Spring MVC Configuration</description>
+    
     <context:annotation-config/>
     <!-- 使用Annotation自动注册Bean,只扫描@Controller -->
     <context:component-scan base-package="com.ice" use-default-filters="false"><!-- base-package 如果多个，用“,”分隔 -->
@@ -39,13 +41,13 @@
 			<bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter">
                 <property name="prettyPrint" value="true"/>
                 <property name="objectMapper">  
-                    <bean class="com.ice.jyzq.controller.JsonMapper"></bean>
+                    <bean class="com.ice.jyzq.util.JsonMapper"></bean>
                 </property> 
             </bean>
             <!-- 使用XML格式输出数据 -->
 		</mvc:message-converters>
 		<mvc:argument-resolvers>
-			<bean class="com.ice.jyzq.controller.SecureModelAttributeMethodArgumentResolver">
+			<bean class="com.ice.jyzq.controller.base.SecureModelAttributeMethodArgumentResolver">
 				<constructor-arg value="false"/>
 			</bean>
 		</mvc:argument-resolvers>

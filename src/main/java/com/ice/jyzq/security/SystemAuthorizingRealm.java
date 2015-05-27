@@ -1,4 +1,4 @@
-package com.ice.jyzq.controller;
+package com.ice.jyzq.security;
 
 import org.apache.commons.lang.builder.ReflectionToStringBuilder;
 import org.apache.commons.lang.builder.ToStringStyle;

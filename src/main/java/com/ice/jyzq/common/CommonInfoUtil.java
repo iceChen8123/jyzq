@@ -8,20 +8,19 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import com.ice.server.ChoiceType;
+import com.ice.server.ChoiseType;
 
 @Component
 public class CommonInfoUtil {
 
-	private static final List<ChoiceType> CHOICE_TYPE_LIST = new ArrayList<ChoiceType>();
+	private static final List<ChoiseType> CHOICE_TYPE_LIST = new ArrayList<ChoiseType>();
 
 	@PostConstruct
 	public void init() {
-		CHOICE_TYPE_LIST.addAll(Arrays.asList(ChoiceType.values()));
+		CHOICE_TYPE_LIST.addAll(Arrays.asList(ChoiseType.values()));
 	}
 
-	public static List<ChoiceType> getChoiceTypes() {
-
+	public static List<ChoiseType> getChoiceTypes() {
 		return CHOICE_TYPE_LIST;
 	}
 

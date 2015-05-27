@@ -1,4 +1,4 @@
-package com.ice.jyzq.controller;
+package com.ice.jyzq.controller.base;
 
 import java.lang.annotation.Annotation;
 import java.util.Collections;
@@ -27,6 +27,8 @@ import org.springframework.web.method.support.HandlerMethodArgumentResolver;
 import org.springframework.web.method.support.ModelAndViewContainer;
 import org.springframework.web.servlet.HandlerMapping;
 import org.springframework.web.servlet.mvc.method.annotation.ExtendedServletRequestDataBinder;
+
+import com.ice.jyzq.util.Reflections;
 
 public class SecureModelAttributeMethodArgumentResolver implements HandlerMethodArgumentResolver {
 

@@ -13,8 +13,8 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
-	public User save(String username, String password) {
-		User user = EndecryptUtils.md5Password(username, password);
+	public User save(String userName, String password) {
+		User user = EndecryptUtils.md5Password(userName, password);
 		return userDao.save(user);
 	}
 
@@ -23,7 +23,7 @@ public class UserService {
 	}
 
 	public void updateUserLoginInfo(Long id) {
-//		userDao.updateUserLoginInfo(id);
+		userDao.updateUserLoginInfo(id);
 	}
 
 	public boolean ifUserExists(String userName) {

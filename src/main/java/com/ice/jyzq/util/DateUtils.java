@@ -1,4 +1,4 @@
-package com.ice.jyzq.controller;
+package com.ice.jyzq.util;
 
 import org.apache.commons.lang3.time.DateFormatUtils;
 

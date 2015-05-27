@@ -27,7 +27,7 @@
 			<value>
 				/static/** = anon
 				/logout = anon
-				/choise/** = authc
+				<!-- /choise/** = authc -->
 			</value>
 		</property>
 	</bean>

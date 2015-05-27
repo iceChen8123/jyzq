@@ -23,5 +23,6 @@
 	<classpathentry kind="lib" path="src/lib/comet4j-tomcat7.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="con" path="org.eclipse.jst.server.core.container/org.eclipse.jst.server.tomcat.runtimeTarget/Apache Tomcat v7.0"/>
+	<classpathentry kind="lib" path="src/lib/pinyin4j-2.5.0.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

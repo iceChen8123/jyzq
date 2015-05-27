@@ -5,34 +5,48 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/WEB-INF/views/include/head.jsp"%>
-<script src="resources/highcharts.js"></script>
+<script src="<%=request.getContextPath()%>/resources/highcharts.js"></script>
 <script type="text/javascript">
-function getPie(){
-	var choiceType = subject;
+function showtips(){
+	if($('#message').val()){
+		alert($('#message').val());
+	}
+}
+	$(document).ready(function() {
+		showtips();
+		genpie();
+	});
+function genpie(){
+	var id = $('#id').val();
+	var btnType =['btn-primary','btn-success','btn-info','btn-warning','btn-danger','btn-default'];
+	
 	$.ajax({    
         type:'get',        
-        url:'choise/some/get',    
-        data:{choiceType: choiceType},    
+        url:'<%=request.getContextPath()%>/choise/get',    
+        data:{id: id},    
         cache:false,    
         dataType:'json',    
         success:function(data){
-        	$.each(data, function(i, n){
         		var seriesdata = [];
-        		$.each(n.choiseAndVote, function(it, a){
-        			seriesdata[it] = [a.choise, parseInt(a.vote)];
+        		$.each(data.choiseAndVote, function(i, a){
+        			seriesdata[i] = [a.choise, parseInt(a.vote)];
+        			$('#onlineP').append("<li><button type=\"button\" class=\"btn "+btnType[i]+" btn-lg\" onclick=\"vote('"+a.choise+"')\">"+ a.choise +"</button></li>");
         		});
-         		$('#test'+i).highcharts({
+         		$('#test0').highcharts({
          			credits:{
-         				text:n.title,
-         				href: "choise/vote?id="+n.id
+         				text:data.title,
+         				href: "<%=request.getContextPath()%>/choise/vote?id="+data.id
          			},
                     chart: {
                         plotBackgroundColor: null,
                         plotBorderWidth: null,
                         plotShadow: false
                     },
+                    subtitle:{
+                    	text: data.choiseDesc
+                    },
                     title: {
-                        text: n.title
+                        text: data.title
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
@@ -49,65 +63,37 @@ function getPie(){
                     },
                     series: [{
                         type: 'pie',
-                        name: n.choiseType,
+                        name: data.choiseType,
                         data: seriesdata
                     }]
                 });
-        	});
         }    
-    });    
+    });
 }
-function getOnline(){
-    $.ajax({    
-        type:'get',        
-        url:'online/some/get',    
-        data:{},    
+function vote(s){
+	var choise = s;
+	var id = $('#id').val();
+	$.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/choise/vote',    
+        data:{id:id,choise:choise},    
         cache:false,    
         dataType:'json',    
         success:function(data){
         	alert(data);
-        	$.each(data, function(i, n){
-         		$('#onlineP').append("<li>"+n+"</li>");
-        	});
+        	location.reload();
         }    
     });    
 }
-function showtips(){
-	if($('#message').val()){
-		alert($('#message').val());
-	}
-}
-	$(document).ready(function() {
-		getPie();
-		//getOnline();
-		showtips();
-	});
 </script>
 </head>
 <body>
 <input id="message" value="${message }" hidden="true">
-	<div class="col-md-9" >
-	<div id="test0" class="col-md-2" ></div>
-	<div id="test1" class="col-md-2" ></div>
-	<div id="test2" class="col-md-2" ></div>
-	<div id="test3" class="col-md-2" ></div>
-	<div id="test4" class="col-md-2" ></div>
-	<div id="test5" class="col-md-2" ></div>
-	<div id="test6" class="col-md-2" ></div>
-	<div id="test7" class="col-md-2" ></div>
-	<div id="test8" class="col-md-2" ></div>
-	<div id="test9" class="col-md-2" ></div>
-	<div id="test10" class="col-md-2" ></div>
-	<div id="test11" class="col-md-2" ></div>
-	</div>
-	<div class="col-md-2" >
-	<div class="panel panel-default">
-		<div class="panel-heading"><h3 class="panel-title">online</h3></div>
-		<div class="panel-body">
-		<ul id="onlineP">
+<input id="id" value="${id }" hidden="true">
+	<div id="test0" class="col-md-12" ></div>
+	<div id="test1" class="col-md-12" >
+	<ul id="onlineP">
 		</ul>
-		  </div>
-		  </div>
 	</div>
 </body>
 </html>

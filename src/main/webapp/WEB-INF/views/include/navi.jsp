@@ -6,27 +6,36 @@
 <html>
 <head>
 <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
-<link href="resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
-<script src="resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<link href="resources/jquery-validation/1.11.1/jquery.validate.min.css" type="text/css" rel="stylesheet" />
-<script src="resources/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
-<script src="resources/jquery-validation/1.11.1/jquery.validate.method.min.js" type="text/javascript"></script>
+<link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<link href="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.min.css" type="text/css" rel="stylesheet" />
+<script src="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
+<script src="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.method.min.js" type="text/javascript"></script>
 <script type="text/javascript">
 $(document).ready(function() {
-	$("#myForm").validate({
-        submitHandler:function(form){
-            form.submit();
-        }
-    });
+	$("#myForm").validate();
 });
 function newtask(){
-	// alert('<%=request.getContextPath()%>'); 
 	$('#myModal').modal('show');
+}
+function commitTask(){
+	var formParam = $("#myForm").serialize();
+    $.ajax({    
+        type:'post',        
+        url:'choise/new',    
+        data:formParam,    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){   
+        	alert(data);
+        	location.reload();
+        }    
+    });    
 }
 var choicenum = 2;
 function addChoice(){
 	if(choicenum >= 6){
-		alert('u have too much choice.Sorry ~_~');
+		alert('u have too much choises.Sorry ~_~');
 		return;
 	}
 	choicenum++;
@@ -37,7 +46,7 @@ function addChoice(){
 		$('#moreButton').attr("disabled", true);
 	}
 } 
-var subject = '';
+var subject = 'EAT';
 function changeSubject(v){
 	subject = v;
 }
@@ -70,11 +79,15 @@ function changeSubject(v){
         <h4 class="modal-title" id="myModalLabel">HAPPY TITLE</h4>
       </div>
       <div class="modal-body">
-      	<form method="post" id="myForm" action="choise/new">
+      	<form method="post" id="myForm">
+      	  <div class="control-group" >
+		    <label for="title" >标题:</label>
+		    <input type="text" class="form-control input-lg required" name="title" id="title" placeholder="写得好，大家都会看...">
+		  </div>
 		  <div class="control-group" >
 		    <label for="choiceType" >发愁的事:</label>
 		    <c:forEach items="${fns:getChoiceTypes()}" var="ct">
-		    	<label class="radio-inline"><input type="radio" name="choiceType" value="${ct.choiceCode }" checked="checked">${ct.choiceName }</label>
+		    	<label class="radio-inline"><input type="radio" name="choiseType" value="${ct.choiceCode }" checked="checked">${ct.choiceName }</label>
 		    </c:forEach>
 		  </div>
 		  <div class="control-group">
@@ -87,9 +100,13 @@ function changeSubject(v){
 		  <div class="control-group">
 		    <input id="moreButton" type="button" class="form-control input-lg" value="Give Me More" onclick="addChoice()">
 		  </div>
+		  <div class="control-group" >
+		    <label for="title" >描述:</label>
+		    <input type="text" class="form-control input-lg required" name="choiseDesc" id="choiseDesc" placeholder="详细描述，更有助于大家投票的准确性">
+		  </div>
 		  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="submit" class="btn btn-primary" id="newChoise">Save changes</button>
+        <button type="button" class="btn btn-primary" onclick="commitTask()" >Save</button>
       </div>
 		</form>
       </div>

@@ -1,4 +1,4 @@
-package com.ice.jyzq.controller;
+package com.ice.jyzq.controller.base;
 
 import java.beans.PropertyEditorSupport;
 import java.util.Date;
@@ -15,6 +15,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import com.ice.jyzq.util.DateUtils;
 
 /**
  * 控制器支持类

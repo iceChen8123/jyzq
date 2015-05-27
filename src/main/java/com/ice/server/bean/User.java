@@ -16,26 +16,11 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
-	@Column(name = "user_name")
-	private String userName;
-	@Column(name = "password")
-	private String password;
-	@Column(name = "salt")
-	private String salt;
+
 	@Column(name = "create_time")
 	private Date createTime;
-	@Column(name = "last_ip")
-	private String lastIp;
-	@Column(name = "last_login")
-	private Date lastLogin;
-
-	public String getSalt() {
-		return salt;
-	}
-
-	public void setSalt(String salt) {
-		this.salt = salt;
-	}
+	@Column(name = "update_time")
+	private Date updateTime;
 
 	public Long getId() {
 		return id;
@@ -44,6 +29,33 @@ public class User implements Serializable {
 	public void setId(Long id) {
 		this.id = id;
 	}
+
+	public Date getCreateTime() {
+		return createTime;
+	}
+
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
+	}
+
+	@Column(name = "user_name")
+	private String userName;
+	@Column(name = "password")
+	private String password;
+	@Column(name = "salt")
+	private String salt;
+	@Column(name = "last_ip")
+	private String lastIp;
+	@Column(name = "last_login")
+	private Date lastLogin;
 
 	public String getUserName() {
 		return userName;
@@ -61,12 +73,12 @@ public class User implements Serializable {
 		this.password = password;
 	}
 
-	public Date getCreateTime() {
-		return createTime;
+	public String getSalt() {
+		return salt;
 	}
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
+	public void setSalt(String salt) {
+		this.salt = salt;
 	}
 
 	public String getLastIp() {

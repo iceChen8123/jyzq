@@ -1,13 +1,13 @@
 package com.ice.server;
 
-public enum ChoiceType {
+public enum ChoiseType {
 
 	Cloth("cloth", "衣"), Food("food", "食");
 
 	private String choiceCode;
 	private String choiceName;
 
-	private ChoiceType(String choiceCode, String choiceName) {
+	private ChoiseType(String choiceCode, String choiceName) {
 		this.choiceCode = choiceCode;
 		this.choiceName = choiceName;
 	}

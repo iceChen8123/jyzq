@@ -1,4 +1,4 @@
-package com.ice.jyzq.controller;
+package com.ice.jyzq.controller.base;
 
 import java.lang.annotation.*;
 
