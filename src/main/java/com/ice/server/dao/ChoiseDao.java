@@ -1,5 +1,6 @@
 package com.ice.server.dao;
 
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
@@ -10,7 +11,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.ice.server.bean.Choise;
 
 @Repository
-public interface ChoiseDao extends PagingAndSortingRepository<Choise, Long> {
+public interface ChoiseDao extends PagingAndSortingRepository<Choise, Long>, JpaSpecificationExecutor<Choise> {
 
 	@Modifying
 	@Transactional

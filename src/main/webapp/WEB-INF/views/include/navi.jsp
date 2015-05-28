@@ -17,9 +17,16 @@ function showtips(){
 		alert($('#message').val());
 	}
 }
+var subject = 'EAT';
+function changeSubject(){
+	if($('#subject').val()){
+		subject = $('#subject').val();
+	}
+}
 $(document).ready(function() {
 	$("#myForm").validate();
 	showtips();
+	changeSubject();
 });
 function newtask(){
 	$('#myModal').modal('show');
@@ -38,26 +45,24 @@ function addChoice(){
 		$('#moreButton').attr("disabled", true);
 	}
 } 
-var subject = 'EAT';
-function changeSubject(v){
-	subject = v;
-}
 </script>
 </head>
 <input id="message" value="${message }" hidden="true">
+<input id="subject" value="${subject }" hidden="true">
 <nav class="navbar navbar-inverse" >
   <div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
       	<c:forEach items="${fns:getChoiceTypes()}" var="ct">
-        	<li><a href="${ct.choiceCode }" )">${ct.choiceName }</a></li>
+        	<li><a href="<%=request.getContextPath()%>/choise?type=${ct.choiseCode }" )">${ct.choiseName }</a></li>
       	</c:forEach>
+        	<shiro:authenticated><li><a href="mailto:81231707@qq.com" )">爽Vs不爽</a></li></shiro:authenticated>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
-        <shiro:lacksRole name="simple"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li></shiro:lacksRole>
-        <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li>
-        <li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li>
+        <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li></shiro:notAuthenticated>
+        <shiro:notAuthenticated><li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:notAuthenticated>
+        <shiro:authenticated><li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li></shiro:authenticated>
       </ul>
     </div>
   </div>
@@ -80,7 +85,7 @@ function changeSubject(v){
 		  <div class="control-group" >
 		    <label for="choiceType" >发愁的事:</label>
 		    <c:forEach items="${fns:getChoiceTypes()}" var="ct">
-		    	<label class="radio-inline"><input type="radio" name="choiseType" value="${ct.choiceCode }" checked="checked">${ct.choiceName }</label>
+		    	<label class="radio-inline"><input type="radio" name="choiseType" value="${ct.choiseCode }" checked="checked">${ct.choiseName }</label>
 		    </c:forEach>
 		  </div>
 		  <div class="control-group">

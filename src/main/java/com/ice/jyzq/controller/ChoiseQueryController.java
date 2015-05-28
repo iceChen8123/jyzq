@@ -46,6 +46,12 @@ public class ChoiseQueryController {
 		return JsonMapper.toJsonString("ok");
 	}
 
+	@RequestMapping(value = "", method = RequestMethod.GET)
+	public String to(@RequestParam("type") String choiseType, Model model) {
+		model.addAttribute("subject", choiseType);
+		return "forward:hello";
+	}
+
 	@RequestMapping(value = "vote", method = RequestMethod.GET)
 	public String vote(@RequestParam("id") String id, Model model) {
 		model.addAttribute("id", id);

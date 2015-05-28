@@ -4,12 +4,19 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Path;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort.Direction;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import com.ice.jyzq.util.Cn2SpellUtil;
@@ -73,9 +80,16 @@ public class ChoiseService {
 		return votes.toString().substring(1);
 	}
 
-	public List<Choise> findLatestChoises(String choiceType, int pageNo, int pageSize) {
+	public List<Choise> findLatestChoises(final String choiseType, int pageNo, int pageSize) {
 		Pageable pageable = new PageRequest(pageNo, pageSize, Direction.DESC, "id");
-		Iterator<Choise> choiseIterator = choiseDao.findAll(pageable).iterator();
+		Iterator<Choise> choiseIterator = choiseDao.findAll(new Specification<Choise>() {
+
+			public Predicate toPredicate(Root<Choise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Path<String> choiseTypePath = root.get("choiseType");
+				query.where(cb.equal(choiseTypePath, choiseType)); // 这里可以设置任意条查询条件
+				return null;
+			}
+		}, pageable).iterator();
 		List<Choise> rtnList = new ArrayList<Choise>();
 		while (choiseIterator.hasNext()) {
 			rtnList.add(choiseIterator.next());
@@ -88,14 +102,12 @@ public class ChoiseService {
 	}
 
 	public void vote(String id, String choise) {
-		// TODO Auto-generated method stub
 		voteChoise(id, choise);
 		voteSummary(choise);
 	}
 
 	private void voteSummary(String choise) {
 		// TODO Auto-generated method stub
-
 	}
 
 	private void voteChoise(String id, String choise) {
