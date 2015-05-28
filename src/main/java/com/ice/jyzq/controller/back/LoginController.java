@@ -23,7 +23,6 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("user", new User());
-		model.addAttribute("message", "请登录");
 		return "login";
 	}
 
@@ -41,8 +40,9 @@ public class LoginController extends BaseController {
 			SecurityUtils.getSubject().login(new UsernamePasswordToken(user.getUserName(), user.getPassword()));
 			model.addAttribute("message", "欢迎光临");
 		} catch (AuthenticationException e) {
-			model.addAttribute("message", "请先登录");
+			model.addAttribute("message", "用户名或密码错误");
 			logger.warn("{} 登录失败.", user.getUserName());
+			return "login";
 		}
 		return "forward:hello";
 	}

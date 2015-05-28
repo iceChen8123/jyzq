@@ -12,84 +12,74 @@
             classpath*:/spring-context*.xml
         </param-value>
 	</context-param>
-	
+
 	<!-- 激活Tomcat的defaultServlet来处理静态文件 -->
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.jpg</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.gif</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.png</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.js</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>*.css</url-pattern>
-    </servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.jpg</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.gif</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.png</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.js</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
+		<url-pattern>*.css</url-pattern>
+	</servlet-mapping>
 
 	<!-- Creates the Spring Container shared by all Servlets and Filters -->
 	<listener>
 		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
 	</listener>
-	
+
 	<filter>
-        <filter-name>encodingFilter</filter-name>
-        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
-        <init-param>
-            <param-name>encoding</param-name>
-            <param-value>UTF-8</param-value>
-        </init-param>
-        <init-param>
-            <param-name>forceEncoding</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>encodingFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+		<init-param>
+			<param-name>forceEncoding</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 
 	<!-- Apache Shiro -->
-    <filter>
-        <filter-name>shiroFilter</filter-name>
-        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
-        <init-param>
-            <param-name>targetFilterLifecycle</param-name>
-            <param-value>true</param-value>
-        </init-param>
-    </filter>
-    <filter-mapping>
-        <filter-name>shiroFilter</filter-name>
-        <url-pattern>/*</url-pattern>
-    </filter-mapping>
-	
-	<!-- <listener>
-		<description>Comet4J容器侦听</description>
-		<listener-class>org.comet4j.core.CometAppListener</listener-class>
-	</listener>
-	<servlet>
-		<description>Comet连接[默认:org.comet4j.core.CometServlet]</description>
-		<display-name>CometServlet</display-name>
-		<servlet-name>CometServlet</servlet-name>
-		<servlet-class>org.comet4j.core.CometServlet</servlet-class>
-	</servlet>
-	<servlet-mapping>
-		<servlet-name>CometServlet</servlet-name>
-		<url-pattern>/conn</url-pattern>
-	</servlet-mapping>
+	<filter>
+		<filter-name>shiroFilter</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+		<init-param>
+			<param-name>targetFilterLifecycle</param-name>
+			<param-value>true</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+		<dispatcher>REQUEST</dispatcher>
+		<dispatcher>FORWARD</dispatcher>
+	</filter-mapping>
 
-	<listener>
-		<description>HelloWorld</description>
-		<listener-class>com.ice.comet.HelloWorld</listener-class>
-	</listener> -->
+	<!-- <listener> <description>Comet4J容器侦听</description> <listener-class>org.comet4j.core.CometAppListener</listener-class> 
+		</listener> <servlet> <description>Comet连接[默认:org.comet4j.core.CometServlet]</description> 
+		<display-name>CometServlet</display-name> <servlet-name>CometServlet</servlet-name> 
+		<servlet-class>org.comet4j.core.CometServlet</servlet-class> </servlet> <servlet-mapping> 
+		<servlet-name>CometServlet</servlet-name> <url-pattern>/conn</url-pattern> 
+		</servlet-mapping> <listener> <description>HelloWorld</description> <listener-class>com.ice.comet.HelloWorld</listener-class> 
+		</listener> -->
 
 	<!-- Processes application requests -->
 	<servlet>
@@ -106,29 +96,29 @@
 		<servlet-name>appServlet</servlet-name>
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 随机验证码 -->
-    <servlet>
-        <servlet-name>ValidateCodeServlet</servlet-name>
-        <servlet-class>com.ice.jyzq.controller.ValidateCodeServlet</servlet-class>
-    </servlet>
-    <servlet-mapping>
-        <servlet-name>ValidateCodeServlet</servlet-name>
-        <url-pattern>/servlet/validateCodeServlet</url-pattern>
-    </servlet-mapping>
+	<servlet>
+		<servlet-name>ValidateCodeServlet</servlet-name>
+		<servlet-class>com.ice.jyzq.controller.ValidateCodeServlet</servlet-class>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>ValidateCodeServlet</servlet-name>
+		<url-pattern>/servlet/validateCodeServlet</url-pattern>
+	</servlet-mapping>
 
 	<!-- 错误 页面配置 -->
-    <error-page>
-        <exception-type>java.lang.Throwable</exception-type>
-        <location>/WEB-INF/views/error/500.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>500</error-code>
-        <location>/WEB-INF/views/error/500.jsp</location>
-    </error-page>
-    <error-page>
-        <error-code>404</error-code>
-        <location>/WEB-INF/views/error/404.jsp</location>
-    </error-page>
+	<error-page>
+		<exception-type>java.lang.Throwable</exception-type>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>500</error-code>
+		<location>/WEB-INF/views/error/500.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/views/error/404.jsp</location>
+	</error-page>
 
 </web-app>
