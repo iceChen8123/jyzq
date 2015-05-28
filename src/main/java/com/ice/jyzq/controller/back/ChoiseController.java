@@ -25,6 +25,9 @@ import com.ice.jyzq.util.JsonMapper;
 @RequestMapping(value = "b/choise")
 public class ChoiseController {
 
+	@Autowired
+	private UserUtil userUtil;
+	
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
@@ -36,7 +39,7 @@ public class ChoiseController {
 			@RequestParam("choiseDesc") String choiseDesc) {
 		List<String> choiseList = getChoisesFromRequest(request);
 		logger.info("choiseType {} , choiceList {}", choiseType, JsonMapper.toJsonString(choiseList));
-		choiseService.save(title, choiseType, choiseList, choiseDesc, UserUtil.getCurrentUserName());
+		choiseService.save(title, choiseType, choiseList, choiseDesc, userUtil.getCurrentUserName());
 		model.addAttribute("message", "ok");
 		return "home";
 	}

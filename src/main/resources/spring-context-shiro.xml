@@ -22,11 +22,12 @@
             <map>
                 <entry key="authc" value-ref="formAuthenticationFilter"/>
             </map>
-        </property> -->
+        </property>  -->
 		<property name="filterChainDefinitions">
 			<value>
 				/static/** = anon
-				/logout = anon
+				/login = authc
+				/logout = logout
 				/b/** = authc 
 			</value>
 		</property>

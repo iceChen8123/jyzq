@@ -54,6 +54,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthorizationInfo doGetAuthorizationInfo(PrincipalCollection principalCollection) {
 		String userName = (String) principalCollection.fromRealm(getName()).iterator().next();
+		logger.info("{} doGetAuthorizationInfo ....", userName);
 		User user = userService.findByUserName(userName);
 		if (user != null) {
 			// 更新登录IP和时间

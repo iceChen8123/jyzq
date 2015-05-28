@@ -11,7 +11,7 @@ function getPie(){
 	var choiceType = subject;
 	$.ajax({    
         type:'get',        
-        url:'choise/some/get',    
+        url:'<%=request.getContextPath()%>/choise/some/get',    
         data:{choiceType: choiceType},    
         cache:false,    
         dataType:'json',    
@@ -24,7 +24,7 @@ function getPie(){
          		$('#test'+i).highcharts({
          			credits:{
          				text:n.title,
-         				href: "choise/vote?id="+n.id
+         				href: "<%=request.getContextPath()%>/choise/vote?id="+n.id
          			},
                     chart: {
                         plotBackgroundColor: null,
@@ -60,7 +60,7 @@ function getPie(){
 function getOnline(){
     $.ajax({    
         type:'get',        
-        url:'online/some/get',    
+        url:'<%=request.getContextPath()%>/online/some/get',    
         data:{},    
         cache:false,    
         dataType:'json',    

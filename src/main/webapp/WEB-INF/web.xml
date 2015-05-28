@@ -72,6 +72,10 @@
 		<dispatcher>REQUEST</dispatcher>
 		<dispatcher>FORWARD</dispatcher>
 	</filter-mapping>
+	<filter-mapping>
+		<filter-name>shiroFilter</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
 
 	<!-- <listener> <description>Comet4J容器侦听</description> <listener-class>org.comet4j.core.CometAppListener</listener-class> 
 		</listener> <servlet> <description>Comet连接[默认:org.comet4j.core.CometServlet]</description> 
@@ -108,7 +112,7 @@
 	</servlet-mapping>
 
 	<!-- 错误 页面配置 -->
-	<error-page>
+	<!-- <error-page>
 		<exception-type>java.lang.Throwable</exception-type>
 		<location>/WEB-INF/views/error/500.jsp</location>
 	</error-page>
@@ -119,6 +123,6 @@
 	<error-page>
 		<error-code>404</error-code>
 		<location>/WEB-INF/views/error/404.jsp</location>
-	</error-page>
+	</error-page> -->
 
 </web-app>

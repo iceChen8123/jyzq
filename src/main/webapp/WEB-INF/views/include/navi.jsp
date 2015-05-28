@@ -18,7 +18,7 @@ function showtips(){
 		alert($('#message').val());
 	}
 }
-var subject = 'EAT';
+var subject = 'food';
 function changeSubject(){
 	if($('#subject').val()){
 		subject = $('#subject').val();
@@ -61,9 +61,9 @@ function addChoice(){
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
-        <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li></shiro:notAuthenticated>
-        <shiro:notAuthenticated><li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:notAuthenticated>
-        <shiro:authenticated><li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li></shiro:authenticated>
+        <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li>
+        <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:notAuthenticated>
+        <li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li>
       </ul>
     </div>
   </div>

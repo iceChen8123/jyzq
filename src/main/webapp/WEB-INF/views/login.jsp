@@ -21,12 +21,12 @@
 					placeholder="密码" />
 			</div>
 		</div>
-		<div class="control-group">
-			<div class="controls">
-				<input id="btnSubmit" class="btn btn-primary" type="submit"
-					value="登录" />&nbsp;
-			</div>
-		</div>
+		<div class="footer">
+                    <label class="checkbox inline">
+                        <input type="checkbox" id="rememberMe" name="rememberMe"> <span style="color:#08c;">记住我</span>
+                    </label>
+                    <input class="btn btn-primary" type="submit" value="登 录"/>
+                </div>
 	</form:form>
 	</div>
 </body>
