@@ -28,7 +28,7 @@ import com.ice.server.bean.Choise;
 
 @Controller
 @RequestMapping(value = "choise")
-public class ChoiseController {
+public class ChoiseQueryController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 

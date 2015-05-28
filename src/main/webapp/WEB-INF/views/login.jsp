@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html>
 <head>
+<title>用户登录</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 </head>
 <body>

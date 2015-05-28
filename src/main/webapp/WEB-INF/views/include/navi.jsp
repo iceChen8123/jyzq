@@ -1,8 +1,8 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fns" uri="/WEB-INF/tlds/fns.tld" %>
+<%@ taglib prefix="shiro" uri="/WEB-INF/tlds/shiros.tld" %>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath}"/>
 <html>
 <head>
 <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
@@ -12,25 +12,17 @@
 <script src="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.method.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+function showtips(){
+	if($('#message').val()){
+		alert($('#message').val());
+	}
+}
 $(document).ready(function() {
 	$("#myForm").validate();
+	showtips();
 });
 function newtask(){
 	$('#myModal').modal('show');
-}
-function commitTask(){
-	var formParam = $("#myForm").serialize();
-    $.ajax({    
-        type:'post',        
-        url:'choise/new',    
-        data:formParam,    
-        cache:false,    
-        dataType:'json',    
-        success:function(data){   
-        	alert(data);
-        	location.reload();
-        }    
-    });    
 }
 var choicenum = 2;
 function addChoice(){
@@ -52,6 +44,7 @@ function changeSubject(v){
 }
 </script>
 </head>
+<input id="message" value="${message }" hidden="true">
 <nav class="navbar navbar-inverse" >
   <div>
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
@@ -62,9 +55,9 @@ function changeSubject(v){
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
-        <li><button type="button" class="btn btn-info btn-lg" ><a href="login">登录</a></button></li>
-        <li><button type="button" class="btn btn-warning btn-lg" ><a href="register">注册</a></button></li>
-        <li><button type="button" class="btn btn-default btn-lg" ><a href="logout">退出</a></button></li>
+        <shiro:lacksRole name="simple"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li></shiro:lacksRole>
+        <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li>
+        <li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li>
       </ul>
     </div>
   </div>
@@ -79,7 +72,7 @@ function changeSubject(v){
         <h4 class="modal-title" id="myModalLabel">HAPPY TITLE</h4>
       </div>
       <div class="modal-body">
-      	<form method="post" id="myForm">
+      	<form method="post" id="myForm" action="<%=request.getContextPath()%>/b/choise/new">
       	  <div class="control-group" >
 		    <label for="title" >标题:</label>
 		    <input type="text" class="form-control input-lg required" name="title" id="title" placeholder="写得好，大家都会看...">
@@ -106,7 +99,7 @@ function changeSubject(v){
 		  </div>
 		  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary" onclick="commitTask()" >Save</button>
+        <button type="submit" class="btn btn-primary" >Save</button>
       </div>
 		</form>
       </div>

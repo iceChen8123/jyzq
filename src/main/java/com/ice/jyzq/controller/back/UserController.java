@@ -1,4 +1,4 @@
-package com.ice.jyzq.controller;
+package com.ice.jyzq.controller.back;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;

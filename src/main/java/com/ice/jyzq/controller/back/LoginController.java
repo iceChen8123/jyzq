@@ -1,4 +1,4 @@
-package com.ice.jyzq.controller;
+package com.ice.jyzq.controller.back;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,12 +23,13 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
 		model.addAttribute("user", new User());
+		model.addAttribute("message", "请登录");
 		return "login";
 	}
 
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(Model model) {
-		SecurityUtils.getSubject().logout(); 
+		SecurityUtils.getSubject().logout();
 		model.addAttribute("message", "已安全退出");
 		return "forward:hello";
 	}
