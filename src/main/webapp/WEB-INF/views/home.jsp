@@ -77,7 +77,6 @@ function getOnline(){
 		//getOnline();
 	});
 	function tomore(){
-		alert(subject);
 		location.href='<%=request.getContextPath()%>/choise/list?type='+subject;
 	}
 </script>
