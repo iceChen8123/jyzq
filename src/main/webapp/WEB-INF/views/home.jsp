@@ -8,11 +8,11 @@
 <script src="<%=request.getContextPath()%>/resources/highcharts.js"></script>
 <script type="text/javascript">
 function getPie(){
-	var choiceType = subject;
+	var choiseType = subject;
 	$.ajax({    
         type:'get',        
         url:'<%=request.getContextPath()%>/choise/some/get',    
-        data:{choiceType: choiceType},    
+        data:{choiseType: choiseType,pageNo:0},    
         cache:false,    
         dataType:'json',    
         success:function(data){
@@ -24,7 +24,7 @@ function getPie(){
          		$('#test'+i).highcharts({
          			credits:{
          				text:n.title,
-         				href: "<%=request.getContextPath()%>/choise/vote?id="+n.id
+         				href: "<%=request.getContextPath()%>/b/choise/vote?id="+n.id
          			},
                     chart: {
                         plotBackgroundColor: null,
@@ -79,7 +79,7 @@ function getOnline(){
 </script>
 </head>
 <body>
-	<div class="col-md-9" >
+	<div class="col-md-12" >
 	<div id="test0" class="col-md-2" ></div>
 	<div id="test1" class="col-md-2" ></div>
 	<div id="test2" class="col-md-2" ></div>
@@ -93,7 +93,7 @@ function getOnline(){
 	<div id="test10" class="col-md-2" ></div>
 	<div id="test11" class="col-md-2" ></div>
 	</div>
-	<div class="col-md-2" >
+	<!-- <div class="col-md-2" >
 	<div class="panel panel-default">
 		<div class="panel-heading"><h3 class="panel-title">online</h3></div>
 		<div class="panel-body">
@@ -101,6 +101,6 @@ function getOnline(){
 		</ul>
 		  </div>
 		  </div>
-	</div>
+	</div> -->
 </body>
 </html>

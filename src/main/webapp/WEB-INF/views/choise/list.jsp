@@ -12,7 +12,7 @@ var divnum = 0;
 $(function(){
 	$('#scrollpaginationdemo').scrollPagination({
 		'contentPage': "<%=request.getContextPath()%>/choise/some/get", // the url you are fetching the results
-		'contentData': {choiseType:'food', pageNo:pageNo}, // these are the variables you can pass to the request, for example: children().size() to know which page you are
+		'contentData': {choiseType:subject, pageNo:pageNo}, // these are the variables you can pass to the request, for example: children().size() to know which page you are
 		'scrollTarget': $(window), // who gonna scroll? in this example, the full window
 		'heightOffset': 10, // it gonna request when scroll is 10 pixels before the page ends
 /* 		'beforeLoad': function(){ // before load function, you can display a preloader div

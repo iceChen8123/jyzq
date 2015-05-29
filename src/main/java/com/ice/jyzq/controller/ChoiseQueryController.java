@@ -31,13 +31,13 @@ public class ChoiseQueryController {
 	private ChoiseService choiseService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
-	public String to(@RequestParam("type") String choiseType, Model model) {
+	public String to(@RequestParam(value = "type", required = false) String choiseType, Model model) {
 		model.addAttribute("subject", choiseType);
 		return "forward:hello";
 	}
 
 	@RequestMapping(value = "list", method = RequestMethod.GET)
-	public String toList(@RequestParam("type") String choiseType, Model model) {
+	public String toList(@RequestParam(value = "type", required = false) String choiseType, Model model) {
 		model.addAttribute("subject", choiseType);
 		return "choise/list";
 	}
@@ -49,8 +49,9 @@ public class ChoiseQueryController {
 	}
 
 	@RequestMapping(value = "some/get", method = { RequestMethod.GET, RequestMethod.POST })
+	// 可以优化，已经过期或者关闭的，就不显示了
 	@ResponseBody
-	public String getSome(@RequestParam(value = "choiseType") String choiseType,
+	public String getSome(@RequestParam(value = "choiseType", required = false) String choiseType,
 			@RequestParam(value = "pageNo", required = true) int pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "12", required = false) int pageSize) {
 		List<Choise> choises = choiseService.findLatestChoises(choiseType, pageNo, pageSize);

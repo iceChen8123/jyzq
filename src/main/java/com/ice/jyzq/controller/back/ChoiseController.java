@@ -52,9 +52,12 @@ public class ChoiseController {
 
 	@RequestMapping(value = "vote", method = RequestMethod.POST)
 	@ResponseBody
-	public String vote(@RequestParam("id") String id, @RequestParam("choise") String choise) {
-		logger.info("vote : {}  - {}", id, choise);
-		choiseService.vote(id, choise);
+	public String vote(@RequestParam("id") String choiseId, @RequestParam("choise") String choise) {
+		logger.info("vote : {}  - {}", choiseId, choise);
+		if(choiseService.checkHasVote(choiseId,choise)){
+			return JsonMapper.toJsonString("您已经投过票了");
+		}
+		choiseService.vote(choiseId, choise);
 		return JsonMapper.toJsonString("ok");
 	}
 

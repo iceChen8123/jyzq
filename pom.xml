@@ -344,6 +344,12 @@
 			<artifactId>hibernate-entitymanager</artifactId>
 			<version>4.3.4.Final</version>
 		</dependency>
+		
+		<dependency>
+			<groupId>me</groupId>
+			<artifactId>pinyin4j</artifactId>
+			<version>2.5.0</version>
+		</dependency>
 
 	</dependencies>
 	<build>
@@ -374,14 +380,23 @@
 					<showDeprecation>true</showDeprecation>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!-- <plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>exec-maven-plugin</artifactId>
 				<version>1.2.1</version>
 				<configuration>
 					<mainClass>org.test.int1.Main</mainClass>
 				</configuration>
-			</plugin>
+			</plugin> -->
 		</plugins>
 	</build>
+	
+	<repositories>
+		<!-- repo for ace dependency -->
+		<repository>
+			<id>acesdk-repository</id>
+			<name>Ace Sdk Repository</name>
+			<url>http://acesdk.github.io/repo</url>
+		</repository>
+	</repositories>
 </project>

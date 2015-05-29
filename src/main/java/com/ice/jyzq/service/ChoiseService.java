@@ -1,6 +1,7 @@
 package com.ice.jyzq.service;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -10,6 +11,7 @@ import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,11 +21,14 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import com.ice.jyzq.common.UserUtil;
 import com.ice.jyzq.util.Cn2SpellUtil;
 import com.ice.server.bean.Choise;
 import com.ice.server.bean.ChoiseItem;
+import com.ice.server.bean.UserVote;
 import com.ice.server.dao.ChoiseDao;
 import com.ice.server.dao.ChoiseItemDao;
+import com.ice.server.dao.UserVoteDao;
 
 @Service
 public class ChoiseService {
@@ -35,6 +40,10 @@ public class ChoiseService {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 
+	@Autowired
+	private UserUtil userUtil;
+	@Autowired
+	private UserVoteDao userVoteDao;
 	@Autowired
 	private ChoiseDao choiseDao;
 	@Autowired
@@ -53,6 +62,7 @@ public class ChoiseService {
 		choise.setChoises(choises.toString().substring(1));
 		choise.setVotes(getInitVotes(choiseList.size()));
 		choise.setChoiseDesc(choiseDesc);
+		choise.setCreateTime(new Date());
 		return choiseDao.save(choise);
 	}
 
@@ -86,7 +96,9 @@ public class ChoiseService {
 
 			public Predicate toPredicate(Root<Choise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				Path<String> choiseTypePath = root.get("choiseType");
-				query.where(cb.equal(choiseTypePath, choiseType)); // 这里可以设置任意条查询条件
+				if (StringUtils.isNotBlank(choiseType)) {
+					query.where(cb.equal(choiseTypePath, choiseType)); // 这里可以设置任意条查询条件
+				}
 				return null;
 			}
 		}, pageable).iterator();
@@ -101,17 +113,26 @@ public class ChoiseService {
 		return choiseDao.findOne(id);
 	}
 
-	public void vote(String id, String choise) {
-		voteChoise(id, choise);
+	public void vote(String choiseId, String choise) {
+		voteChoise(choiseId, choise);
+		recordVote(choiseId, choise);
 		voteSummary(choise);
+	}
+
+	private void recordVote(String choiseId, String choise) {
+		UserVote entity = new UserVote();
+		entity.setUserName(userUtil.getCurrentUserName());
+		entity.setChoiseId(Long.parseLong(choiseId));
+		entity.setVoteChoise(choise);
+		userVoteDao.save(entity);
 	}
 
 	private void voteSummary(String choise) {
 		// TODO Auto-generated method stub
 	}
 
-	private void voteChoise(String id, String choise) {
-		Choise choisetemp = choiseDao.findOne(Long.parseLong(id));
+	private void voteChoise(String choiseId, String choise) {
+		Choise choisetemp = choiseDao.findOne(Long.parseLong(choiseId));
 		String[] choiseTemps = choisetemp.getChoises().split(ChoiseService.CHOISES_SPLIT_SEPARATOR);
 		String[] voteTemps = choisetemp.getVotes().split(ChoiseService.VOTE_SPLIT_SEPARATOR);
 		int index = 0;
@@ -127,7 +148,13 @@ public class ChoiseService {
 			votes.append(VOTE_SEPARATOR).append(voteTemps[a]);
 		}
 		choisetemp.setVotes(votes.toString().substring(1));
-		choiseDao.updateVote(Long.parseLong(id), votes.toString().substring(1));
+		choiseDao.updateVote(Long.parseLong(choiseId), votes.toString().substring(1));
+	}
+
+	public boolean checkHasVote(String choiseId, String choise) {
+		UserVote userVote = userVoteDao
+				.findByChoiseIdAndChoise(userUtil.getCurrentUserName(), Long.parseLong(choiseId));
+		return (userVote != null) && StringUtils.isNotBlank(userVote.getUserName());
 	}
 
 }

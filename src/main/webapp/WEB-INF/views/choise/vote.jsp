@@ -75,7 +75,7 @@ function vote(s){
 	var id = $('#id').val();
 	$.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/choise/vote',    
+        url:'<%=request.getContextPath()%>/b/choise/vote',    
         data:{id:id,choise:choise},    
         cache:false,    
         dataType:'json',    

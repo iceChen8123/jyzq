@@ -47,8 +47,8 @@ public class LoginController extends BaseController {
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
-	public String login(User user, @RequestParam("rememberMe") Boolean rememberMe, HttpServletResponse response,
-			Model model) {
+	public String login(User user, @RequestParam(value = "rememberMe", defaultValue = "false") Boolean rememberMe,
+			HttpServletResponse response, Model model) {
 		User usertemp = userUtil.getUser();
 		if (usertemp != null && usertemp.getId() != null) {
 			return "forward:hello";

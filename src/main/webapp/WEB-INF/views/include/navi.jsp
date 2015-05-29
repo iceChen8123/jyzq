@@ -21,9 +21,10 @@ function showtips(){
 }
 var subject = 'food';
 function changeSubject(){
-	if($('#subject').val()){
+	//alert($('#subject').val());
+	//if($('#subject').val()){
 		subject = $('#subject').val();
-	}
+	//}
 }
 $(document).ready(function() {
 	$("#myForm").validate();
@@ -58,8 +59,8 @@ function addChoice(){
       	<c:forEach items="${fns:getChoiceTypes()}" var="ct">
         	<li><a href="<%=request.getContextPath()%>/choise?type=${ct.choiseCode }" )">${ct.choiseName }</a></li>
       	</c:forEach>
-      		<li><a href="<%=request.getContextPath()%>/choise/list?type=food" )">看看呢</a></li>
-        	<shiro:authenticated><li><a href="mailto:81231707@qq.com" )">爽Vs不爽</a></li></shiro:authenticated>
+      		<li><a href="<%=request.getContextPath()%>/choise/list" )">随便看看</a></li>
+        	<li><a href="mailto:81231707@qq.com" )">用着不爽</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
