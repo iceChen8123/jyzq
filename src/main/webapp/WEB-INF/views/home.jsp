@@ -5,7 +5,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/WEB-INF/views/include/head.jsp"%>
-<script src="resources/highcharts.js"></script>
+<script src="<%=request.getContextPath()%>/resources/highcharts.js"></script>
 <script type="text/javascript">
 function getPie(){
 	var choiceType = subject;

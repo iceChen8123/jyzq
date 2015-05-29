@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.ice.jyzq.common.UserUtil;
 import com.ice.jyzq.controller.vo.ChoiseVo;
 import com.ice.jyzq.service.ChoiseService;
 import com.ice.jyzq.util.JsonMapper;
@@ -29,9 +28,6 @@ public class ChoiseQueryController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
-	private UserUtil userUtil;
-
-	@Autowired
 	private ChoiseService choiseService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
@@ -40,19 +36,27 @@ public class ChoiseQueryController {
 		return "forward:hello";
 	}
 
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String toList(@RequestParam("type") String choiseType, Model model) {
+		model.addAttribute("subject", choiseType);
+		return "choise/list";
+	}
+
 	@RequestMapping(value = "get", method = RequestMethod.GET)
 	@ResponseBody
 	public String get(@RequestParam("id") String id) {
 		return JsonMapper.toJsonString(convertToChoiseVo(choiseService.findById(Long.parseLong(id))));
 	}
 
-	@RequestMapping(value = "some/get", method = RequestMethod.GET)
+	@RequestMapping(value = "some/get", method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public String getSome(@RequestParam("choiceType") String choiceType) {
-		int pageNo = 0;
-		int pageSize = 12;
-		List<Choise> choises = choiseService.findLatestChoises(choiceType, pageNo, pageSize);
+	public String getSome(@RequestParam(value = "choiseType") String choiseType,
+			@RequestParam(value = "pageNo", required = true) int pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "12", required = false) int pageSize) {
+		List<Choise> choises = choiseService.findLatestChoises(choiseType, pageNo, pageSize);
 		List<ChoiseVo> choisevos = convertToChoiseVos(choises);
+		logger.info("getSome page : {}; pageSize: {}, listsize: {}",
+				new Object[] { pageNo, pageSize, choisevos.size() });
 		return JsonMapper.toJsonString(choisevos);
 	}
 
