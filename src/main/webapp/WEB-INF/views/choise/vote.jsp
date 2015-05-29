@@ -35,7 +35,7 @@ function genpie(){
          		$('#test0').highcharts({
          			credits:{
          				text:data.title,
-         				href: "<%=request.getContextPath()%>/choise/vote?id="+data.id
+         				href: "<%=request.getContextPath()%>/b/choise/vote?id="+data.id
          			},
                     chart: {
                         plotBackgroundColor: null,
