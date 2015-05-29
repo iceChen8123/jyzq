@@ -76,6 +76,10 @@ function getOnline(){
 		getPie();
 		//getOnline();
 	});
+	function tomore(){
+		alert(subject);
+		location.href='<%=request.getContextPath()%>/choise/list?type='+subject;
+	}
 </script>
 </head>
 <body>
@@ -102,5 +106,10 @@ function getOnline(){
 		  </div>
 		  </div>
 	</div> -->
+	<div class="col-md-4" ></div>
+	<div class="col-md-4" >
+	<button type="button" class="btn btn-primary btn-lg btn-block" onclick="tomore()">MORE</button>
+	</div>
+	<div class="col-md-4" ></div>
 </body>
 </html>
