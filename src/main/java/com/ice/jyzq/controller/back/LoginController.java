@@ -27,7 +27,8 @@ public class LoginController extends BaseController {
 	private UserUtil userUtil;
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
+	public String login(HttpServletRequest request,
+			HttpServletResponse response, Model model) {
 		logger.info("来了。。。get....login........");
 		SecurityUtils.getSubject().logout();
 		User user = userUtil.getUser();
@@ -48,7 +49,7 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(User user, @RequestParam(value = "rememberMe", defaultValue = "false") Boolean rememberMe,
-			HttpServletResponse response, Model model) {
+			HttpServletRequest request,HttpServletResponse response, Model model) {
 		User usertemp = userUtil.getUser();
 		if (usertemp != null && usertemp.getId() != null) {
 			return "forward:hello";
@@ -56,15 +57,14 @@ public class LoginController extends BaseController {
 			try {
 				// 成功后，会自动跳转到 successUrl，与return无关
 				SecurityUtils.getSubject().login(
-						new UsernamePasswordToken(user.getUserName(), user.getPassword(), rememberMe));
+						new UsernamePasswordToken(user.getUserName(), user.getPassword(), rememberMe,request.getRemoteHost()));
 				model.addAttribute("message", "欢迎光临");
 			} catch (AuthenticationException e) {
 				model.addAttribute("message", "用户名或密码错误");
-				logger.warn("{} 登录失败.", user.getUserName());
+				logger.warn(user.getUserName()+" 登录失败.",e);
 				return "login";
 			}
 		}
 		return "forward:hello";
 	}
-
 }

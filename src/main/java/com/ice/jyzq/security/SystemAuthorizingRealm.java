@@ -84,7 +84,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 		User user = userService.findByUserName(token.getUsername());
 		if (EndecryptUtils.checkMd5Password(token.getUsername(), String.valueOf(token.getPassword()), user.getSalt(),
 				user.getPassword())) {
-			SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), user.getUserName(),
+			SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), token.getPassword(),
 					getName());
 			this.setSession("currentUser", user.getUserName());
 			return authcInfo;

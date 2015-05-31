@@ -35,7 +35,8 @@ $(function(){
                         plotShadow: false
                     },
                     title: {
-                        text: n.title
+                        text: n.title,
+                        style:{color:"#333333",fontSize:"12px"}
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

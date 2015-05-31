@@ -1,4 +1,4 @@
-package com.ice.server.constant;
+package com.ice.server.trash.mina;
 
 public class CommonMessage {
 

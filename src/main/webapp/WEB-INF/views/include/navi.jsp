@@ -66,6 +66,7 @@ function addChoice(){
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
         <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li>
         <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:notAuthenticated>
+        <shiro:authenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/choise/history/my">纠结史</a></button></li></shiro:authenticated>
         <li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li>
       </ul>
     </div>
@@ -78,12 +79,12 @@ function addChoice(){
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-        <h4 class="modal-title" id="myModalLabel">HAPPY TITLE</h4>
+        <h4 class="modal-title" id="myModalLabel">撕心裂肺的纠结</h4>
       </div>
       <div class="modal-body">
       	<form method="post" id="myForm" action="<%=request.getContextPath()%>/b/choise/new">
       	  <div class="control-group" >
-		    <label for="title" >标题:</label>
+		    <label for="title" >标题(吸引大家帮你投票，写好点哦):</label>
 		    <input type="text" class="form-control input-lg required" name="title" id="title" placeholder="写得好，大家都会看...">
 		  </div>
 		  <div class="control-group" >

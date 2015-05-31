@@ -5,9 +5,12 @@
 <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <html>
+<head>
+<title>纠友自取</title>
+</head>
 <div class="container-fluid directional" >
 <div class="col-md-12" >
-  <h1><a href="<%=request.getContextPath()%>/hello">JYZQ</a></h1>
+  <h1><a href="<%=request.getContextPath()%>/hello">纠友自取</a></h1>
 </div>
 </div>
 <%@include file="/WEB-INF/views/include/navi.jsp"%>
