@@ -60,11 +60,15 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			// 更新登录IP和时间
 			userService.updateUserLoginInfo(user.getId());
 			// 权限信息对象info 用来存放查出的用户的所有的角色（role）及权限（permission）
-			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
-			// 添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
-			info.addRole("simple"); // TODO 添加角色
-			// 添加权限
-			info.addStringPermission("admin:manage"); // TODO 添加权限
+						SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
+			if("admin".equals(userName)){
+				info.addRole("admin");
+			}else{
+				// 添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
+				info.addRole("simple"); // TODO 添加角色
+				// 添加权限
+				info.addStringPermission("admin:manage"); // TODO 添加权限
+			}
 			logger.info("{} doGetAuthorizationInfo ok.....", user);
 			return info;
 		}

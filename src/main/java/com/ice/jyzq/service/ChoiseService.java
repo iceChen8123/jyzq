@@ -157,4 +157,26 @@ public class ChoiseService {
 		return (userVote != null) && StringUtils.isNotBlank(userVote.getUserName());
 	}
 
+	public List<Choise> findMyChoises(final String choiseType, int pageNo, int pageSize) {
+		Pageable pageable = new PageRequest(pageNo, pageSize, Direction.DESC, "id");
+		Iterator<Choise> choiseIterator = choiseDao.findAll(new Specification<Choise>() {
+
+			public Predicate toPredicate(Root<Choise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Predicate userPredicate = cb.equal(root.get("userName"), userUtil.getCurrentUserName());
+				Path<String> choiseTypePath = root.get("choiseType");
+				if (StringUtils.isNotBlank(choiseType)) {
+					query.where(cb.and(userPredicate, cb.equal(choiseTypePath, choiseType))); // 这里可以设置任意条查询条件
+				} else {
+					query.where(userPredicate);
+				}
+				return query.getRestriction();
+			}
+		}, pageable).iterator();
+		List<Choise> rtnList = new ArrayList<Choise>();
+		while (choiseIterator.hasNext()) {
+			rtnList.add(choiseIterator.next());
+		}
+		return rtnList;
+	}
+
 }

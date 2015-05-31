@@ -5,7 +5,6 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <html>
 <head>
-
 <script src="<%=request.getContextPath()%>/resources/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
 <!-- <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script> -->
 <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
@@ -60,13 +59,14 @@ function addChoice(){
         	<li><a href="<%=request.getContextPath()%>/choise?type=${ct.choiseCode }" )">${ct.choiseName }</a></li>
       	</c:forEach>
       		<li><a href="<%=request.getContextPath()%>/choise/list" )">随便看看</a></li>
-        	<li><a href="mailto:81231707@qq.com" )">用着不爽</a></li>
+        	<li><a href="<%=request.getContextPath()%>/b/advice" )">用着不爽</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
         <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li>
         <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:notAuthenticated>
         <shiro:authenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/choise/history/my">纠结史</a></button></li></shiro:authenticated>
+        <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/advice/get">好建议</a></button></li></shiro:hasRole>
         <li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li>
       </ul>
     </div>

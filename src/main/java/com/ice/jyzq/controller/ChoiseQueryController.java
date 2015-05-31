@@ -1,11 +1,7 @@
 package com.ice.jyzq.controller;
 
-import java.lang.reflect.InvocationTargetException;
-import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.beanutils.BeanUtils;
-import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ice.jyzq.controller.util.ChoiseConvertUtil;
 import com.ice.jyzq.controller.vo.ChoiseVo;
 import com.ice.jyzq.service.ChoiseService;
 import com.ice.jyzq.util.JsonMapper;
@@ -45,7 +42,7 @@ public class ChoiseQueryController {
 	@RequestMapping(value = "get", method = RequestMethod.GET)
 	@ResponseBody
 	public String get(@RequestParam("id") String id) {
-		return JsonMapper.toJsonString(convertToChoiseVo(choiseService.findById(Long.parseLong(id))));
+		return JsonMapper.toJsonString(ChoiseConvertUtil.convertToChoiseVo(choiseService.findById(Long.parseLong(id))));
 	}
 
 	@RequestMapping(value = "some/get", method = { RequestMethod.GET, RequestMethod.POST })
@@ -55,39 +52,9 @@ public class ChoiseQueryController {
 			@RequestParam(value = "pageNo", required = true) int pageNo,
 			@RequestParam(value = "pageSize", defaultValue = "12", required = false) int pageSize) {
 		List<Choise> choises = choiseService.findLatestChoises(choiseType, pageNo, pageSize);
-		List<ChoiseVo> choisevos = convertToChoiseVos(choises);
-		logger.info("getSome page : {}; pageSize: {}, listsize: {}",
+		List<ChoiseVo> choisevos = ChoiseConvertUtil.convertToChoiseVos(choises);
+		logger.debug("getSome page : {}; pageSize: {}, listsize: {}",
 				new Object[] { pageNo, pageSize, choisevos.size() });
 		return JsonMapper.toJsonString(choisevos);
-	}
-
-	private List<ChoiseVo> convertToChoiseVos(List<Choise> choises) {
-		List<ChoiseVo> rtnList = new ArrayList<ChoiseVo>();
-		for (Choise choise : choises) {
-			ChoiseVo choiseVo = convertToChoiseVo(choise);
-			rtnList.add(choiseVo);
-		}
-		return rtnList;
-	}
-
-	private ChoiseVo convertToChoiseVo(Choise choise) {
-		ChoiseVo choiseVo = new ChoiseVo();
-		try {
-			BeanUtils.copyProperties(choiseVo, choise);
-		} catch (IllegalAccessException e) {
-			e.printStackTrace();
-		} catch (InvocationTargetException e) {
-			e.printStackTrace();
-		}
-		String[] choiseTemps = choise.getChoises().split(ChoiseService.CHOISES_SPLIT_SEPARATOR);
-		String[] voteTemps = choise.getVotes().split(ChoiseService.VOTE_SPLIT_SEPARATOR);
-		int index = 0;
-		for (String choiseTemp : choiseTemps) {
-			if (StringUtils.isNotBlank(choiseTemp)) {
-				choiseVo.addChoiseAndVote(choiseTemp, voteTemps[index]);
-			}
-			index++;
-		}
-		return choiseVo;
 	}
 }

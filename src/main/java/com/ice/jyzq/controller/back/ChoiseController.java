@@ -18,8 +18,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.common.collect.Lists;
 import com.ice.jyzq.common.UserUtil;
+import com.ice.jyzq.controller.util.ChoiseConvertUtil;
+import com.ice.jyzq.controller.vo.ChoiseVo;
 import com.ice.jyzq.service.ChoiseService;
 import com.ice.jyzq.util.JsonMapper;
+import com.ice.server.bean.Choise;
 
 @Controller
 @RequestMapping(value = "b/choise")
@@ -27,7 +30,7 @@ public class ChoiseController {
 
 	@Autowired
 	private UserUtil userUtil;
-	
+
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Autowired
@@ -50,11 +53,28 @@ public class ChoiseController {
 		return "choise/vote";
 	}
 
+	@RequestMapping(value = "history/my", method = RequestMethod.GET)
+	public String tohistory() {
+		return "choise/history";
+	}
+
+	@RequestMapping(value = "history/my", method = RequestMethod.POST)
+	@ResponseBody
+	public String history(@RequestParam(value = "choiseType", required = false) String choiseType,
+			@RequestParam(value = "pageNo", required = true) int pageNo,
+			@RequestParam(value = "pageSize", defaultValue = "12", required = false) int pageSize) {
+		List<Choise> choises = choiseService.findMyChoises(choiseType, pageNo, pageSize);
+		List<ChoiseVo> choisevos = ChoiseConvertUtil.convertToChoiseVos(choises);
+		logger.debug("getSome page : {}; pageSize: {}, listsize: {}",
+				new Object[] { pageNo, pageSize, choisevos.size() });
+		return JsonMapper.toJsonString(choisevos);
+	}
+
 	@RequestMapping(value = "vote", method = RequestMethod.POST)
 	@ResponseBody
 	public String vote(@RequestParam("id") String choiseId, @RequestParam("choise") String choise) {
 		logger.info("vote : {}  - {}", choiseId, choise);
-		if(choiseService.checkHasVote(choiseId,choise)){
+		if (choiseService.checkHasVote(choiseId, choise)) {
 			return JsonMapper.toJsonString("您已经投过票了");
 		}
 		choiseService.vote(choiseId, choise);
