@@ -1,7 +1,9 @@
 eclipse.preferences.version=1
 encoding//src/main/webapp/WEB-INF/views/advice.jsp=UTF-8
+encoding//src/main/webapp/WEB-INF/views/choise/list.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/choise/vote.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/error/500.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/home.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/include/navi.jsp=UTF-8
 encoding//src/main/webapp/WEB-INF/views/sys/manage.jsp=UTF-8
+encoding//src/main/webapp/index.jsp=UTF-8

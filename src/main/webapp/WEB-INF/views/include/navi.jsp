@@ -62,7 +62,7 @@ function addChoice(){
         	<li><a href="<%=request.getContextPath()%>/b/advice" )">用着不爽</a></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">
-        <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >helpme</button></li>
+        <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >神,帮帮我</button></li>
         <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li>
         <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:notAuthenticated>
         <shiro:authenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/choise/history/my">纠结史</a></button></li></shiro:authenticated>

@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -107,7 +108,7 @@ function getOnline(){
 	</div> -->
 	<div class="col-md-4" ></div>
 	<div class="col-md-4" >
-	<button type="button" class="btn btn-primary btn-lg btn-block" onclick="tomore()">MORE</button>
+	<button type="button" class="btn btn-primary btn-lg btn-block" onclick="tomore()">更多...</button>
 	</div>
 	<div class="col-md-4" ></div>
 </body>
