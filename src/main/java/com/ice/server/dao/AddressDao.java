@@ -4,9 +4,9 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.stereotype.Repository;
 
-import com.ice.server.bean.sys.Advice;
+import com.ice.server.bean.Address;
 
 @Repository
-public interface AdviceDao extends PagingAndSortingRepository<Advice, Long>, JpaSpecificationExecutor<Advice> {
+public interface AddressDao extends PagingAndSortingRepository<Address, Long>, JpaSpecificationExecutor<Address> {
 
 }

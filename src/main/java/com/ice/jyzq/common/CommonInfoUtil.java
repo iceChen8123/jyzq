@@ -14,8 +14,8 @@ import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import com.ice.jyzq.util.JsonMapper;
-import com.ice.server.bean.ChoiseType;
-import com.ice.server.dao.ChoiseTypeDao;
+import com.ice.server.bean.sys.ChoiseType;
+import com.ice.server.dao.sys.ChoiseTypeDao;
 
 @Component
 public class CommonInfoUtil {
@@ -32,7 +32,10 @@ public class CommonInfoUtil {
 		List<ChoiseType> choice_type_list = new ArrayList<ChoiseType>();
 		Iterator<ChoiseType> choiseIterable = choiseTypeDao.findAll().iterator();
 		while (choiseIterable.hasNext()) {
-			choice_type_list.add(choiseIterable.next());
+			ChoiseType choiseType = choiseIterable.next();
+			if (choiseType.isOk()) {
+				choice_type_list.add(choiseType);
+			}
 		}
 		CHOICE_TYPE_LIST = choice_type_list;
 		logger.info("init ok {}", JsonMapper.toJsonString(CHOICE_TYPE_LIST));

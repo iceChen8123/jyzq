@@ -53,7 +53,7 @@ $(function(){
                     },
                     series: [{
                         type: 'pie',
-                        name: n.choiseType,
+                        name: n.choiseCode,
                         data: seriesdata
                     }]
                 });

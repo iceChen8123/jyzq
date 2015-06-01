@@ -1,4 +1,4 @@
-package com.ice.server.bean;
+package com.ice.server.bean.sys;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_advice")
+@Table(name = "sys_advice")
 public class Advice implements Serializable {
 
 	@Id

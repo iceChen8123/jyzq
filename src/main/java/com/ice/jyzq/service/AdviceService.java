@@ -12,7 +12,7 @@ import org.springframework.data.domain.Sort.Direction;
 import org.springframework.stereotype.Service;
 
 import com.ice.jyzq.common.UserUtil;
-import com.ice.server.bean.Advice;
+import com.ice.server.bean.sys.Advice;
 import com.ice.server.dao.AdviceDao;
 
 @Service

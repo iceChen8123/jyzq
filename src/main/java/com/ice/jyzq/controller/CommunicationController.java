@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ice.jyzq.service.AdviceService;
 import com.ice.jyzq.util.JsonMapper;
-import com.ice.server.bean.Advice;
+import com.ice.server.bean.sys.Advice;
 
 @Controller
 @RequestMapping("b")

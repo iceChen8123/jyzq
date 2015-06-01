@@ -1,4 +1,4 @@
-package com.ice.server.bean;
+package com.ice.server.bean.sys;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -11,7 +11,7 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_choise_type")
+@Table(name = "sys_choise_type")
 public class ChoiseType implements Serializable {
 
 	@Id
@@ -51,8 +51,16 @@ public class ChoiseType implements Serializable {
 	private String choiseCode;
 	@Column(name = "choise_name")
 	private String choiseName;
-	@Column(name = "parent_id")
-	private Long parentId;
+	@Column(name = "valid")
+	private Integer valid;
+
+	public Integer getValid() {
+		return valid;
+	}
+
+	public void setValid(Integer valid) {
+		this.valid = valid;
+	}
 
 	public String getChoiseCode() {
 		return choiseCode;
@@ -70,12 +78,8 @@ public class ChoiseType implements Serializable {
 		this.choiseName = choiseName;
 	}
 
-	public Long getParentId() {
-		return parentId;
-	}
-
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
+	public boolean isOk() {
+		return getValid() == 1;
 	}
 
 }

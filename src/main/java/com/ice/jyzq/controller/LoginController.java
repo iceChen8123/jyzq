@@ -1,4 +1,4 @@
-package com.ice.jyzq.controller.back;
+package com.ice.jyzq.controller;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;

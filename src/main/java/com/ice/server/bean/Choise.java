@@ -49,32 +49,22 @@ public class Choise implements Serializable {
 
 	@Column(name = "user_name")
 	private String userName;
+	@Column(name = "city_id")
+	private Integer cityId;
+	@Column(name = "address_id")
+	private Integer addressId;
 	@Column(name = "title")
 	private String title;
-	@Column(name = "choise_type")
-	private String choiseType;
+	@Column(name = "choise_code")
+	private String choiseCode;
+	@Column(name = "subject_id")
+	private Long subjectId;
 	@Column(name = "choises")
 	private String choises;
 	@Column(name = "votes")
 	private String votes;
 	@Column(name = "choise_desc")
 	private String choiseDesc;
-
-	public String getTitle() {
-		return title;
-	}
-
-	public void setTitle(String title) {
-		this.title = title;
-	}
-
-	public String getChoiseDesc() {
-		return choiseDesc;
-	}
-
-	public void setChoiseDesc(String choiseDesc) {
-		this.choiseDesc = choiseDesc;
-	}
 
 	public String getUserName() {
 		return userName;
@@ -84,12 +74,44 @@ public class Choise implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getChoiseType() {
-		return choiseType;
+	public Integer getCityId() {
+		return cityId;
 	}
 
-	public void setChoiseType(String choiseType) {
-		this.choiseType = choiseType;
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}
+
+	public Integer getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Integer addressId) {
+		this.addressId = addressId;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getChoiseCode() {
+		return choiseCode;
+	}
+
+	public void setChoiseCode(String choiseCode) {
+		this.choiseCode = choiseCode;
+	}
+
+	public Long getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
 	}
 
 	public String getChoises() {
@@ -106,6 +128,14 @@ public class Choise implements Serializable {
 
 	public void setVotes(String votes) {
 		this.votes = votes;
+	}
+
+	public String getChoiseDesc() {
+		return choiseDesc;
+	}
+
+	public void setChoiseDesc(String choiseDesc) {
+		this.choiseDesc = choiseDesc;
 	}
 
 }

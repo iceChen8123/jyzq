@@ -62,7 +62,7 @@ function genpie(){
                     },
                     series: [{
                         type: 'pie',
-                        name: data.choiseType,
+                        name: data.choiseCode,
                         data: seriesdata
                     }]
                 });

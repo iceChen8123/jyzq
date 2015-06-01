@@ -49,12 +49,14 @@ public class ChoiseService {
 	@Autowired
 	private ChoiseItemDao choiseItemDao;
 
-	public Choise save(String title, String choiseType, List<String> choiseList, String choiseDesc, String userName) {
-		saveChoiseItem(choiseType, choiseList);
+	public Choise save(String title, String choiseCode, Long subjectId, List<String> choiseList, String choiseDesc,
+			String userName) {
+		saveChoiseItem(choiseCode, subjectId, choiseList);
 		Choise choise = new Choise();
 		choise.setUserName(userName);
 		choise.setTitle(title);
-		choise.setChoiseType(choiseType);
+		choise.setChoiseCode(choiseCode);
+		choise.setSubjectId(subjectId);
 		StringBuilder choises = new StringBuilder();
 		for (String choiseString : choiseList) {
 			choises.append(CHOISE_SEPARATOR).append(choiseString);
@@ -66,11 +68,12 @@ public class ChoiseService {
 		return choiseDao.save(choise);
 	}
 
-	private void saveChoiseItem(String choiseType, List<String> choiseList) {
+	private void saveChoiseItem(String choiseCode, Long subjectId, List<String> choiseList) {
 		try {
 			for (String choise : choiseList) {
 				ChoiseItem temp = new ChoiseItem();
-				temp.setChoiseType(choiseType);
+				temp.setChoiseCode(choiseCode);
+				temp.setSubjectId(subjectId);
 				temp.setChoiseName(Cn2SpellUtil.converterToSpell(choise));
 				temp.setChoiseCnName(choise);
 				temp.setCreateNum(1L);
@@ -95,7 +98,7 @@ public class ChoiseService {
 		Iterator<Choise> choiseIterator = choiseDao.findAll(new Specification<Choise>() {
 
 			public Predicate toPredicate(Root<Choise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				Path<String> choiseTypePath = root.get("choiseType");
+				Path<String> choiseTypePath = root.get("choiseCode");
 				if (StringUtils.isNotBlank(choiseType)) {
 					query.where(cb.equal(choiseTypePath, choiseType)); // 这里可以设置任意条查询条件
 				}
@@ -113,10 +116,10 @@ public class ChoiseService {
 		return choiseDao.findOne(id);
 	}
 
-	public void vote(String choiseId, String choise) {
+	public void vote(Long subjectId, String choiseId, String choise) {
 		voteChoise(choiseId, choise);
 		recordVote(choiseId, choise);
-		voteSummary(choise);
+		voteSummary(subjectId, choise);
 	}
 
 	private void recordVote(String choiseId, String choise) {
@@ -127,8 +130,8 @@ public class ChoiseService {
 		userVoteDao.save(entity);
 	}
 
-	private void voteSummary(String choise) {
-		// TODO Auto-generated method stub
+	private void voteSummary(Long subjectId, String choise) {
+		choiseItemDao.incrVoteNum(subjectId, choise);
 	}
 
 	private void voteChoise(String choiseId, String choise) {
@@ -163,7 +166,7 @@ public class ChoiseService {
 
 			public Predicate toPredicate(Root<Choise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
 				Predicate userPredicate = cb.equal(root.get("userName"), userUtil.getCurrentUserName());
-				Path<String> choiseTypePath = root.get("choiseType");
+				Path<String> choiseTypePath = root.get("choiseCode");
 				if (StringUtils.isNotBlank(choiseType)) {
 					query.where(cb.and(userPredicate, cb.equal(choiseTypePath, choiseType))); // 这里可以设置任意条查询条件
 				} else {

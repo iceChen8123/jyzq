@@ -66,6 +66,7 @@ function addChoice(){
         <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li>
         <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:notAuthenticated>
         <shiro:authenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/choise/history/my">纠结史</a></button></li></shiro:authenticated>
+        <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/manage">我叫后门</a></button></li></shiro:hasRole>
         <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/advice/get">好建议</a></button></li></shiro:hasRole>
         <li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li>
       </ul>
@@ -90,7 +91,7 @@ function addChoice(){
 		  <div class="control-group" >
 		    <label for="choiceType" >发愁的事:</label>
 		    <c:forEach items="${fns:getChoiceTypes()}" var="ct">
-		    	<label class="radio-inline"><input type="radio" name="choiseType" value="${ct.choiseCode }" checked="checked">${ct.choiseName }</label>
+		    	<label class="radio-inline"><input type="radio" name="choiseTypeId" value="${ct.id }" checked="checked">${ct.choiseName }</label>
 		    </c:forEach>
 		  </div>
 		  <div class="control-group">

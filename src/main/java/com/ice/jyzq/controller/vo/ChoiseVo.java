@@ -13,7 +13,7 @@ public class ChoiseVo {
 	private Date updateTime;
 	private String userName;
 	private String title;
-	private String choiseType;
+	private String choiseCode;
 	private List<Map<String, Object>> choiseAndVote = new ArrayList<Map<String, Object>>();
 	private String choiseDesc;
 
@@ -57,12 +57,12 @@ public class ChoiseVo {
 		this.title = title;
 	}
 
-	public String getChoiseType() {
-		return choiseType;
+	public String getChoiseCode() {
+		return choiseCode;
 	}
 
-	public void setChoiseType(String choiseType) {
-		this.choiseType = choiseType;
+	public void setChoiseCode(String choiseCode) {
+		this.choiseCode = choiseCode;
 	}
 
 	public List<Map<String, Object>> getChoiseAndVote() {

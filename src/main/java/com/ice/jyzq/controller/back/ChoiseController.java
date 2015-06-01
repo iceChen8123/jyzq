@@ -38,11 +38,11 @@ public class ChoiseController {
 
 	@RequestMapping(value = "new", method = { RequestMethod.GET, RequestMethod.POST })
 	public String add(HttpServletRequest request, HttpServletResponse response, Model model,
-			@RequestParam("choiseType") String choiseType, @RequestParam("title") String title,
-			@RequestParam("choiseDesc") String choiseDesc) {
+			@RequestParam("choiseCode") String choiseCode, @RequestParam("subjectId") Long subjectId,
+			@RequestParam("title") String title, @RequestParam("choiseDesc") String choiseDesc) {
 		List<String> choiseList = getChoisesFromRequest(request);
-		logger.info("choiseType {} , choiceList {}", choiseType, JsonMapper.toJsonString(choiseList));
-		choiseService.save(title, choiseType, choiseList, choiseDesc, userUtil.getCurrentUserName());
+		logger.info("choiseType {} , choiceList {}", choiseCode, JsonMapper.toJsonString(choiseList));
+		choiseService.save(title, choiseCode, subjectId, choiseList, choiseDesc, userUtil.getCurrentUserName());
 		model.addAttribute("message", "ok");
 		return "home";
 	}
@@ -72,12 +72,13 @@ public class ChoiseController {
 
 	@RequestMapping(value = "vote", method = RequestMethod.POST)
 	@ResponseBody
-	public String vote(@RequestParam("id") String choiseId, @RequestParam("choise") String choise) {
+	public String vote(@RequestParam("id") String choiseId, @RequestParam("subjectId") Long subjectId,
+			@RequestParam("choise") String choise) {
 		logger.info("vote : {}  - {}", choiseId, choise);
 		if (choiseService.checkHasVote(choiseId, choise)) {
 			return JsonMapper.toJsonString("您已经投过票了");
 		}
-		choiseService.vote(choiseId, choise);
+		choiseService.vote(subjectId, choiseId, choise);
 		return JsonMapper.toJsonString("ok");
 	}
 

@@ -47,8 +47,10 @@ public class ChoiseItem implements Serializable {
 		this.updateTime = updateTime;
 	}
 
-	@Column(name = "choise_type")
-	private String choiseType;
+	@Column(name = "choise_code")
+	private String choiseCode;
+	@Column(name = "subject_id")
+	private Long subjectId;
 	@Column(name = "choise_name")
 	private String choiseName;
 	@Column(name = "choise_cn_name")
@@ -58,12 +60,20 @@ public class ChoiseItem implements Serializable {
 	@Column(name = "vote_num")
 	private Long voteNum;
 
-	public String getChoiseType() {
-		return choiseType;
+	public String getChoiseCode() {
+		return choiseCode;
 	}
 
-	public void setChoiseType(String choiseType) {
-		this.choiseType = choiseType;
+	public void setChoiseCode(String choiseCode) {
+		this.choiseCode = choiseCode;
+	}
+
+	public Long getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
 	}
 
 	public String getChoiseName() {
