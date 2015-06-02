@@ -196,14 +196,32 @@ public class ChoiseService {
 	}
 
 	public Integer getlatestCityId() {
-		// TODO Auto-generated method stub
-
-		return 1;
+		Choise choise = getlatestChoise(userUtil.getCurrentUserName());
+		if (choise == null) {
+			return 0;
+		}
+		return choise.getCityId();
 	}
 
 	public String getlatestaddress() {
-		// TODO Auto-generated method stub
-		return "";
+		Choise choise = getlatestChoise(userUtil.getCurrentUserName());
+		if (choise == null) {
+			return "";
+		}
+		String latestaddress = addressDao.findOne(choise.getAddressId()).getAddress();
+		return latestaddress;
+	}
+
+	private Choise getlatestChoise(String currentUserName) {
+		Pageable pageable = new PageRequest(0, 1, Direction.DESC, "id");
+		Iterator<Choise> choiseIterator = choiseDao.findAll(new Specification<Choise>() {
+			public Predicate toPredicate(Root<Choise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+				Predicate userPredicate = cb.equal(root.get("userName"), userUtil.getCurrentUserName());
+				query.where(userPredicate);
+				return query.getRestriction();
+			}
+		}, pageable).iterator();
+		return choiseIterator.next();
 	}
 
 }

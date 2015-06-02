@@ -12,6 +12,18 @@
 <script src="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script> 
 <script src="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.method.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+var checkSubmitFlg = false;
+function checkSubmit() {
+ if (!checkSubmitFlg) {
+// 第一次提交
+  checkSubmitFlg = true;
+  return true;
+ } else {
+
+//重复提交
+  return false;
+ }
+}
 function listchoisetype(){
     $.ajax({    
         type:'post',        
@@ -20,6 +32,7 @@ function listchoisetype(){
         cache:false,    
         dataType:'json',    
         success:function(data){
+        	$('#choiseCode').empty();
         	$.each(data, function(i, n){
          		if(n.valid == 1){
         			$('#choiseCode').append("<option value=\""+ n.choiseCode+"\" selected=\"selected\">"+n.choiseName+"</option>");
@@ -28,7 +41,21 @@ function listchoisetype(){
         }    
     });    
 }
+function getlatestaddressinfo(){
+    $.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/b/choise/getlatestaddressinfo',    
+        data:{},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+        	$('#cityId').val(data.cityId);
+        	$('#address').val(data.address);
+        }    
+    });    
+}
 function listcity(){
+	getlatestaddressinfo();
     $.ajax({    
         type:'post',        
         url:'<%=request.getContextPath()%>/b/city/get',    
@@ -37,7 +64,11 @@ function listcity(){
         dataType:'json',    
         success:function(data){
         	$.each(data, function(i, n){
-        		$('#cityId').append("<option value=\""+ n.id+"\" selected=\"selected\">"+n.cityName+"</option>");
+        		if(cityId == n.id){
+	        		$('#cityId').append("<option value=\""+ n.id+"\" selected=\"selected\">"+n.cityName+"</option>");
+        		}else{
+	        		$('#cityId').append("<option value=\""+ n.id+"\" >"+n.cityName+"</option>");
+        		}
         	});
         }    
     });    
@@ -74,21 +105,6 @@ function initSubjects(){
         	$.each(data, function(i, n){
         		$('#subjectId').append("<option value=\""+ n.id+"\">"+n.subjectName+"</option>");
         	});
-        }    
-    });    
-}
-var cityId;
-var address;
-function getlatestaddressinfo(){
-    $.ajax({    
-        type:'post',        
-        url:'<%=request.getContextPath()%>/b/choise/getlatestaddressinfo',    
-        data:{},    
-        cache:false,    
-        dataType:'json',    
-        success:function(data){
-        	cityId = data.cityId;
-        	address = data.address;
         }    
     });    
 }
@@ -164,7 +180,7 @@ function addChoice(){
         <h4 class="modal-title" id="myModalLabel">撕心裂肺的纠结</h4>
       </div>
       <div class="modal-body">
-      	<form method="post" id="myForm" action="<%=request.getContextPath()%>/b/choise/new">
+      	<form method="post" id="myForm" action="<%=request.getContextPath()%>/b/choise/new" onsubmit="return checkSubmit();">
       	  <div class="control-group" >
 		    <label for="title" >标题(吸引大家帮你投票，写好点哦):</label>
 		    <input type="text" class="form-control input-lg required" name="title" id="title" placeholder="写得好，大家都会看...">
