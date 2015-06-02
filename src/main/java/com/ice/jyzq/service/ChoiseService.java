@@ -195,4 +195,15 @@ public class ChoiseService {
 		return rtnList;
 	}
 
+	public Integer getlatestCityId() {
+		// TODO Auto-generated method stub
+
+		return 1;
+	}
+
+	public String getlatestaddress() {
+		// TODO Auto-generated method stub
+		return "";
+	}
+
 }

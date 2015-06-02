@@ -3,6 +3,7 @@ package com.ice.jyzq.controller;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -27,9 +28,7 @@ public class LoginController extends BaseController {
 	private UserUtil userUtil;
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
-	public String login(HttpServletRequest request,
-			HttpServletResponse response, Model model) {
-		logger.info("来了。。。get....login........");
+	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
 		SecurityUtils.getSubject().logout();
 		User user = userUtil.getUser();
 		// 如果已经登录，则跳转到管理首页
@@ -49,7 +48,15 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(User user, @RequestParam(value = "rememberMe", defaultValue = "false") Boolean rememberMe,
-			HttpServletRequest request,HttpServletResponse response, Model model) {
+			HttpServletRequest request, HttpServletResponse response, Model model) {
+		if (StringUtils.isBlank(user.getUserName())) {
+			model.addAttribute("message", "用户名不能为空");
+			return "login";
+		}
+		if (StringUtils.isBlank(user.getPassword())) {
+			model.addAttribute("message", "密码不能为空");
+			return "login";
+		}
 		User usertemp = userUtil.getUser();
 		if (usertemp != null && usertemp.getId() != null) {
 			return "forward:hello";
@@ -57,11 +64,12 @@ public class LoginController extends BaseController {
 			try {
 				// 成功后，会自动跳转到 successUrl，与return无关
 				SecurityUtils.getSubject().login(
-						new UsernamePasswordToken(user.getUserName(), user.getPassword(), rememberMe,request.getRemoteHost()));
+						new UsernamePasswordToken(user.getUserName(), user.getPassword(), rememberMe, request
+								.getRemoteHost()));
 				model.addAttribute("message", "欢迎光临");
 			} catch (AuthenticationException e) {
 				model.addAttribute("message", "用户名或密码错误");
-				logger.warn(user.getUserName()+" 登录失败.",e);
+				logger.warn(user.getUserName() + " 登录失败.", e);
 				return "login";
 			}
 		}

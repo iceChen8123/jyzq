@@ -1,6 +1,8 @@
 package com.ice.jyzq.controller.back;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -93,6 +95,15 @@ public class ChoiseController {
 			}
 		}
 		return rtnList;
+	}
+	
+	@RequestMapping(value = "getlatestaddressinfo", method = RequestMethod.POST)
+	@ResponseBody
+	public String getlatestaddressinfo() {
+		Map<String , Object> latestaddressinfo = new HashMap<String, Object>();
+		latestaddressinfo.put("cityId", choiseService.getlatestCityId());
+		latestaddressinfo.put("address", choiseService.getlatestaddress());
+		return JsonMapper.toJsonString(latestaddressinfo);
 	}
 
 }

@@ -3,22 +3,27 @@
 <head>
 <title>用户登录</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
+<script type="text/javascript">
+$(document).ready(function() {
+	$("#myForm").validate();
+});
+</script>
 </head>
 <body>
 <div class="col-md-2" ></div>
 <div class="col-md-6" >
-	<form:form action="login" commandName="user" method="post">
+	<form:form action="login" commandName="user" method="post" id="myForm">
 		<div class="control-group">
 			<label for="username">用户名</label>
 			<div class="controls">
-				<form:input path="userName" class="required" />
+				<form:input path="userName" class="required" maxlength="40" minlength="5" />
 			</div>
 		</div>
 		<div class="control-group">
 			<label for="password">密码</label>
 			<div class="controls">
 				<form:input type="password" path="password" class="required"
-					placeholder="密码" />
+					placeholder="密码" minlength="6" />
 			</div>
 		</div>
 		<div class="footer">

@@ -29,9 +29,14 @@ public class UserController extends BaseController {
 			model.addAttribute("user", user);
 			return "register";
 		}
-		userService.save(user.getUserName(), user.getPassword());
-		model.addAttribute("message", "注册成功，请登录");
-		return "forward:hello";
+		try {
+			userService.save(user.getUserName(), user.getPassword());
+			model.addAttribute("message", "注册成功，请登录");
+			return "forward:hello";
+		} catch (Exception e) {
+			logger.error("register: ", e);
+			return "register";
+		}
 	}
 
 }

@@ -11,14 +11,14 @@
 		<div class="control-group">
 			<label for="username">用户名</label>
 			<div class="controls">
-				<form:input path="userName" class="required" />
+				<form:input path="userName" class="required" maxlength="40" minlength="6" />(6个以上字母或数字)
 			</div>
 		</div>
 		<div class="control-group">
 			<label for="password">密码</label>
 			<div class="controls">
 				<form:input type="password" path="password" class="required"
-					placeholder="密码" />
+					placeholder="密码"  maxlength="40" minlength="6"  />(6个以上字母或数字)
 			</div>
 		</div>
 		<div class="control-group">
