@@ -40,6 +40,9 @@ public class ChoiseConvertUtil {
 			}
 			index++;
 		}
+		// choiseVo.setCity(city); //TODO 这三个有待实现
+		// choiseVo.setAddress(address);
+		// choiseVo.setSubject(subject);
 		return choiseVo;
 	}
 

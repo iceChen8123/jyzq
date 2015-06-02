@@ -23,7 +23,7 @@ function getPie(){
         		});
          		$('#test'+i).highcharts({
          			credits:{
-         				text:n.title,
+         				text: '点我去投票',
          				href: "<%=request.getContextPath()%>/b/choise/vote?id="+n.id
          			},
                     chart: {

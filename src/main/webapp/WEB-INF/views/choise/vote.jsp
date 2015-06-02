@@ -29,7 +29,7 @@ function genpie(){
         		var seriesdata = [];
         		$.each(data.choiseAndVote, function(i, a){
         			seriesdata[i] = [a.choise, parseInt(a.vote)];
-        			$('#onlineP').append("<li><button type=\"button\" class=\"btn "+btnType[i]+" btn-lg\" onclick=\"vote('"+a.choise+"')\">"+ a.choise +"</button></li>");
+        			$('#onlineP').append("<li><button type=\"button\" class=\"btn "+btnType[i]+" btn-lg\" onclick=\"vote('"+a.choise+"','"+ data.subjectId+ "')\">"+ a.choise +"</button></li>");
         		});
          		$('#test0').highcharts({
          			credits:{
@@ -69,13 +69,14 @@ function genpie(){
         }    
     });
 }
-function vote(s){
-	var choise = s;
+function vote(c,sid){
+	var choise = c;
+	var subjectId = sid;
 	var id = $('#id').val();
 	$.ajax({    
         type:'post',        
         url:'<%=request.getContextPath()%>/b/choise/vote',    
-        data:{id:id,choise:choise},    
+        data:{id:id,subjectId:subjectId,choise:choise},    
         cache:false,    
         dataType:'json',    
         success:function(data){

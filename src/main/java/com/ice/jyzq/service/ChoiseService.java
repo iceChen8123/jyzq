@@ -23,9 +23,11 @@ import org.springframework.stereotype.Service;
 
 import com.ice.jyzq.common.UserUtil;
 import com.ice.jyzq.util.Cn2SpellUtil;
+import com.ice.server.bean.Address;
 import com.ice.server.bean.Choise;
 import com.ice.server.bean.ChoiseItem;
 import com.ice.server.bean.UserVote;
+import com.ice.server.dao.AddressDao;
 import com.ice.server.dao.ChoiseDao;
 import com.ice.server.dao.ChoiseItemDao;
 import com.ice.server.dao.UserVoteDao;
@@ -48,15 +50,26 @@ public class ChoiseService {
 	private ChoiseDao choiseDao;
 	@Autowired
 	private ChoiseItemDao choiseItemDao;
+	@Autowired
+	private AddressDao addressDao;
 
 	public Choise save(String title, String choiseCode, Long subjectId, List<String> choiseList, String choiseDesc,
-			String userName) {
+			String userName, Integer cityId, String address) {
 		saveChoiseItem(choiseCode, subjectId, choiseList);
 		Choise choise = new Choise();
 		choise.setUserName(userName);
 		choise.setTitle(title);
 		choise.setChoiseCode(choiseCode);
 		choise.setSubjectId(subjectId);
+		choise.setCityId(cityId);
+		if (StringUtils.isNotBlank(address)) {
+			Address entity = new Address();
+			entity.setCityId(cityId);
+			entity.setAddress(address);
+			entity.setCreateTime(new Date());
+			Long addressId = addressDao.save(entity).getId();
+			choise.setAddressId(addressId);
+		}
 		StringBuilder choises = new StringBuilder();
 		for (String choiseString : choiseList) {
 			choises.append(CHOISE_SEPARATOR).append(choiseString);

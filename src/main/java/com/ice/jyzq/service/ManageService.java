@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.ice.server.bean.sys.ChoiseSubject;
 import com.ice.server.bean.sys.ChoiseType;
+import com.ice.server.bean.sys.City;
 import com.ice.server.dao.sys.ChoiseSubjectDao;
 import com.ice.server.dao.sys.ChoiseTypeDao;
+import com.ice.server.dao.sys.CityDao;
 
 @Service
 public class ManageService {
@@ -24,6 +26,9 @@ public class ManageService {
 
 	@Autowired
 	private ChoiseSubjectDao choiseSubjectDao;
+
+	@Autowired
+	private CityDao cityDao;
 
 	public List<ChoiseType> getChoiseTypes() {
 		return Lists.newArrayList(choiseTypeDao.findAll().iterator());
@@ -67,5 +72,13 @@ public class ManageService {
 
 	public void renewSubject(Long choiseSubjectId) {
 		choiseSubjectDao.valid(choiseSubjectId);
+	}
+
+	public List<ChoiseSubject> getSubjects(String choiseCode) {
+		return choiseSubjectDao.findByChoiseCode(choiseCode);
+	}
+
+	public List<City> getcities() {
+		return Lists.newArrayList(cityDao.findAll().iterator());
 	}
 }

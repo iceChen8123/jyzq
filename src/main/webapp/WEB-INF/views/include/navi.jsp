@@ -13,6 +13,71 @@
 <script src="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.min.js" type="text/javascript"></script>
 <script src="<%=request.getContextPath()%>/resources/jquery-validation/1.11.1/jquery.validate.method.min.js" type="text/javascript"></script>
 <script type="text/javascript">
+function listchoisetype(){
+    $.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/b/choisetype/get',    
+        data:{},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+        	$.each(data, function(i, n){
+         		if(n.valid == 1){
+        			$('#choiseCode').append("<option value=\""+ n.choiseCode+"\" selected=\"selected\">"+n.choiseName+"</option>");
+        		}
+        	});
+        }    
+    });    
+}
+function listaddress(){
+    $.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/b/city/get',    
+        data:{},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+        	$.each(data, function(i, n){
+        		$('#cityId').append("<option value=\""+ n.id+"\" selected=\"selected\">"+n.cityName+"</option>");
+        	});
+        }    
+    });    
+}
+function changeSubjects(){
+	var choiseCode = $('#choiseCode').val();
+    $.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/b/subject/getbychoisecode',    
+        data:{choiseCode:choiseCode},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+    		$('#subjectId').empty();
+        	$.each(data, function(i, n){
+        		$('#subjectId').append("<option value=\""+ n.id+"\">"+n.subjectName+"</option>");
+        	});
+        }    
+    });    
+}
+function initSubjects(){
+	if($('#subjectId').val()){
+		return;
+	}
+	var choiseCode = $('#choiseCode').val();
+    $.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/b/subject/getbychoisecode',    
+        data:{choiseCode:choiseCode},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+    		$('#subjectId').empty();
+        	$.each(data, function(i, n){
+        		$('#subjectId').append("<option value=\""+ n.id+"\">"+n.subjectName+"</option>");
+        	});
+        }    
+    });    
+}
 function showtips(){
 	if($('#message').val()){
 		alert($('#message').val());
@@ -29,21 +94,23 @@ $(document).ready(function() {
 	$("#myForm").validate();
 	showtips();
 	changeSubject();
+	listaddress();
 });
 function newtask(){
+	listchoisetype();
 	$('#myModal').modal('show');
 }
 var choicenum = 2;
 function addChoice(){
 	if(choicenum >= 6){
-		alert('u have too much choises.Sorry ~_~');
+		alert('我+_+ 这么多纠结，我们也无能为力了  ~_~');
 		return;
 	}
 	choicenum++;
 	var content = "<input type='text' class='form-control input-lg required' name='choiceList"+choicenum+"' id='choiceList"+choicenum+"' placeholder='你的选择?'>";
 	$("#choiceInput").append(content); 
 	if(choicenum == 6){
-		$('#moreButton').val('NO MORE');
+		$('#moreButton').val('不能再多了#_#');
 		$('#moreButton').attr("disabled", true);
 	}
 } 
@@ -90,23 +157,36 @@ function addChoice(){
 		  </div>
 		  <div class="control-group" >
 		    <label for="choiceType" >发愁的事:</label>
-		    <c:forEach items="${fns:getChoiceTypes()}" var="ct">
-		    	<label class="radio-inline"><input type="radio" name="choiseTypeId" value="${ct.id }" checked="checked">${ct.choiseName }</label>
-		    </c:forEach>
+		    <select class="form-control input-lg required" id="choiseCode" name="choiseCode" onchange="changeSubjects()">
+		    </select>
+		  </div>
+		  <div class="control-group" >
+		    <label for="subjectId" >再具体点:</label>
+		    <select class="form-control input-lg required" id="subjectId" name="subjectId" onclick="initSubjects()">
+		    </select>
+		  </div>
+		  <div class="control-group" >
+		    <label for="cityId" >所在城市:</label>
+		    <select class="form-control input-lg required" id="cityId" name="cityId" >
+		    </select>
+		  </div>
+		  <div class="control-group" >
+		    <label for="address" >地址:</label>
+		     <input type="text" class="form-control input-lg" name="address" id="address" placeholder="选填，大致位置，方便大家投票时判断">
 		  </div>
 		  <div class="control-group">
-		    <label for="choiceList">choice:</label>
+		    <label for="choiceList">纠结的东东:</label>
 		  </div>
 		  <div class="control-group" id="choiceInput">
 		    <input type="text" class="form-control input-lg required" name="choiceList1" id="choiceList1" placeholder="你的选择?">
 		    <input type="text" class="form-control input-lg required" name="choiceList2" id="choiceList2" placeholder="你的选择?">
 		  </div>
 		  <div class="control-group">
-		    <input id="moreButton" type="button" class="form-control input-lg" value="Give Me More" onclick="addChoice()">
+		    <input id="moreButton" type="button" class="form-control input-lg" value="我还有其他纠结的..." onclick="addChoice()">
 		  </div>
 		  <div class="control-group" >
 		    <label for="title" >描述:</label>
-		    <input type="text" class="form-control input-lg required" name="choiseDesc" id="choiseDesc" placeholder="详细描述，更有助于大家投票的准确性">
+		    <input type="text" class="form-control input-lg" name="choiseDesc" id="choiseDesc" placeholder="详细描述，更有助于大家投票的准确性">
 		  </div>
 		  <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

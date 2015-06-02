@@ -7,7 +7,7 @@
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 <script src="<%=request.getContextPath()%>/resources/highcharts.js"></script>
 <script type="text/javascript">
-function getchoisetype(){
+function listchoisetype(){
     $.ajax({    
         type:'post',        
         url:'<%=request.getContextPath()%>/b/choisetype/get',    
@@ -24,11 +24,15 @@ function getchoisetype(){
         			o = "<a href=\"<%=request.getContextPath()%>/b/choiseType/del?id="+ n.id+"\">delete</a>";
         		}
          		$('#choisetypeB').append("<tr><td>"+ o+ "</td><td>"+ n.choiseCode+"</td><td>"+ n.choiseName+"</td><td>"+ n.valid+"</td><td>"+ date+"</td></tr>");
+         		
+         		if(n.valid == 1){
+        			$('#choiseType').append("<option value=\""+ n.choiseCode+"\">"+n.choiseName+"</option>");
+        		}
         	});
         }    
     });    
 }
-function getsubject(){
+function listsubject(){
     $.ajax({    
         type:'post',        
         url:'<%=request.getContextPath()%>/b/subject/get',    
@@ -49,17 +53,47 @@ function getsubject(){
         }    
     });    
 }
+function listchoiseexpiredtime(){
+    $.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/b/choiseexpiredtime/get',    
+        data:{},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+        	$.each(data, function(i, n){
+        		$('#expiredTime').append("<option value=\""+ n.expiredTime+"\">"+n.desc+"</option>");
+        	});
+        }    
+    });    
+}
+function listvotearea(){
+    $.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/b/votearea/get',    
+        data:{},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+        	$.each(data, function(i, n){
+				$('#voteArea').append("<option value=\""+ n.voteArea+"\">"+n.desc+"</option>");
+        	});
+        }    
+    });    
+}
 function newchoisetype(){
 	$('#choisetypeModal').modal('show');
 }
 function newchoisesubject(){
+	listchoiseexpiredtime();
+	listvotearea();
 	$('#choisesubjectModal').modal('show');
 }
 	$(document).ready(function() {
 		$("#choiseTypeForm").validate();
 		$("#choiseSubjectForm").validate();
-		getchoisetype();
-		getsubject();
+		listchoisetype();
+		listsubject();
 	});
 </script>
 </head>
@@ -126,19 +160,22 @@ function newchoisesubject(){
       	<form method="post" id="choiseSubjectForm" action="<%=request.getContextPath()%>/b/choiseSubject/new">
       	  <div class="control-group" >
 		    <label for="choiseCode" >choiseCode:</label>
-		    <input type="text" class="form-control input-lg required" name="choiseCode" id="choiseCode" placeholder="choiseCode">
+		    <select class="form-control input-lg required" id="choiseType" name="choiseType">
+		    </select>
 		  </div>
       	  <div class="control-group" >
 		    <label for="subjectName" >subjectName:</label>
 		    <input type="text" class="form-control input-lg required" name="subjectName" id="subjectName" placeholder="subjectName">
 		  </div>
       	  <div class="control-group" >
-		    <label for="expiredTime" >subjectName:</label>
-		    <input type="text" class="form-control input-lg required" name="expiredTime" id="expiredTime" placeholder="expiredTime">
+		    <label for="expiredTime" >expiredTime:</label>
+		    <select class="form-control input-lg required" id="expiredTime" name="expiredTime">
+		    </select>
 		  </div>
       	  <div class="control-group" >
 		    <label for="voteArea" >voteArea:</label>
-		    <input type="text" class="form-control input-lg required" name="voteArea" id="voteArea" placeholder="voteArea">
+		    <select class="form-control input-lg required" id="voteArea" name="voteArea">
+		    </select>
 		  </div>
 		  <div class="modal-footer">
 	        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

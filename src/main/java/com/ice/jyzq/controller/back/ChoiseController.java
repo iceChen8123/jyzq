@@ -39,10 +39,13 @@ public class ChoiseController {
 	@RequestMapping(value = "new", method = { RequestMethod.GET, RequestMethod.POST })
 	public String add(HttpServletRequest request, HttpServletResponse response, Model model,
 			@RequestParam("choiseCode") String choiseCode, @RequestParam("subjectId") Long subjectId,
-			@RequestParam("title") String title, @RequestParam("choiseDesc") String choiseDesc) {
+			@RequestParam("title") String title,
+			@RequestParam(value = "choiseDesc", required = false) String choiseDesc,
+			@RequestParam("cityId") Integer cityId, @RequestParam("address") String address) {
 		List<String> choiseList = getChoisesFromRequest(request);
 		logger.info("choiseType {} , choiceList {}", choiseCode, JsonMapper.toJsonString(choiseList));
-		choiseService.save(title, choiseCode, subjectId, choiseList, choiseDesc, userUtil.getCurrentUserName());
+		choiseService.save(title, choiseCode, subjectId, choiseList, choiseDesc, userUtil.getCurrentUserName(), cityId,
+				address);
 		model.addAttribute("message", "ok");
 		return "home";
 	}

@@ -11,11 +11,39 @@ public class ChoiseVo {
 	private Long id;
 	private Date createTime;
 	private Date updateTime;
+	private String city;
+	private String address;
 	private String userName;
 	private String title;
+	private Long subjectId;
+	private String subject;
 	private String choiseCode;
 	private List<Map<String, Object>> choiseAndVote = new ArrayList<Map<String, Object>>();
 	private String choiseDesc;
+
+	public String getCity() {
+		return city;
+	}
+
+	public void setCity(String city) {
+		this.city = city;
+	}
+
+	public String getAddress() {
+		return address;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public String getSubject() {
+		return subject;
+	}
+
+	public void setSubject(String subject) {
+		this.subject = subject;
+	}
 
 	public Long getId() {
 		return id;
@@ -55,6 +83,14 @@ public class ChoiseVo {
 
 	public void setTitle(String title) {
 		this.title = title;
+	}
+
+	public Long getSubjectId() {
+		return subjectId;
+	}
+
+	public void setSubjectId(Long subjectId) {
+		this.subjectId = subjectId;
 	}
 
 	public String getChoiseCode() {

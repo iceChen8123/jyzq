@@ -52,7 +52,7 @@ public class Choise implements Serializable {
 	@Column(name = "city_id")
 	private Integer cityId;
 	@Column(name = "address_id")
-	private Integer addressId;
+	private Long addressId;
 	@Column(name = "title")
 	private String title;
 	@Column(name = "choise_code")
@@ -82,11 +82,11 @@ public class Choise implements Serializable {
 		this.cityId = cityId;
 	}
 
-	public Integer getAddressId() {
+	public Long getAddressId() {
 		return addressId;
 	}
 
-	public void setAddressId(Integer addressId) {
+	public void setAddressId(Long addressId) {
 		this.addressId = addressId;
 	}
 
