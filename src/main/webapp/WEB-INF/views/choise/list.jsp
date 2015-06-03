@@ -23,7 +23,7 @@ $(function(){
 			$.each(data, function(i, n){
         		var seriesdata = [];
         		$.each(n.choiseAndVote, function(it, a){
-        			seriesdata[it] = [a.choise, parseInt(a.vote)];
+        			seriesdata[it] = [a.choise+'('+ parseInt(a.vote)+ ')', parseInt(a.vote)];
         		});
          		$('#div'+divnum).highcharts({
          			credits:{

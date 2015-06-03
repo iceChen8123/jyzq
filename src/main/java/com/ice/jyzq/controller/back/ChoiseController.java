@@ -8,6 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang.math.RandomUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,11 +46,24 @@ public class ChoiseController {
 			@RequestParam(value = "choiseDesc", required = false) String choiseDesc,
 			@RequestParam("cityId") Integer cityId, @RequestParam("address") String address) {
 		List<String> choiseList = getChoisesFromRequest(request);
-		logger.info("choiseType {} , choiceList {}", choiseCode, JsonMapper.toJsonString(choiseList));
 		choiseService.save(title, choiseCode, subjectId, choiseList, choiseDesc, userUtil.getCurrentUserName(), cityId,
 				address);
 		model.addAttribute("message", "ok");
 		return "home";
+	}
+
+	@RequestMapping(value = "chooseforme", method = { RequestMethod.GET, RequestMethod.POST })
+	public String chooseforme(HttpServletRequest request, HttpServletResponse response, Model model,
+			@RequestParam("choiseCode") String choiseCode, @RequestParam("subjectId") Long subjectId,
+			@RequestParam("title") String title,
+			@RequestParam(value = "choiseDesc", required = false) String choiseDesc,
+			@RequestParam("cityId") Integer cityId, @RequestParam("address") String address) {
+		List<String> choiseList = getChoisesFromRequest(request);
+		Choise choise = choiseService.save(title, choiseCode, subjectId, choiseList, choiseDesc,
+				userUtil.getCurrentUserName(), cityId, address);
+		model.addAttribute("message", "系统为你选的是: " + choiseList.get(RandomUtils.nextInt(choiseList.size())));
+		model.addAttribute("id", choise.getId());
+		return "choise/vote";
 	}
 
 	@RequestMapping(value = "vote", method = RequestMethod.GET)
@@ -96,11 +110,11 @@ public class ChoiseController {
 		}
 		return rtnList;
 	}
-	
+
 	@RequestMapping(value = "getlatestaddressinfo", method = RequestMethod.POST)
 	@ResponseBody
 	public String getlatestaddressinfo() {
-		Map<String , Object> latestaddressinfo = new HashMap<String, Object>();
+		Map<String, Object> latestaddressinfo = new HashMap<String, Object>();
 		latestaddressinfo.put("cityId", choiseService.getlatestCityId());
 		latestaddressinfo.put("address", choiseService.getlatestaddress());
 		return JsonMapper.toJsonString(latestaddressinfo);

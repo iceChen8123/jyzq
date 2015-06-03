@@ -6,13 +6,7 @@
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 <script src="<%=request.getContextPath()%>/resources/highcharts.js"></script>
 <script type="text/javascript">
-function showtips(){
-	if($('#message').val()){
-		alert($('#message').val());
-	}
-}
 	$(document).ready(function() {
-		showtips();
 		genpie();
 	});
 function genpie(){
@@ -28,7 +22,7 @@ function genpie(){
         success:function(data){
         		var seriesdata = [];
         		$.each(data.choiseAndVote, function(i, a){
-        			seriesdata[i] = [a.choise, parseInt(a.vote)];
+        			seriesdata[i] = [a.choise+'('+ parseInt(a.vote)+ ')', parseInt(a.vote)];
         			$('#onlineP').append("<li><button type=\"button\" class=\"btn "+btnType[i]+" btn-lg\" onclick=\"vote('"+a.choise+"','"+ data.subjectId+ "')\">"+ a.choise +"</button></li>");
         		});
          		$('#test0').highcharts({
@@ -88,7 +82,6 @@ function vote(c,sid){
 </script>
 </head>
 <body>
-<input id="message" value="${message }" hidden="true">
 <input id="id" value="${id }" hidden="true">
 	<div id="test0" class="col-md-12" ></div>
 	<div id="test1" class="col-md-12" >

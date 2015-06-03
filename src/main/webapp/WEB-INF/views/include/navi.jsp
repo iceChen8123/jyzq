@@ -111,7 +111,9 @@ function initSubjects(){
 }
 function showtips(){
 	if($('#message').val()){
-		alert($('#message').val());
+		$('#allllinfo').html($('#message').val());
+		$('#allll').show();
+		//alert($('#message').val());
 	}
 }
 var subject = 'food';
@@ -161,6 +163,10 @@ function addChoice(){
 		$('#moreButton').attr("disabled", true);
 	}
 } 
+function chooseforme(){
+	$("#myForm").attr('action', "<%=request.getContextPath()%>/b/choise/chooseforme");
+	$("#myForm").submit();
+}
 </script>
 </head>
 <input id="message" value="${message }" hidden="true">
@@ -236,12 +242,16 @@ function addChoice(){
 		    <input type="text" class="form-control input-lg" name="choiseDesc" id="choiseDesc" placeholder="详细描述，更有助于大家投票的准确性">
 		  </div>
 		  <div class="modal-footer">
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-default" onclick="chooseforme()" >帮我选</button>
         <button type="submit" class="btn btn-primary" >Save</button>
       </div>
 		</form>
       </div>
     </div>
   </div>
+</div>
+<div class="alert alert-info alert-dismissible" id="allll" role="alert" hidden="true">
+	<button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+	<strong id="allllinfo"></strong>
 </div>
 </html>
