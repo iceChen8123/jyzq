@@ -31,6 +31,7 @@ $(document).ready(function() {
                         <input type="checkbox" id="rememberMe" name="rememberMe" checked="checked" hidden="true"> 
                     </label>
                     <input class="btn btn-primary" type="submit" value="登 录"/>
+                    <input class="btn btn-default" type="button" onclick="window.location.href='<%=request.getContextPath()%>/register'" value="注册"/>
                 </div>
 	</form:form>
 	</div>

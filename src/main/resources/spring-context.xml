@@ -26,7 +26,7 @@
 		class="org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor" />
 
 	<bean id="propertyConfigurer"
-		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		class="com.ice.jyzq.util.EncryptablePropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
 				<!-- <value>classpath:log4j.properties</value> <value>classpath:neo4j.properties</value> -->

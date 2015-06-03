@@ -50,7 +50,7 @@
       	<span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span>
       	<span class="glyphicon glyphicon-sunglasses" aria-hidden="true"></span></span>
       	<hr>
-      	<span style="font-size: large;color: black;font-weight: bolder;">我们<a href="<%=request.getContextPath()%>/hello"><span style="font-size: xx-large;">帮</span></a>你
+      	<span style="font-size: large;color: black;font-weight: bolder;">我们<a onclick="newtask()"><span style="font-size: xx-large;color: red">帮</span></a>你
       	<span style="font-size: xx-large;color: red;font-weight: bolder;">
       	<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
       	<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
