@@ -205,17 +205,17 @@ function chooseforme(){
       <div class="modal-body">
       	<form method="post" id="myForm" action="<%=request.getContextPath()%>/b/choise/new" onsubmit="return checkSubmit();">
       	  <div class="control-group" >
-		    <label for="title" >标题(吸引大家帮你投票，写好点哦):</label>
-		    <input type="text" class="form-control input-lg required" name="title" id="title" placeholder="写得好，大家都会看...">
+		    <label for="title" >标题:</label>
+		    <input type="text" class="form-control input-lg required" data-toggle="tooltip" data-placement="top" title="吸引大家帮你投票，写好点哦" name="title" id="title" placeholder="写得好，大家都会看...">
 		  </div>
 		  <div class="control-group" >
 		    <label for="choiceType" >发愁的事:</label>
-		    <select class="form-control input-lg required" id="choiseCode" name="choiseCode" onchange="changeSubjects()">
+		    <select class="form-control input-lg required" data-toggle="tooltip" data-placement="top" title="为了这玩意,老纠结了*_*" id="choiseCode" name="choiseCode" onchange="changeSubjects()">
 		    </select>
 		  </div>
 		  <div class="control-group" >
 		    <label for="subjectId" >再具体点:</label>
-		    <select class="form-control input-lg required" id="subjectId" name="subjectId" onclick="initSubjects()">
+		    <select class="form-control input-lg required" data-toggle="tooltip" data-placement="top" title="这个没啥用,看着选吧,哈哈~_~" id="subjectId" name="subjectId" onclick="initSubjects()">
 		    </select>
 		  </div>
 		  <div class="control-group" >
@@ -225,7 +225,7 @@ function chooseforme(){
 		  </div>
 		  <div class="control-group" >
 		    <label for="address" >地址:</label>
-		     <input type="text" class="form-control input-lg" name="address" id="address" placeholder="选填，大致位置，方便大家投票时判断">
+		     <input type="text" class="form-control input-lg" data-toggle="tooltip" data-placement="top" title="填下哦,帮你投票的小伙伴,可能就在周围呢^_^" name="address" id="address" placeholder="选填，大致位置，方便大家投票时判断">
 		  </div>
 		  <div class="control-group">
 		    <label for="choiceList">纠结的东东:</label>
@@ -239,11 +239,11 @@ function chooseforme(){
 		  </div>
 		  <div class="control-group" >
 		    <label for="title" >描述:</label>
-		    <input type="text" class="form-control input-lg" name="choiseDesc" id="choiseDesc" placeholder="详细描述，更有助于大家投票的准确性">
+		    <input type="text" class="form-control input-lg" data-toggle="tooltip" data-placement="top" title="陛下,就请您勉为其难的写点什么吧...." name="choiseDesc" id="choiseDesc" placeholder="详细描述，更有助于大家投票的准确性">
 		  </div>
 		  <div class="modal-footer">
-        <button type="button" class="btn btn-default" onclick="chooseforme()" >帮我选</button>
-        <button type="submit" class="btn btn-primary" >Save</button>
+        <button type="button" class="btn btn-default" data-toggle="tooltip" data-placement="top" title="系统随机帮你挑一个,不用等,快快滴@_@" onclick="chooseforme()" >随机个</button>
+        <button type="submit" class="btn btn-primary" data-toggle="tooltip" data-placement="top" title="丢给大家投票去" >丢给大家</button>
       </div>
 		</form>
       </div>
