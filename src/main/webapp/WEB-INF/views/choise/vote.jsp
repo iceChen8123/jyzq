@@ -22,7 +22,9 @@ function genpie(){
         success:function(data){
         		$('#choiseinfo').append("<li>"+data.title+"</li>");
         		$('#choiseinfo').append("<li>"+data.city+"</li>");
+        		if(data.address){
         		$('#choiseinfo').append("<li>"+data.address+"</li>");
+        		}
         		$('#choiseinfo').append("<li>"+new Date(data.createTime).toLocaleString()+"</li>");
         		var seriesdata = [];
         		$.each(data.choiseAndVote, function(i, a){

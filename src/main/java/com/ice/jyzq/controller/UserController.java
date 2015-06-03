@@ -25,13 +25,13 @@ public class UserController extends BaseController {
 	@RequestMapping(value = "register", method = RequestMethod.POST)
 	public String register(Model model, User user) {
 		if (userService.ifUserExists(user.getUserName())) {
-			model.addAttribute("message", "用户名重复");
+			model.addAttribute("message", "陛下,你的登录名重复了...麻烦换个吧");
 			model.addAttribute("user", user);
 			return "register";
 		}
 		try {
 			userService.save(user.getUserName(), user.getPassword());
-			model.addAttribute("message", "注册成功，请登录");
+			model.addAttribute("message", "又一个纠结的人诞生了～恭喜～请陛下登录吧");
 			return "forward:hello";
 		} catch (Exception e) {
 			logger.error("register: ", e);

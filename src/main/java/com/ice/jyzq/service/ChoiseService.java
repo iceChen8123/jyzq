@@ -7,6 +7,7 @@ import java.util.List;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Path;
 import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
@@ -192,11 +193,12 @@ public class ChoiseService {
 	}
 
 	public List<Choise> findMyChoises(final String choiseType, int pageNo, int pageSize) {
+		final String username = userUtil.getCurrentUserName();
 		Pageable pageable = new PageRequest(pageNo, pageSize, Direction.DESC, "id");
 		Iterator<Choise> choiseIterator = choiseDao.findAll(new Specification<Choise>() {
 
 			public Predicate toPredicate(Root<Choise> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-				Predicate userPredicate = cb.equal(root.get("userName"), userUtil.getCurrentUserName());
+				Predicate userPredicate = cb.equal(root.get("userName"), username);
 				Path<String> choiseTypePath = root.get("choiseCode");
 				if (StringUtils.isNotBlank(choiseType)) {
 					query.where(cb.and(userPredicate, cb.equal(choiseTypePath, choiseType))); // 这里可以设置任意条查询条件

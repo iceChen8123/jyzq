@@ -48,7 +48,7 @@ public class ChoiseController {
 		List<String> choiseList = getChoisesFromRequest(request);
 		choiseService.save(title, choiseCode, subjectId, choiseList, choiseDesc, userUtil.getCurrentUserName(), cityId,
 				address);
-		model.addAttribute("message", "ok");
+		model.addAttribute("message", "恭喜你,把纠结丢给大家了,哈哈@_@");
 		return "home";
 	}
 
@@ -98,7 +98,7 @@ public class ChoiseController {
 			return JsonMapper.toJsonString("您已经投过票了");
 		}
 		choiseService.vote(subjectId, choiseId, choise);
-		return JsonMapper.toJsonString("ok");
+		return JsonMapper.toJsonString("谢谢,你正在拯救一个纠结中的生命^_^");
 	}
 
 	private List<String> getChoisesFromRequest(HttpServletRequest request) {

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
+import com.ice.server.bean.Address;
 import com.ice.server.bean.sys.ChoiseSubject;
 import com.ice.server.bean.sys.ChoiseType;
 import com.ice.server.bean.sys.City;
@@ -95,7 +96,10 @@ public class ManageService {
 
 	public String getAddress(Long addressId) {
 		if (addressId != null) {
-			return addressDao.findOne(addressId.longValue()).getAddress();
+			Address temp = addressDao.findOne(addressId.longValue());
+			if(temp != null){
+				return temp.getAddress();
+			}
 		}
 		return "";
 	}

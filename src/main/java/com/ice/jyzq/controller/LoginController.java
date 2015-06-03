@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.ice.jyzq.common.UserUtil;
 import com.ice.jyzq.controller.base.BaseController;
@@ -39,7 +40,7 @@ public class LoginController extends BaseController {
 		}
 		if (StringUtils.isNotBlank(request.getParameter("message"))) {
 			if ("pleaseloginfirst".equals(request.getParameter("message"))) {
-				model.addAttribute("message", "请先登录");
+				model.addAttribute("message", "你登录了,才能丢问题给大家oO $_$");
 			}
 		}
 		model.addAttribute("user", new User());
@@ -55,7 +56,7 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(User user, @RequestParam(value = "rememberMe", defaultValue = "false") Boolean rememberMe,
-			HttpServletRequest request, HttpServletResponse response, Model model) {
+			HttpServletRequest request, HttpServletResponse response, Model model,RedirectAttributes redirectAttributes) {
 		if (StringUtils.isBlank(user.getUserName())) {
 			model.addAttribute("message", "用户名不能为空");
 			return "loginj";
@@ -80,6 +81,7 @@ public class LoginController extends BaseController {
 				return "loginj";
 			}
 		}
+		model.addAttribute("message", "陛下您登上来了~有什么纠结的,请告诉众卿家吧 #_#");
 		return "forward:hello";
 	}
 

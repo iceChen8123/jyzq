@@ -46,7 +46,7 @@ public class CommunicationController {
 	@RequestMapping(value = "advice", method = RequestMethod.POST)
 	public String advice(Model model, String title, String advice) {
 		adviceService.save(title, advice);
-		model.addAttribute("message", "Thanks ^_^");
+		model.addAttribute("message", "谢陛下 (*_*)");
 		return "forward:hello";
 	}
 
