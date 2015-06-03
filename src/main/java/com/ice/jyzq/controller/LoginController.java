@@ -13,9 +13,11 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.ice.jyzq.common.UserUtil;
 import com.ice.jyzq.controller.base.BaseController;
+import com.ice.jyzq.util.JsonMapper;
 import com.ice.server.bean.User;
 
 /**
@@ -29,14 +31,19 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
-		SecurityUtils.getSubject().logout();
-		User user = userUtil.getUser();
+		// SecurityUtils.getSubject().logout();
+//		User user = userUtil.getUser();
 		// 如果已经登录，则跳转到管理首页
-		if (user != null && user.getId() != null) {
+		if (StringUtils.isNotBlank(userUtil.getCurrentUserName())) {
 			return "forward:hello";
 		}
+		if (StringUtils.isNotBlank(request.getParameter("message"))) {
+			if ("pleaseloginfirst".equals(request.getParameter("message"))) {
+				model.addAttribute("message", "请先登录");
+			}
+		}
 		model.addAttribute("user", new User());
-		return "login";
+		return "loginj";
 	}
 
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
@@ -51,11 +58,11 @@ public class LoginController extends BaseController {
 			HttpServletRequest request, HttpServletResponse response, Model model) {
 		if (StringUtils.isBlank(user.getUserName())) {
 			model.addAttribute("message", "用户名不能为空");
-			return "login";
+			return "loginj";
 		}
 		if (StringUtils.isBlank(user.getPassword())) {
 			model.addAttribute("message", "密码不能为空");
-			return "login";
+			return "loginj";
 		}
 		User usertemp = userUtil.getUser();
 		if (usertemp != null && usertemp.getId() != null) {
@@ -66,13 +73,24 @@ public class LoginController extends BaseController {
 				SecurityUtils.getSubject().login(
 						new UsernamePasswordToken(user.getUserName(), user.getPassword(), rememberMe, request
 								.getRemoteHost()));
-				model.addAttribute("message", "欢迎光临");
+//				model.addAttribute("message", "欢迎光临");
 			} catch (AuthenticationException e) {
 				model.addAttribute("message", "用户名或密码错误");
 				logger.warn(user.getUserName() + " 登录失败.", e);
-				return "login";
+				return "loginj";
 			}
 		}
 		return "forward:hello";
+	}
+
+	@RequestMapping(value = "checkiflogin", method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String checkiflogin() {
+		User user = userUtil.getUser();
+		// 如果已经登录，则跳转到管理首页
+		if (user != null && user.getId() != null) {
+			return JsonMapper.toJsonString("true");
+		}
+		return JsonMapper.toJsonString("false");
 	}
 }

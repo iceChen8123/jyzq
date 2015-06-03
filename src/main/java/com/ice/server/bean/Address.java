@@ -19,6 +19,8 @@ public class Address implements Serializable {
 	private Long id;
 	@Column(name = "city_id")
 	private Integer cityId;
+	@Column(name = "address_py")
+	private String addressPy;
 	@Column(name = "address")
 	private String address;
 	@Column(name = "create_time")
@@ -38,6 +40,14 @@ public class Address implements Serializable {
 
 	public void setCityId(Integer cityId) {
 		this.cityId = cityId;
+	}
+
+	public String getAddressPy() {
+		return addressPy;
+	}
+
+	public void setAddressPy(String addressPy) {
+		this.addressPy = addressPy;
 	}
 
 	public String getAddress() {

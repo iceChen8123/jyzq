@@ -65,6 +65,7 @@ public class ChoiseService {
 		if (StringUtils.isNotBlank(address)) {
 			Address entity = new Address();
 			entity.setCityId(cityId);
+			entity.setAddressPy(Cn2SpellUtil.converterToSpell(address));
 			entity.setAddress(address);
 			entity.setCreateTime(new Date());
 			Long addressId = addressDao.save(entity).getId();
@@ -205,7 +206,7 @@ public class ChoiseService {
 
 	public String getlatestaddress() {
 		Choise choise = getlatestChoise(userUtil.getCurrentUserName());
-		if (choise == null) {
+		if (choise == null || choise.getAddressId() == null) {
 			return "";
 		}
 		String latestaddress = addressDao.findOne(choise.getAddressId()).getAddress();
@@ -221,7 +222,10 @@ public class ChoiseService {
 				return query.getRestriction();
 			}
 		}, pageable).iterator();
-		return choiseIterator.next();
+		if (choiseIterator.hasNext()) {
+			return choiseIterator.next();
+		}
+		return null;
 	}
 
 }

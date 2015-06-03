@@ -26,9 +26,9 @@ $(document).ready(function() {
 					placeholder="密码" minlength="6" />
 			</div>
 		</div>
-		<div class="footer">
-                    <label class="checkbox inline">
-                        <input type="checkbox" id="rememberMe" name="rememberMe"> <span style="color:#08c;">记住我</span>
+		<div class="footer" >
+                    <label class="checkbox inline" hidden="true">
+                        <input type="checkbox" id="rememberMe" name="rememberMe" checked="checked" hidden="true"> 
                     </label>
                     <input class="btn btn-primary" type="submit" value="登 录"/>
                 </div>

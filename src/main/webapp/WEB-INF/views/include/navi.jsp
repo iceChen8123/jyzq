@@ -29,7 +29,7 @@ function checkSubmit() {
 function listchoisetype(){
     $.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/b/choisetype/get',    
+        url:'<%=request.getContextPath()%>/choisetype/get',    
         data:{},    
         cache:false,    
         dataType:'json',    
@@ -57,10 +57,9 @@ function getlatestaddressinfo(){
     });    
 }
 function listcity(){
-	getlatestaddressinfo();
     $.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/b/city/get',    
+        url:'<%=request.getContextPath()%>/city/get',    
         data:{},    
         cache:false,    
         dataType:'json',    
@@ -79,7 +78,7 @@ function changeSubjects(){
 	var choiseCode = $('#choiseCode').val();
     $.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/b/subject/getbychoisecode',    
+        url:'<%=request.getContextPath()%>/subject/getbychoisecode',    
         data:{choiseCode:choiseCode},    
         cache:false,    
         dataType:'json',    
@@ -98,7 +97,7 @@ function initSubjects(){
 	var choiseCode = $('#choiseCode').val();
     $.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/b/subject/getbychoisecode',    
+        url:'<%=request.getContextPath()%>/subject/getbychoisecode',    
         data:{choiseCode:choiseCode},    
         cache:false,    
         dataType:'json',    
@@ -129,8 +128,24 @@ $(document).ready(function() {
 	listcity();
 });
 function newtask(){
+	checkiflogin();
+	getlatestaddressinfo();
 	listchoisetype();
 	$('#myModal').modal('show');
+}
+function checkiflogin(){
+    $.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/checkiflogin',    
+        data:{},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+    		if(data == 'false'){
+    			location.href = '<%=request.getContextPath()%>/login?message=pleaseloginfirst';
+    		}
+        }    
+    });    
 }
 var choicenum = 2;
 function addChoice(){
@@ -162,10 +177,11 @@ function addChoice(){
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >神,帮帮我</button></li>
-        <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li>
-        <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:notAuthenticated>
-        <shiro:authenticated><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/choise/history/my">纠结史</a></button></li></shiro:authenticated>
+        <shiro:lacksRole name="simple"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/login">登录</a></button></li>
+        <li><button type="button" class="btn btn-warning btn-lg" ><a href="<%=request.getContextPath()%>/register">注册</a></button></li></shiro:lacksRole>
+        <shiro:hasRole name="simple"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/choise/history/my">纠结史</a></button></li></shiro:hasRole>
         <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/manage">我叫后门</a></button></li></shiro:hasRole>
+        <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/manage/online">在线管理</a></button></li></shiro:hasRole>
         <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg" ><a href="<%=request.getContextPath()%>/b/advice/get">好建议</a></button></li></shiro:hasRole>
         <li><button type="button" class="btn btn-default btn-lg" ><a href="<%=request.getContextPath()%>/logout">退出</a></button></li>
       </ul>

@@ -10,7 +10,7 @@
 function listchoisetype(){
     $.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/b/choisetype/get',    
+        url:'<%=request.getContextPath()%>/choisetype/get',    
         data:{},    
         cache:false,    
         dataType:'json',    
@@ -35,7 +35,7 @@ function listchoisetype(){
 function listsubject(){
     $.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/b/subject/get',    
+        url:'<%=request.getContextPath()%>/subject/get',    
         data:{},    
         cache:false,    
         dataType:'json',    
@@ -56,7 +56,7 @@ function listsubject(){
 function listchoiseexpiredtime(){
     $.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/b/choiseexpiredtime/get',    
+        url:'<%=request.getContextPath()%>/choiseexpiredtime/get',    
         data:{},    
         cache:false,    
         dataType:'json',    
@@ -70,7 +70,7 @@ function listchoiseexpiredtime(){
 function listvotearea(){
     $.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/b/votearea/get',    
+        url:'<%=request.getContextPath()%>/votearea/get',    
         data:{},    
         cache:false,    
         dataType:'json',    
