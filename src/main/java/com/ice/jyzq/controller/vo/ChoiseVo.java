@@ -11,7 +11,9 @@ public class ChoiseVo {
 	private Long id;
 	private Date createTime;
 	private Date updateTime;
+	private Integer cityId;
 	private String city;
+	private Long addressId;
 	private String address;
 	private String userName;
 	private String title;
@@ -20,6 +22,22 @@ public class ChoiseVo {
 	private String choiseCode;
 	private List<Map<String, Object>> choiseAndVote = new ArrayList<Map<String, Object>>();
 	private String choiseDesc;
+
+	public Integer getCityId() {
+		return cityId;
+	}
+
+	public void setCityId(Integer cityId) {
+		this.cityId = cityId;
+	}
+
+	public Long getAddressId() {
+		return addressId;
+	}
+
+	public void setAddressId(Long addressId) {
+		this.addressId = addressId;
+	}
 
 	public String getCity() {
 		return city;

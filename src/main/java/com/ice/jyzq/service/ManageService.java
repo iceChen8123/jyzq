@@ -12,6 +12,7 @@ import com.google.common.collect.Lists;
 import com.ice.server.bean.sys.ChoiseSubject;
 import com.ice.server.bean.sys.ChoiseType;
 import com.ice.server.bean.sys.City;
+import com.ice.server.dao.AddressDao;
 import com.ice.server.dao.sys.ChoiseSubjectDao;
 import com.ice.server.dao.sys.ChoiseTypeDao;
 import com.ice.server.dao.sys.CityDao;
@@ -29,6 +30,9 @@ public class ManageService {
 
 	@Autowired
 	private CityDao cityDao;
+
+	@Autowired
+	private AddressDao addressDao;
 
 	public List<ChoiseType> getChoiseTypes() {
 		return Lists.newArrayList(choiseTypeDao.findAll().iterator());
@@ -80,5 +84,19 @@ public class ManageService {
 
 	public List<City> getcities() {
 		return Lists.newArrayList(cityDao.findAll().iterator());
+	}
+
+	public String getcity(Integer cityId) {
+		if (cityId != null) {
+			return cityDao.findOne(cityId.longValue()).getCityName();
+		}
+		return "";
+	}
+
+	public String getAddress(Long addressId) {
+		if (addressId != null) {
+			return addressDao.findOne(addressId.longValue()).getAddress();
+		}
+		return "";
 	}
 }

@@ -183,8 +183,8 @@ function chooseforme(){
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >神,帮帮我</button></li>
-        <shiro:lacksRole name="simple"><li><button type="button" class="btn btn-info btn-lg" onclick="window.location.href='<%=request.getContextPath()%>/login'" >登录</button></li>
-        <li><button type="button" class="btn btn-warning btn-lg"  onclick="window.location.href='<%=request.getContextPath()%>/register'" >注册</button></li></shiro:lacksRole>
+        <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" onclick="window.location.href='<%=request.getContextPath()%>/login'" >登录</button></li>
+        <li><button type="button" class="btn btn-warning btn-lg"  onclick="window.location.href='<%=request.getContextPath()%>/register'" >注册</button></li></shiro:notAuthenticated>
         <shiro:hasRole name="simple"><li><button type="button" class="btn btn-info btn-lg" onclick="window.location.href='<%=request.getContextPath()%>/b/choise/history/my'">纠结史</button></li></shiro:hasRole>
         <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg"  onclick="window.location.href='<%=request.getContextPath()%>/b/manage'">我叫后门</button></li></shiro:hasRole>
         <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg"  onclick="window.location.href='<%=request.getContextPath()%>/b/advice/get'">好建议</button></li></shiro:hasRole>

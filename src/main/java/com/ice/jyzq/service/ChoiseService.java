@@ -63,13 +63,21 @@ public class ChoiseService {
 		choise.setSubjectId(subjectId);
 		choise.setCityId(cityId);
 		if (StringUtils.isNotBlank(address)) {
-			Address entity = new Address();
-			entity.setCityId(cityId);
-			entity.setAddressPy(Cn2SpellUtil.converterToSpell(address));
-			entity.setAddress(address);
-			entity.setCreateTime(new Date());
-			Long addressId = addressDao.save(entity).getId();
-			choise.setAddressId(addressId);
+			boolean isexist = false;
+			List<Address> temps = addressDao.findByAddressPy(Cn2SpellUtil.converterToSpell(address));
+			if (temps != null && !temps.isEmpty()) {
+				for (Address tempAddress : temps) {
+					if (address.equals(tempAddress.getAddress())) {
+						isexist = true;
+						choise.setAddressId(tempAddress.getId());
+					}
+				}
+				if (!isexist) {
+					Address entity = createAddress(cityId, address);
+					Long addressId = addressDao.save(entity).getId();
+					choise.setAddressId(addressId);
+				}
+			}
 		}
 		StringBuilder choises = new StringBuilder();
 		for (String choiseString : choiseList) {
@@ -80,6 +88,15 @@ public class ChoiseService {
 		choise.setChoiseDesc(choiseDesc);
 		choise.setCreateTime(new Date());
 		return choiseDao.save(choise);
+	}
+
+	private Address createAddress(Integer cityId, String address) {
+		Address entity = new Address();
+		entity.setCityId(cityId);
+		entity.setAddressPy(Cn2SpellUtil.converterToSpell(address));
+		entity.setAddress(address);
+		entity.setCreateTime(new Date());
+		return entity;
 	}
 
 	private void saveChoiseItem(String choiseCode, Long subjectId, List<String> choiseList) {

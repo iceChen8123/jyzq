@@ -20,6 +20,10 @@ function genpie(){
         cache:false,    
         dataType:'json',    
         success:function(data){
+        		$('#choiseinfo').append("<li>"+data.title+"</li>");
+        		$('#choiseinfo').append("<li>"+data.city+"</li>");
+        		$('#choiseinfo').append("<li>"+data.address+"</li>");
+        		$('#choiseinfo').append("<li>"+new Date(data.createTime).toLocaleString()+"</li>");
         		var seriesdata = [];
         		$.each(data.choiseAndVote, function(i, a){
         			seriesdata[i] = [a.choise+'('+ parseInt(a.vote)+ ')', parseInt(a.vote)];
@@ -83,7 +87,11 @@ function vote(c,sid){
 </head>
 <body>
 <input id="id" value="${id }" hidden="true">
-	<div id="test0" class="col-md-12" ></div>
+	<div class="col-md-3" >
+		<ul id="choiseinfo">
+		</ul>
+	</div>
+	<div id="test0" class="col-md-9" ></div>
 	<div id="test1" class="col-md-12" >
 	<ul id="onlineP">
 		</ul>

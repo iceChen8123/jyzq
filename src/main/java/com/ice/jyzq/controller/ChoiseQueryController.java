@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ice.jyzq.controller.util.ChoiseConvertUtil;
 import com.ice.jyzq.controller.vo.ChoiseVo;
 import com.ice.jyzq.service.ChoiseService;
+import com.ice.jyzq.service.ManageService;
 import com.ice.jyzq.util.JsonMapper;
 import com.ice.server.bean.Choise;
 
@@ -26,6 +27,9 @@ public class ChoiseQueryController {
 
 	@Autowired
 	private ChoiseService choiseService;
+
+	@Autowired
+	private ManageService manageService;
 
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String to(@RequestParam(value = "type", required = false) String choiseType, Model model) {
@@ -42,7 +46,11 @@ public class ChoiseQueryController {
 	@RequestMapping(value = "get", method = RequestMethod.GET)
 	@ResponseBody
 	public String get(@RequestParam("id") String id) {
-		return JsonMapper.toJsonString(ChoiseConvertUtil.convertToChoiseVo(choiseService.findById(Long.parseLong(id))));
+		ChoiseVo choiseVo = ChoiseConvertUtil.convertToChoiseVo(choiseService.findById(Long.parseLong(id)));
+		choiseVo.setCity(manageService.getcity(choiseVo.getCityId()));
+		choiseVo.setAddress(manageService.getAddress(choiseVo.getAddressId()));
+		// choiseVo.setSubject(subject); not need
+		return JsonMapper.toJsonString(choiseVo);
 	}
 
 	@RequestMapping(value = "some/get", method = { RequestMethod.GET, RequestMethod.POST })
