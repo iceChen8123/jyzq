@@ -9,6 +9,7 @@
 <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <html>
 <head>
+<link rel="shortcut icon" href="<%=request.getContextPath()%>/resources/jyzq.png" type="image/x-icon" />
 <meta name="keywords" content="咎由自取,纠友自取,纠结" />
 <meta name="description" content="纠结的人们来这里，让你不再被摧残" />
 <title>纠友自取</title>

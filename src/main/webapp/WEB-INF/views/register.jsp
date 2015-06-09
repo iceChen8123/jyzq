@@ -21,7 +21,7 @@
 					placeholder="密码"  maxlength="40" minlength="6"  />(6个以上字母或数字)
 			</div>
 		</div>
-		<div class="control-group">
+		<div class="footer" >
 			<div class="controls">
 				<input id="btnSubmit" class="btn btn-primary" type="submit"
 					value="保存" />&nbsp;

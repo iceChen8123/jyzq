@@ -172,16 +172,14 @@ function chooseforme(){
 <input id="message" value="${message }" hidden="true">
 <input id="subject" value="${subject }" hidden="true">
 <nav class="navbar navbar-inverse" >
-  <div>
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
+      <ul class="nav navbar-nav nav-pills ">
       	<c:forEach items="${fns:getChoiceTypes()}" var="ct">
         	<li><a href="<%=request.getContextPath()%>/choise?type=${ct.choiseCode }" )">${ct.choiseName }</a></li>
       	</c:forEach>
       		<li><a href="<%=request.getContextPath()%>/choise/list" )">随便看看</a></li>
         	<li><a href="<%=request.getContextPath()%>/b/advice" )">用着不爽</a></li>
       </ul>
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav nav-pills navbar-right">
         <li><button type="button" class="btn btn-success btn-lg" onclick="newtask()" >神,帮帮我</button></li>
         <shiro:notAuthenticated><li><button type="button" class="btn btn-info btn-lg" onclick="window.location.href='<%=request.getContextPath()%>/login'" >登录</button></li>
         <li><button type="button" class="btn btn-warning btn-lg"  onclick="window.location.href='<%=request.getContextPath()%>/register'" >注册</button></li></shiro:notAuthenticated>
@@ -190,8 +188,6 @@ function chooseforme(){
         <shiro:hasRole name="admin"><li><button type="button" class="btn btn-info btn-lg"  onclick="window.location.href='<%=request.getContextPath()%>/b/advice/get'">好建议</button></li></shiro:hasRole>
         <li><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='<%=request.getContextPath()%>/logout'" >退出</button></li>
       </ul>
-    </div>
-  </div>
 </nav>
 
 <!-- Modal -->
