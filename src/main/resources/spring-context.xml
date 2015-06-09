@@ -29,7 +29,7 @@
 		class="com.ice.jyzq.util.EncryptablePropertyPlaceholderConfigurer">
 		<property name="locations">
 			<list>
-				<!-- <value>classpath:log4j.properties</value> <value>classpath:neo4j.properties</value> -->
+				<value>classpath:log4j.properties</value> 
 				<value>classpath:jdbc.properties</value>
 			</list>
 		</property>
