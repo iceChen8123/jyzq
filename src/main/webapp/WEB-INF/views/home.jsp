@@ -24,6 +24,7 @@ function getPie(){
          		$('#test'+i).highcharts({
          			credits:{
          				text: '点我去投票',
+         				style:{cursor:"pointer",color:"#217853",fontSize:"9px",fontFamily:'幼圆',fontWeight:'bold'},
          				href: "<%=request.getContextPath()%>/b/choise/vote?id="+n.id
          			},
                     chart: {
@@ -33,7 +34,7 @@ function getPie(){
                     },
                     title: {
                         text: n.title,
-                        style:{color:"#333333",fontSize:"12px"}
+                        style:{color:"#333333",fontSize:"16px",fontFamily:'幼圆',fontWeight:'bold'}
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'

@@ -34,6 +34,7 @@ function genpie(){
          		$('#test0').highcharts({
          			credits:{
          				text:data.title,
+         				style:{cursor:"pointer",color:"#217853",fontSize:"9px",fontFamily:'幼圆',fontWeight:'bold'},
          				href: "<%=request.getContextPath()%>/b/choise/vote?id="+data.id
          			},
                     chart: {
@@ -45,7 +46,8 @@ function genpie(){
                     	text: data.choiseDesc
                     },
                     title: {
-                        text: data.title
+                        text: data.title,
+                        style:{color:"#333333",fontSize:"16px",fontFamily:'幼圆',fontWeight:'bold'}
                     },
                     tooltip: {
                         pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
