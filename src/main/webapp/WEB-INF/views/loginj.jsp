@@ -14,13 +14,13 @@ $(document).ready(function() {
 <div class="col-md-6" >
 	<form:form action="login" commandName="user" method="post" id="myForm">
 		<div class="control-group">
-			<label for="username">用户名</label>
+			<label class="control-label" for="username">用户名</label>
 			<div class="controls">
 				<form:input path="userName" class="required" maxlength="40" minlength="5" />
 			</div>
 		</div>
 		<div class="control-group">
-			<label for="password">密码</label>
+			<label class="control-label" for="password">密码</label>
 			<div class="controls">
 				<form:input type="password" path="password" class="required"
 					placeholder="密码" minlength="6" />
