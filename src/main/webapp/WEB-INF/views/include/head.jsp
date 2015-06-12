@@ -12,10 +12,34 @@
 <meta name="description" content="纠友相聚,分外亲.我为人人，人人为我" />
 <meta name="author" content="ice">
 <title>纠友自取</title>
+<script type="text/javascript">
+function getonlinenumber(){
+	var id = $('#onlineid').val();
+	$.ajax({    
+        type:'post',        
+        url:'<%=request.getContextPath()%>/getonlinenumber',    
+        data:{},    
+        cache:false,    
+        dataType:'json',    
+        success:function(data){
+			$('#onlinenumber').html(data.onlinenumber);
+        }    
+    });    
+}
+$(document).ready(function(){  
+	getonlinenumber();
+	 setInterval("getonlinenumber()", 5000);  
+	}); 
+</script>
 </head>
 <div class="page-header">
 <div class="container-fluid directional" >
-  <h1 align="center"><a href="<%=request.getContextPath()%>">纠友自取</a></h1>
+  <div class="col-md-11"><h1 align="center" style="font-family: '幼圆'"><a href="<%=request.getContextPath()%>">纠友自取</a></h1></div>
+  <div class="col-md-1">&nbsp;</div>
+  <div class="col-md-11">&nbsp;</div>
+  <div class="col-md-1"><h6 align="right" style="vertical-align: bottom;">
+  <span style="font-family: '幼圆'">当前在线:<span id="onlinenumber"></span></span></h6>
+  </div>
 </div>
 </div>
 <%@include file="/WEB-INF/views/include/navi.jsp"%>
