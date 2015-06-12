@@ -1,7 +1,5 @@
 <%@ page contentType="text/html;charset=UTF-8" %>
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="咎由自取,纠友自取,纠结" />
-<meta name="description" content="纠结的人们来这里，让你不再被摧残" />
 <meta http-equiv="Cache-Control" content="max-age=3600" />
 <script src="http://libs.useso.com/js/jquery/2.1.1/jquery.min.js" type="text/javascript"></script>
 <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
@@ -10,8 +8,9 @@
 <html>
 <head>
 <link rel="shortcut icon" href="<%=request.getContextPath()%>/resources/jyzq.png" type="image/x-icon" />
-<meta name="keywords" content="咎由自取,纠友自取,纠结" />
-<meta name="description" content="纠结的人们来这里，让你不再被摧残" />
+<meta name="keywords" content="纠友自取,纠结,选择困难症,选择恐惧症,纠结是我的态度,咎由自取,choose,choise" />
+<meta name="description" content="纠友相聚,分外亲.我为人人，人人为我" />
+<meta name="author" content="ice">
 <title>纠友自取</title>
 </head>
 <div class="page-header">

@@ -6,8 +6,6 @@
 <html>
 <head>
 <meta http-equiv="Cache-Control" content="max-age=3600" />
-<meta name="keywords" content="咎由自取,纠友自取,纠结" />
-<meta name="description" content="纠结的人们来这里，让你不再被摧残" />
 <script src="<%=request.getContextPath()%>/resources/jquery/jquery-1.9.1.min.js" type="text/javascript"></script>
 <link href="<%=request.getContextPath()%>/resources/bootstrap/css/bootstrap.min.css" type="text/css" rel="stylesheet" />
 <script src="<%=request.getContextPath()%>/resources/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
