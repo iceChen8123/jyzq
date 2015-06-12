@@ -38,7 +38,7 @@ $(document).ready(function(){
   <div class="col-md-1">&nbsp;</div>
   <div class="col-md-11">&nbsp;</div>
   <div class="col-md-1"><h6 align="right" style="vertical-align: bottom;">
-  <span style="font-family: '幼圆'">纠友:<span id="onlinenumber"></span></span></h6>
+  <span style="font-family: '幼圆'">在线纠友:<span id="onlinenumber"></span></span></h6>
   </div>
 </div>
 </div>
