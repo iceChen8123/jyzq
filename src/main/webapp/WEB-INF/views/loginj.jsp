@@ -12,7 +12,7 @@ var duoshuoQuery = {
 	       short_name: "jyzq", 
 	       sso: { 
 	           login: "http://www.jyzq.pub/loginfromds/", //替换为你自己的回调地址
-	           logout: "http://www.jyzq.pub/logout/" //替换为你自己的回调地址
+	           logout: "http://www.jyzq.pub/tologout" //替换为你自己的回调地址
 	       }};
 </script>
 </head>
@@ -41,7 +41,7 @@ var duoshuoQuery = {
                     <input class="btn btn-default" type="button" onclick="window.location.href='<%=request.getContextPath()%>/register'" value="注册"/>
                 </div>
 	</form:form>
-	<div class="ds-login"> </div>
+	<div class="ds-login"> </div> 
 	</div>
 </body>
 </html>

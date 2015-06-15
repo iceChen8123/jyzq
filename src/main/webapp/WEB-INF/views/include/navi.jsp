@@ -185,7 +185,7 @@ function chooseforme(){
         <shiro:hasRole name="simple"><li style="font-family: '幼圆'"><button type="button" class="btn btn-info btn-lg" onclick="window.location.href='<%=request.getContextPath()%>/b/choise/history/my'">纠结史</button></li></shiro:hasRole>
         <shiro:hasRole name="admin"><li style="font-family: '幼圆'"><button type="button" class="btn btn-info btn-lg"  onclick="window.location.href='<%=request.getContextPath()%>/b/manage'">我叫后门</button></li></shiro:hasRole>
         <shiro:hasRole name="admin"><li style="font-family: '幼圆'"><button type="button" class="btn btn-info btn-lg"  onclick="window.location.href='<%=request.getContextPath()%>/b/advice/get'">好建议</button></li></shiro:hasRole>
-        <li style="font-family: '幼圆'"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='<%=request.getContextPath()%>/logout'" >退出</button></li>
+        <li style="font-family: '幼圆'"><button type="button" class="btn btn-default btn-lg" onclick="window.location.href='<%=request.getContextPath()%>/tologout'" >退出</button></li>
       </ul>
 </nav>
 

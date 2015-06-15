@@ -10,14 +10,15 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
 import org.apache.http.protocol.HTTP;
+import org.apache.http.util.EntityUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -30,8 +31,11 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
 import com.ice.jyzq.common.UserUtil;
 import com.ice.jyzq.controller.base.BaseController;
+import com.ice.jyzq.service.UserService;
 import com.ice.jyzq.util.JsonMapper;
 import com.ice.server.bean.User;
 
@@ -44,26 +48,59 @@ public class LoginController extends BaseController {
 	@Autowired
 	private UserUtil userUtil;
 
+	@Autowired
+	private UserService userService;
+
 	@RequestMapping(value = "loginfromds", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginFromDuoshuo(HttpServletRequest request, Model model, @RequestParam("code") String code) {
-		HttpClient httpclient = new DefaultHttpClient();
-		HttpPost httpost = new HttpPost("http://api.duoshuo.com/oauth2/access_token");
-		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-		nvps.add(new BasicNameValuePair("code", "1f7a6a18563b6ad221dff75c900bc436"));
-		try {
-			httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
-		} catch (UnsupportedEncodingException e1) {
-			e1.printStackTrace();
-		}
-		try {
-			HttpResponse httpResponse = httpclient.execute(httpost);
-			System.out.println(httpResponse);
-		} catch (ClientProtocolException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		model.addAttribute("message", "暂时不支持此功能,请在本站注册,并登录");
 		return "loginj";
+		
+//		HttpClient httpclient = new DefaultHttpClient();
+//		HttpPost httpost = new HttpPost("http://api.duoshuo.com/oauth2/access_token");
+//		httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+//
+//		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
+//		nvps.add(new BasicNameValuePair("code", code));
+//		nvps.add(new BasicNameValuePair("client_id", "jyzq"));
+//		try {
+//			httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+//		} catch (UnsupportedEncodingException e1) {
+//			logger.warn("loginFromDuoshuo: ", e1);
+//		}
+//		try {
+//			HttpResponse httpResponse = httpclient.execute(httpost);
+//			String response = EntityUtils.toString(httpResponse.getEntity());
+//			JSONObject jsonObject = JSON.parseObject(response);
+//			if (jsonObject.get("code") != null && "990002".equals(jsonObject.get("code"))) {
+//				model.addAttribute("message", "请陛下重新登基...");
+//			}
+//			String userId = jsonObject.get("user_id").toString();
+//			HttpGet httpGet = new HttpGet("http://api.duoshuo.com/users/profile.json?user_id=" + userId);
+//			try {
+//				HttpResponse responset = httpclient.execute(httpGet);
+//
+//				JSONObject userinforesponse = JSON.parseObject(EntityUtils.toString(responset.getEntity()));
+//				userinforesponse = (JSONObject) userinforesponse.get("response");
+////				System.out.println(jsonObject.get("user_id"));
+////				System.out.println(jsonObject.get("name"));
+////				System.out.println(jsonObject.get("url"));
+////				jsonObject = (JSONObject) jsonObject.get("connected_services");
+////				System.out.println(jsonObject.toJSONString());
+//			} catch (ClientProtocolException e) {
+//				e.printStackTrace();
+//			} catch (IOException e) {
+//				e.printStackTrace();
+//			}
+//
+//			// userService.
+//		} catch (Exception e) {
+//			logger.warn("loginFromDuoshuo: ", e);
+//			model.addAttribute("message", "登基失败,请重新登基...");
+//			return "loginj";
+//		}
+//		model.addAttribute("message", "陛下您登上来了~有什么纠结的,请告诉众卿家吧 #_#");
+//		return "forward:hello";
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)
@@ -81,6 +118,11 @@ public class LoginController extends BaseController {
 		}
 		model.addAttribute("user", new User());
 		return "loginj";
+	}
+
+	@RequestMapping(value = "tologout", method = RequestMethod.GET)
+	public String tologout(Model model) {
+		return "forward:logout";
 	}
 
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
@@ -135,17 +177,42 @@ public class LoginController extends BaseController {
 	public static void main(String[] args) throws UnsupportedEncodingException { // 1f7a6a18563b6ad221dff75c900bc436
 		HttpClient httpclient = new DefaultHttpClient();
 		HttpPost httpost = new HttpPost("http://api.duoshuo.com/oauth2/access_token");
-		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
-		nvps.add(new BasicNameValuePair("code", "1f7a6a18563b6ad221dff75c900bc436"));
+		httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+
+		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
+		nvps.add(new BasicNameValuePair("code", "c055eed5a986ffaa5ac09d112baed0c4"));
+		nvps.add(new BasicNameValuePair("client_id", "jyzq"));
 		httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+		String userId = "";
 		try {
 			HttpResponse httpResponse = httpclient.execute(httpost);
-			System.out.println(httpResponse);
+			String response = EntityUtils.toString(httpResponse.getEntity());
+			System.out.println(response);
+			JSONObject jsonObject = JSON.parseObject(response);
+			System.out.println(jsonObject.get("user_id"));
+			userId = jsonObject.get("user_id").toString();
 		} catch (ClientProtocolException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+
+		HttpGet httpGet = new HttpGet("http://api.duoshuo.com/users/profile.json?user_id=" + userId);
+		try {
+			HttpResponse httpResponse = httpclient.execute(httpGet);
+			String response = EntityUtils.toString(httpResponse.getEntity());
+			System.out.println(response);
+
+			JSONObject jsonObject = JSON.parseObject(response);
+			jsonObject = (JSONObject) jsonObject.get("response");
+			System.out.println(jsonObject.get("user_id"));
+			System.out.println(jsonObject.get("name"));
+			System.out.println(jsonObject.get("url"));
+			jsonObject = (JSONObject) jsonObject.get("connected_services");
+			System.out.println(jsonObject.toJSONString());
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}

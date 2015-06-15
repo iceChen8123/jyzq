@@ -90,7 +90,6 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 				user.getPassword())) {
 			SimpleAuthenticationInfo authcInfo = new SimpleAuthenticationInfo(user.getUserName(), token.getPassword(),
 					getName());
-			this.setSession("currentUser", user.getUserName());
 			return authcInfo;
 		}
 		// 没有返回登录用户名对应的SimpleAuthenticationInfo对象时,就会在LoginController中抛出UnknownAccountException异常
