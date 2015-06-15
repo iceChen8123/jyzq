@@ -13,6 +13,15 @@
 <meta name="author" content="ice">
 <title>纠友自取</title>
 <script type="text/javascript">
+var duoshuoQuery = {short_name:"jyzq"};
+(function() {
+	var ds = document.createElement('script');
+	ds.type = 'text/javascript';ds.async = true;
+	ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+	ds.charset = 'UTF-8';
+	(document.getElementsByTagName('head')[0] 
+	 || document.getElementsByTagName('body')[0]).appendChild(ds);
+})();
 function getonlinenumber(){
 	var id = $('#onlineid').val();
 	$.ajax({    
@@ -28,7 +37,7 @@ function getonlinenumber(){
 }
 $(document).ready(function(){  
 	getonlinenumber();
-	 setInterval("getonlinenumber()", 5000);  
+	 setInterval("getonlinenumber()", 2000);  
 	}); 
 </script>
 </head>

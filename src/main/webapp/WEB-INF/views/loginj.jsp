@@ -7,6 +7,13 @@
 $(document).ready(function() {
 	$("#myForm").validate();
 });
+
+var duoshuoQuery = {
+	       short_name: "jyzq", 
+	       sso: { 
+	           login: "http://www.jyzq.pub/loginfromds/", //替换为你自己的回调地址
+	           logout: "http://www.jyzq.pub/logout/" //替换为你自己的回调地址
+	       }};
 </script>
 </head>
 <body>
@@ -34,6 +41,7 @@ $(document).ready(function() {
                     <input class="btn btn-default" type="button" onclick="window.location.href='<%=request.getContextPath()%>/register'" value="注册"/>
                 </div>
 	</form:form>
+	<div class="ds-login"> </div>
 	</div>
 </body>
 </html>

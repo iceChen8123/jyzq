@@ -1,3 +1,4 @@
+<%@ page contentType="text/html;charset=UTF-8" %>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
 <meta charset="utf-8">
@@ -5,10 +6,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <%@include file="/WEB-INF/views/include/head.jsp"%>
 <script src="<%=request.getContextPath()%>/resources/highcharts.js"></script>
+<script type="text/javascript" src="<%=request.getContextPath()%>/resources/scrollpagination/datapage.js"></script>
 <script type="text/javascript">
-	$(document).ready(function() {
-		genpie();
-	});
 function genpie(){
 	var id = $('#id').val();
 	var btnType =['btn-primary','btn-success','btn-info','btn-warning','btn-danger','btn-default'];
@@ -20,12 +19,12 @@ function genpie(){
         cache:false,    
         dataType:'json',    
         success:function(data){
-        		$('#choiseinfo').append("<li>"+data.title+"</li>");
-        		$('#choiseinfo').append("<li>"+data.city+"</li>");
+        		$('#choiseinfo').append("<li style=\"font-family: '幼圆';color: '#217853';size: '9px'\">"+data.title+"</li>");
+        		$('#choiseinfo').append("<li style=\"font-family: '幼圆';color: '#217853';size: '9px'\">"+data.city+"</li>");
         		if(data.address){
-        		$('#choiseinfo').append("<li>"+data.address+"</li>");
+        		$('#choiseinfo').append("<li style=\"font-family: '幼圆';color: '#217853';size: '9px'\">"+data.address+"</li>");
         		}
-        		$('#choiseinfo').append("<li>"+new Date(data.createTime).toLocaleString()+"</li>");
+        		$('#choiseinfo').append("<li style=\"font-family: '幼圆';color: '#217853';size: '9px'\">"+new Date(data.createTime).toLocaleString()+"</li>");
         		var seriesdata = [];
         		$.each(data.choiseAndVote, function(i, a){
         			seriesdata[i] = [a.choise+'('+ parseInt(a.vote)+ ')', parseInt(a.vote)];
@@ -43,7 +42,8 @@ function genpie(){
                         plotShadow: false
                     },
                     subtitle:{
-                    	text: data.choiseDesc
+                    	text: data.choiseDesc,
+                        style:{color:"#333333",fontSize:"9px",fontFamily:'幼圆'}
                     },
                     title: {
                         text: data.title,
@@ -68,9 +68,15 @@ function genpie(){
                         data: seriesdata
                     }]
                 });
+         		//$('#choiseinfo').append("<div class=\"ds-thread\" data-thread-key=\""+data.id +"\" data-title=\""+ data.title+ "\" data-url=\"请替换成文章的网址\"></div>");
+         		$('#ds-thread').attr("data-title", data.title);
+         		$('#ds-thread').attr("data-thread-key", 'choise'+data.id);
         }    
     });
 }
+$(document).ready(function() {
+	genpie();
+});
 function vote(c,sid){
 	var choise = c;
 	var subjectId = sid;
@@ -97,8 +103,11 @@ function vote(c,sid){
 	</div>
 	<div id="test0" class="col-md-9" ></div>
 	<div id="test1" class="col-md-12" >
-	<ul id="onlineP">
+	<ul id="onlineP" style="font-family: '幼圆';color: '#217853';size: '9px';font-weight: bold;">
 		</ul>
 	</div>
+	<!-- 多说评论框 start -->
+	<div id="duoshuo" class="ds-thread" data-thread-key="kkk" data-title="ttt" ></div>
+	<!-- 多说评论框 end -->
 </body>
 </html>

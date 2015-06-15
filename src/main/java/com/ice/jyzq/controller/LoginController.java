@@ -1,9 +1,23 @@
 package com.ice.jyzq.controller;
 
+import java.io.IOException;
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.lang.StringUtils;
+import org.apache.http.HttpResponse;
+import org.apache.http.NameValuePair;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+import org.apache.http.protocol.HTTP;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -30,10 +44,32 @@ public class LoginController extends BaseController {
 	@Autowired
 	private UserUtil userUtil;
 
+	@RequestMapping(value = "loginfromds", method = { RequestMethod.GET, RequestMethod.POST })
+	public String loginFromDuoshuo(HttpServletRequest request, Model model, @RequestParam("code") String code) {
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httpost = new HttpPost("http://api.duoshuo.com/oauth2/access_token");
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("code", "1f7a6a18563b6ad221dff75c900bc436"));
+		try {
+			httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+		} catch (UnsupportedEncodingException e1) {
+			e1.printStackTrace();
+		}
+		try {
+			HttpResponse httpResponse = httpclient.execute(httpost);
+			System.out.println(httpResponse);
+		} catch (ClientProtocolException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "loginj";
+	}
+
 	@RequestMapping(value = "login", method = RequestMethod.GET)
 	public String login(HttpServletRequest request, HttpServletResponse response, Model model) {
 		// SecurityUtils.getSubject().logout();
-//		User user = userUtil.getUser();
+		// User user = userUtil.getUser();
 		// 如果已经登录，则跳转到管理首页
 		if (StringUtils.isNotBlank(userUtil.getCurrentUserName())) {
 			return "forward:hello";
@@ -56,7 +92,7 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value = "login", method = RequestMethod.POST)
 	public String login(User user, @RequestParam(value = "rememberMe", defaultValue = "false") Boolean rememberMe,
-			HttpServletRequest request, HttpServletResponse response, Model model,RedirectAttributes redirectAttributes) {
+			HttpServletRequest request, HttpServletResponse response, Model model, RedirectAttributes redirectAttributes) {
 		if (StringUtils.isBlank(user.getUserName())) {
 			model.addAttribute("message", "用户名不能为空");
 			return "loginj";
@@ -74,7 +110,7 @@ public class LoginController extends BaseController {
 				SecurityUtils.getSubject().login(
 						new UsernamePasswordToken(user.getUserName(), user.getPassword(), rememberMe, request
 								.getRemoteHost()));
-//				model.addAttribute("message", "欢迎光临");
+				// model.addAttribute("message", "欢迎光临");
 			} catch (AuthenticationException e) {
 				model.addAttribute("message", "用户名或密码错误");
 				logger.warn(user.getUserName() + " 登录失败.", e);
@@ -94,5 +130,23 @@ public class LoginController extends BaseController {
 			return JsonMapper.toJsonString("true");
 		}
 		return JsonMapper.toJsonString("false");
+	}
+
+	public static void main(String[] args) throws UnsupportedEncodingException { // 1f7a6a18563b6ad221dff75c900bc436
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httpost = new HttpPost("http://api.duoshuo.com/oauth2/access_token");
+		List<NameValuePair> nvps = new ArrayList<NameValuePair>();
+		nvps.add(new BasicNameValuePair("code", "1f7a6a18563b6ad221dff75c900bc436"));
+		httpost.setEntity(new UrlEncodedFormEntity(nvps, HTTP.UTF_8));
+		try {
+			HttpResponse httpResponse = httpclient.execute(httpost);
+			System.out.println(httpResponse);
+		} catch (ClientProtocolException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 }
