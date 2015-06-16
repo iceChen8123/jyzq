@@ -26,7 +26,7 @@ function getonlinenumber(){
 	var id = $('#onlineid').val();
 	$.ajax({    
         type:'post',        
-        url:'<%=request.getContextPath()%>/getonlinenumber',    
+        url:'',    
         data:{},    
         cache:false,    
         dataType:'json',    
@@ -36,7 +36,7 @@ function getonlinenumber(){
     });    
 }
 $(document).ready(function(){  
-	getonlinenumber();
+	//getonlinenumber();
 	 //setInterval("getonlinenumber()", 2000);  
 	}); 
 </script>
@@ -45,10 +45,10 @@ $(document).ready(function(){
 <div class="container-fluid directional" >
   <div class="col-md-11"><h1 align="center" style="font-family: '幼圆'"><a href="<%=request.getContextPath()%>">纠友自取</a></h1></div>
   <div class="col-md-1">&nbsp;</div>
-  <div class="col-md-11">&nbsp;</div>
+  <!-- <div class="col-md-11">&nbsp;</div>
   <div class="col-md-1"><h6 align="right" style="vertical-align: bottom;">
   <span style="font-family: '幼圆'">在线纠友:<span id="onlinenumber"></span></span> </h6>
-  </div>
+  </div> -->
 </div>
 </div>
 <%@include file="/WEB-INF/views/include/navi.jsp"%>
