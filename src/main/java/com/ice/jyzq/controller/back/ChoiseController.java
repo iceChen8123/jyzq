@@ -67,7 +67,9 @@ public class ChoiseController {
 	}
 
 	@RequestMapping(value = "vote", method = RequestMethod.GET)
-	public String vote(@RequestParam("id") String id, Model model) {
+	public String vote(@RequestParam("id") String id, @RequestParam(value = "title", required = false) String title,
+			Model model) {
+		model.addAttribute("title", title);
 		model.addAttribute("id", id);
 		return "choise/vote";
 	}

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ice.jyzq.common.CommonInfoUtil;
 import com.ice.jyzq.controller.util.ChoiseConvertUtil;
 import com.ice.jyzq.controller.vo.ChoiseVo;
 import com.ice.jyzq.service.ChoiseService;
@@ -49,6 +50,7 @@ public class ChoiseQueryController {
 		ChoiseVo choiseVo = ChoiseConvertUtil.convertToChoiseVo(choiseService.findById(Long.parseLong(id)));
 		choiseVo.setCity(manageService.getcity(choiseVo.getCityId()));
 		choiseVo.setAddress(manageService.getAddress(choiseVo.getAddressId()));
+		choiseVo.setHasComment(CommonInfoUtil.getIfHasCommentBySubject(choiseVo.getSubjectId()));
 		// choiseVo.setSubject(subject); not need
 		return JsonMapper.toJsonString(choiseVo);
 	}

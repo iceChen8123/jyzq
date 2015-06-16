@@ -55,8 +55,18 @@ public class ChoiseSubject implements Serializable {
 	private Long expiredTime;
 	@Column(name = "vote_area")
 	private String voteArea;
+	@Column(name = "has_comment")
+	private Integer hasComment;
 	@Column(name = "valid")
 	private Integer valid;
+
+	public Integer getHasComment() {
+		return hasComment;
+	}
+
+	public void setHasComment(Integer hasComment) {
+		this.hasComment = hasComment;
+	}
 
 	public Integer getValid() {
 		return valid;

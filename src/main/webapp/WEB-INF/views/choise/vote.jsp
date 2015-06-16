@@ -69,8 +69,16 @@ function genpie(){
                     }]
                 });
          		//$('#choiseinfo').append("<div class=\"ds-thread\" data-thread-key=\""+data.id +"\" data-title=\""+ data.title+ "\" data-url=\"请替换成文章的网址\"></div>");
-         		$('#ds-thread').attr("data-title", data.title);
-         		$('#ds-thread').attr("data-thread-key", 'choise'+data.id);
+         		if(data.hasComment != 0){
+         			//$('#test1').append("<div class=\"ds-thread\" data-thread-key=\"choise" + data.id+ "\" data-title=\""+ data.title+ "\" ></div>");
+	         		//$('#ds-thread').attr("data-title", data.title);
+	         		//$('#ds-thread').attr("data-thread-key", 'choise'+data.id);
+         			$('#ds-thread').show();
+         			$('#duoshuo').show();
+         		}else{
+         			$('#ds-thread').hide();
+         			$('#duoshuo').hide();
+         		}
         }    
     });
 }
@@ -107,7 +115,7 @@ function vote(c,sid){
 		</ul>
 	</div>
 	<!-- 多说评论框 start -->
-	<div id="duoshuo" class="ds-thread" data-thread-key="kkk" data-title="ttt" ></div>
+	<div id="duoshuo" class="ds-thread" data-thread-key="choise${id }" data-title="${title }" hidden="true"></div> 
 	<!-- 多说评论框 end -->
 </body>
 </html>

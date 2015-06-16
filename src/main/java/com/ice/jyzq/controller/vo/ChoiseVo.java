@@ -22,6 +22,15 @@ public class ChoiseVo {
 	private String choiseCode;
 	private List<Map<String, Object>> choiseAndVote = new ArrayList<Map<String, Object>>();
 	private String choiseDesc;
+	private Integer hasComment;
+
+	public Integer getHasComment() {
+		return hasComment;
+	}
+
+	public void setHasComment(Integer hasComment) {
+		this.hasComment = hasComment;
+	}
 
 	public Integer getCityId() {
 		return cityId;
