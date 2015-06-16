@@ -52,7 +52,9 @@ public class LoginController extends BaseController {
 	private UserService userService;
 
 	@RequestMapping(value = "loginfromds", method = { RequestMethod.GET, RequestMethod.POST })
-	public String loginFromDuoshuo(HttpServletRequest request, Model model, @RequestParam("code") String code) {
+	public String loginFromDuoshuo(HttpServletRequest request, Model model,
+			@RequestParam(value = "code", required = false) String code) {
+		logger.info("loginFromDuoshuo: {}", code);
 		String dsId = getDsIdByDsCode(code);
 		if (StringUtils.isBlank(dsId)) {
 			model.addAttribute("message", "陛下您没登上来了!_!要不直接通过本站登录吧.");

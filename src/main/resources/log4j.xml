@@ -22,7 +22,7 @@
 	</appender>
 
 	<!-- Application Loggers -->
-	<logger name="com.ice.server">
+	<logger name="com.ice">
 		<level value="info" />
 	</logger>
 
@@ -47,6 +47,7 @@
 	<root>
 		<priority value="info" />
 		<appender-ref ref="console" />
+		<appender-ref ref="filelog_daily" />
 	</root>
 
 </log4j:configuration>

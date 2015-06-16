@@ -37,7 +37,7 @@ function getonlinenumber(){
 }
 $(document).ready(function(){  
 	getonlinenumber();
-	 setInterval("getonlinenumber()", 2000);  
+	 //setInterval("getonlinenumber()", 2000);  
 	}); 
 </script>
 </head>
