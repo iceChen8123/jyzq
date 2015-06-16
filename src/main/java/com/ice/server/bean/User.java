@@ -46,16 +46,30 @@ public class User implements Serializable {
 		this.updateTime = updateTime;
 	}
 
+	@Column(name = "ds_id")
+	private Long dsId;
 	@Column(name = "user_name")
 	private String userName;
 	@Column(name = "password")
 	private String password;
 	@Column(name = "salt")
 	private String salt;
+	@Column(name = "url")
+	private String url;
+	@Column(name = "connected_services")
+	private String connectedServices;
 	@Column(name = "last_ip")
 	private String lastIp;
 	@Column(name = "last_login")
 	private Date lastLogin;
+
+	public Long getDsId() {
+		return dsId;
+	}
+
+	public void setDsId(Long dsId) {
+		this.dsId = dsId;
+	}
 
 	public String getUserName() {
 		return userName;
@@ -79,6 +93,22 @@ public class User implements Serializable {
 
 	public void setSalt(String salt) {
 		this.salt = salt;
+	}
+
+	public String getUrl() {
+		return url;
+	}
+
+	public void setUrl(String url) {
+		this.url = url;
+	}
+
+	public String getConnectedServices() {
+		return connectedServices;
+	}
+
+	public void setConnectedServices(String connectedServices) {
+		this.connectedServices = connectedServices;
 	}
 
 	public String getLastIp() {

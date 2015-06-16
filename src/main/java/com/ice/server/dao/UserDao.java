@@ -20,4 +20,7 @@ public interface UserDao extends CrudRepository<User, Long> {
 	@Query("update User u set u.lastLogin = now() where id = :id")
 	public void updateUserLoginInfo(@Param("id") Long id);
 
+	@Query("select u from User u where u.dsId = :dsid")
+	public User findByDsId(@Param("dsid") Long dsId);
+
 }

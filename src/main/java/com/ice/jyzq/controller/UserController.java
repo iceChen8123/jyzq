@@ -30,7 +30,7 @@ public class UserController extends BaseController {
 			return "register";
 		}
 		try {
-			userService.save(user.getUserName(), user.getPassword());
+			userService.save(user);
 			model.addAttribute("message", "又一个纠结的人诞生了～恭喜～请陛下登录吧");
 			return "forward:hello";
 		} catch (Exception e) {

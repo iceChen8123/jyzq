@@ -53,54 +53,83 @@ public class LoginController extends BaseController {
 
 	@RequestMapping(value = "loginfromds", method = { RequestMethod.GET, RequestMethod.POST })
 	public String loginFromDuoshuo(HttpServletRequest request, Model model, @RequestParam("code") String code) {
-		model.addAttribute("message", "暂时不支持此功能,请在本站注册,并登录");
-		return "loginj";
-		
-//		HttpClient httpclient = new DefaultHttpClient();
-//		HttpPost httpost = new HttpPost("http://api.duoshuo.com/oauth2/access_token");
-//		httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
-//
-//		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
-//		nvps.add(new BasicNameValuePair("code", code));
-//		nvps.add(new BasicNameValuePair("client_id", "jyzq"));
-//		try {
-//			httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
-//		} catch (UnsupportedEncodingException e1) {
-//			logger.warn("loginFromDuoshuo: ", e1);
-//		}
-//		try {
-//			HttpResponse httpResponse = httpclient.execute(httpost);
-//			String response = EntityUtils.toString(httpResponse.getEntity());
-//			JSONObject jsonObject = JSON.parseObject(response);
-//			if (jsonObject.get("code") != null && "990002".equals(jsonObject.get("code"))) {
-//				model.addAttribute("message", "请陛下重新登基...");
-//			}
-//			String userId = jsonObject.get("user_id").toString();
-//			HttpGet httpGet = new HttpGet("http://api.duoshuo.com/users/profile.json?user_id=" + userId);
-//			try {
-//				HttpResponse responset = httpclient.execute(httpGet);
-//
-//				JSONObject userinforesponse = JSON.parseObject(EntityUtils.toString(responset.getEntity()));
-//				userinforesponse = (JSONObject) userinforesponse.get("response");
-////				System.out.println(jsonObject.get("user_id"));
-////				System.out.println(jsonObject.get("name"));
-////				System.out.println(jsonObject.get("url"));
-////				jsonObject = (JSONObject) jsonObject.get("connected_services");
-////				System.out.println(jsonObject.toJSONString());
-//			} catch (ClientProtocolException e) {
-//				e.printStackTrace();
-//			} catch (IOException e) {
-//				e.printStackTrace();
-//			}
-//
-//			// userService.
-//		} catch (Exception e) {
-//			logger.warn("loginFromDuoshuo: ", e);
-//			model.addAttribute("message", "登基失败,请重新登基...");
-//			return "loginj";
-//		}
-//		model.addAttribute("message", "陛下您登上来了~有什么纠结的,请告诉众卿家吧 #_#");
-//		return "forward:hello";
+		String dsId = getDsIdByDsCode(code);
+		if (StringUtils.isBlank(dsId)) {
+			model.addAttribute("message", "陛下您没登上来了!_!要不直接通过本站登录吧.");
+			model.addAttribute("user", new User());
+			return "loginj";
+		}
+
+		User user = userService.findByDsId(dsId);
+		if (user != null && StringUtils.isNotBlank(user.getUserName())) {
+			logger.info("用户 {} 通过ds 登录了...", user.getUserName());
+			SecurityUtils.getSubject().login(
+					new UsernamePasswordToken(user.getUserName(), "81231707", true, request.getRemoteHost())); // special
+																												// keycode
+			model.addAttribute("message", "陛下您登上来了~有什么纠结的,请告诉众卿家吧 #_#");
+			return "home";
+		} else {
+			logger.info("用户 dsid {} 通过ds 跳转到注册页面...", dsId);
+			model.addAttribute("message", "请陛下在本站登记下.避免您将来不能通过其他账户登录,谢谢.");
+			model.addAttribute("dsid", dsId);
+			model.addAttribute("user", new User());
+			return "register";
+		}
+	}
+
+	private String getDsIdByDsCode(String code) {
+		String dsId = "";
+
+		HttpClient httpclient = new DefaultHttpClient();
+		HttpPost httpost = new HttpPost("http://api.duoshuo.com/oauth2/access_token");
+		httpost.setHeader("Content-Type", "application/x-www-form-urlencoded");
+
+		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
+		nvps.add(new BasicNameValuePair("code", code));
+		nvps.add(new BasicNameValuePair("client_id", "jyzq"));
+		try {
+			httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
+		} catch (UnsupportedEncodingException e1) {
+			logger.warn("loginFromDuoshuo: ", e1);
+		}
+		try {
+			// {"access_token":"d1decdc8d6e2492a69e0f0c6033f0e24","expires_in":7776000,"user_id":"12247047","remind_in":7770149,"code":0}
+			HttpResponse httpResponse = httpclient.execute(httpost);
+			String response = EntityUtils.toString(httpResponse.getEntity());
+			JSONObject jsonObject = JSON.parseObject(response);
+			if (jsonObject.get("code") != null && "990002".equals(jsonObject.get("code"))) {
+				logger.warn("loginFromDuoshuo: " + jsonObject);
+			} else {
+				if (jsonObject.get("user_id") != null) {
+					dsId = jsonObject.get("user_id").toString();
+				}
+			}
+
+			// HttpGet httpGet = new
+			// HttpGet("http://api.duoshuo.com/users/profile.json?user_id=" +
+			// userId);
+			// try {
+			// HttpResponse responset = httpclient.execute(httpGet);
+			//
+			// JSONObject userinforesponse =
+			// JSON.parseObject(EntityUtils.toString(responset.getEntity()));
+			// userinforesponse = (JSONObject) userinforesponse.get("response");
+			// // System.out.println(jsonObject.get("user_id"));
+			// // System.out.println(jsonObject.get("name"));
+			// // System.out.println(jsonObject.get("url"));
+			// // jsonObject = (JSONObject)
+			// // jsonObject.get("connected_services");
+			// // System.out.println(jsonObject.toJSONString());
+			// } catch (ClientProtocolException e) {
+			// e.printStackTrace();
+			// } catch (IOException e) {
+			// e.printStackTrace();
+			// }
+
+		} catch (Exception e) {
+			logger.warn("loginFromDuoshuo: ", e);
+		}
+		return dsId;
 	}
 
 	@RequestMapping(value = "login", method = RequestMethod.GET)

@@ -2,6 +2,7 @@ package com.ice.jyzq.service;
 
 import java.util.Date;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +16,13 @@ public class UserService {
 	@Autowired
 	private UserDao userDao;
 
-	public User save(String userName, String password) {
+	public User save(User userin) {
+		String userName = userin.getUserName();
+		String password = userin.getPassword();
 		User user = EndecryptUtils.md5Password(userName, password);
+		if (userin.getDsId() != 0) {
+			user.setDsId(userin.getDsId());
+		}
 		user.setCreateTime(new Date());
 		return userDao.save(user);
 	}
@@ -32,6 +38,10 @@ public class UserService {
 	public boolean ifUserExists(String userName) {
 		User user = userDao.findByUserName(userName);
 		return (user != null) && (userName.equals(user.getUserName()));
+	}
+
+	public User findByDsId(String dsId) {
+		return userDao.findByDsId(Long.parseLong(dsId));
 	}
 
 }

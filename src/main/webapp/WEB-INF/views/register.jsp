@@ -3,11 +3,22 @@
 <head>
 <title>用户注册</title>
 <%@include file="/WEB-INF/views/include/head.jsp"%>
+<script type="text/javascript">
+function setdsid(){
+	if($('#dsid').val()){
+		$('#dsId').val($('#dsid').val());
+	}
+	$('#regform').attr('action','<%=request.getContextPath()%>/register');
+	$('#regform').submit();
+}
+</script>
 </head>
 <body>
 <div class="col-md-2" ></div>
 <div class="col-md-6" >
-	<form:form action="register" commandName="user" method="post">
+<input hidden="true" value="${dsid }" id="dsid">
+	<form:form id="regform" commandName="user" method="post" onsubmit="setdsid()">
+	<form:input name="dsId" id="dsId" hidden="true" path="dsId" />
 		<div class="control-group">
 			<label class="control-label" for="username">用户名</label>
 			<div class="controls">
