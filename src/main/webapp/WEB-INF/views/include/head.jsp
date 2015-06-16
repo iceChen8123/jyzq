@@ -23,7 +23,6 @@ var duoshuoQuery = {short_name:"jyzq"};
 	 || document.getElementsByTagName('body')[0]).appendChild(ds);
 })();
 function getonlinenumber(){
-	var id = $('#onlineid').val();
 	$.ajax({    
         type:'post',        
         url:'',    

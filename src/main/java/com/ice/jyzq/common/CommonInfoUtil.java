@@ -38,7 +38,7 @@ public class CommonInfoUtil {
 			}
 		}
 		CHOICE_TYPE_LIST = choice_type_list;
-		logger.info("init ok {}", JsonMapper.toJsonString(CHOICE_TYPE_LIST));
+		logger.debug("init ok {}", JsonMapper.toJsonString(CHOICE_TYPE_LIST));
 	}
 
 	@Scheduled(fixedDelay = 60 * 1000)
