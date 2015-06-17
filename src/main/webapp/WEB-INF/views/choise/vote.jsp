@@ -34,7 +34,7 @@ function genpie(){
          			credits:{
          				text:data.title,
          				style:{cursor:"pointer",color:"#217853",fontSize:"9px",fontFamily:'幼圆',fontWeight:'bold'},
-         				href: "<%=request.getContextPath()%>/b/choise/vote?id="+data.id
+         				href: "<%=request.getContextPath()%>/choise/vote?id="+data.id
          			},
                     chart: {
                         plotBackgroundColor: null,
@@ -86,6 +86,7 @@ $(document).ready(function() {
 	genpie();
 });
 function vote(c,sid){
+	checkiflogin();
 	var choise = c;
 	var subjectId = sid;
 	var id = $('#id').val();

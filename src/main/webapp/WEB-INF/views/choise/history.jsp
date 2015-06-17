@@ -25,7 +25,7 @@ $(function(){
          		$('#div'+divnum).highcharts({
          			credits:{
          				text:'看看结果',
-         				href: "<%=request.getContextPath()%>/b/choise/vote?id="+n.id+"&title=" +n.title
+         				href: "<%=request.getContextPath()%>/choise/vote?id="+n.id+"&title=" +n.title
          			},
                     chart: {
                         plotBackgroundColor: null,

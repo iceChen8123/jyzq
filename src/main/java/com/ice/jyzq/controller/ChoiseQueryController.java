@@ -32,6 +32,14 @@ public class ChoiseQueryController {
 	@Autowired
 	private ManageService manageService;
 
+	@RequestMapping(value = "vote", method = RequestMethod.GET)
+	public String vote(@RequestParam("id") String id, @RequestParam(value = "title", required = false) String title,
+			Model model) {
+		model.addAttribute("title", title);
+		model.addAttribute("id", id);
+		return "choise/vote";
+	}
+
 	@RequestMapping(value = "", method = RequestMethod.GET)
 	public String to(@RequestParam(value = "type", required = false) String choiseType, Model model) {
 		model.addAttribute("subject", choiseType);

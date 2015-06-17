@@ -144,7 +144,7 @@ public class LoginController extends BaseController {
 		}
 		if (StringUtils.isNotBlank(request.getParameter("message"))) {
 			if ("pleaseloginfirst".equals(request.getParameter("message"))) {
-				model.addAttribute("message", "你登录了,才能丢问题给大家oO $_$");
+				model.addAttribute("message", "请陛下先登基oO $_$");
 			}
 		}
 		model.addAttribute("user", new User());
@@ -159,7 +159,7 @@ public class LoginController extends BaseController {
 	@RequestMapping(value = "logout", method = RequestMethod.GET)
 	public String logout(Model model) {
 		SecurityUtils.getSubject().logout();
-		model.addAttribute("message", "已安全退出");
+		model.addAttribute("message", "陛下,您已安全让位");
 		return "forward:hello";
 	}
 

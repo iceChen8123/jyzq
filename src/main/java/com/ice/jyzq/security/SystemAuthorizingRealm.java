@@ -63,13 +63,14 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			if ("admin".equals(userName)) {
 				info.addRole("admin");
+				info.addStringPermission("login"); 
 			} else {
 				// 添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
-				info.addRole("simple"); // TODO 添加角色
+				info.addRole("simple"); 
 				// 添加权限
-				info.addStringPermission("admin:manage"); // TODO 添加权限
+				info.addStringPermission("login");
 			}
-			logger.info("{} doGetAuthorizationInfo ok.....", user);
+			logger.debug("{} doGetAuthorizationInfo ok.....", user);
 			return info;
 		}
 		return null;

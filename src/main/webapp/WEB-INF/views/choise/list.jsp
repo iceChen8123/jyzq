@@ -28,7 +28,7 @@ $(function(){
          		$('#div'+divnum).highcharts({
          			credits:{
          				text:'点我去投票',
-         				href: "<%=request.getContextPath()%>/b/choise/vote?id="+n.id+"&title=" +n.title
+         				href: "<%=request.getContextPath()%>/choise/vote?id="+n.id+"&title=" +n.title
          			},
                     chart: {
                         plotBackgroundColor: null,

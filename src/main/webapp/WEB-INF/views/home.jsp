@@ -25,7 +25,7 @@ function getPie(){
          			credits:{
          				text: '点我去投票',
          				style:{cursor:"pointer",color:"#217853",fontSize:"9px",fontFamily:'幼圆',fontWeight:'bold'},
-         				href: "<%=request.getContextPath()%>/b/choise/vote?id="+n.id+"&title=" +n.title
+         				href: "<%=request.getContextPath()%>/choise/vote?id="+n.id+"&title=" +n.title
          			},
                     chart: {
                         plotBackgroundColor: null,

@@ -66,14 +66,6 @@ public class ChoiseController {
 		return "choise/vote";
 	}
 
-	@RequestMapping(value = "vote", method = RequestMethod.GET)
-	public String vote(@RequestParam("id") String id, @RequestParam(value = "title", required = false) String title,
-			Model model) {
-		model.addAttribute("title", title);
-		model.addAttribute("id", id);
-		return "choise/vote";
-	}
-
 	@RequestMapping(value = "history/my", method = RequestMethod.GET)
 	public String tohistory() {
 		return "choise/history";

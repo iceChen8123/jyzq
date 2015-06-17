@@ -19,6 +19,7 @@ var duoshuoQuery = {
 <body>
 <div class="col-md-2" ></div>
 <div class="col-md-6" >
+移动设备，请通过本站登录。。。。。
 	<form:form action="login" commandName="user" method="post" id="myForm">
 		<div class="control-group">
 			<label class="control-label" for="username">用户名</label>
