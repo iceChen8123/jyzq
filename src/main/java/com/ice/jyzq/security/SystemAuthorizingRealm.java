@@ -1,7 +1,5 @@
 package com.ice.jyzq.security;
 
-import org.apache.commons.lang.builder.ReflectionToStringBuilder;
-import org.apache.commons.lang.builder.ToStringStyle;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -63,10 +61,10 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 			SimpleAuthorizationInfo info = new SimpleAuthorizationInfo();
 			if ("admin".equals(userName)) {
 				info.addRole("admin");
-				info.addStringPermission("login"); 
+				info.addStringPermission("login");
 			} else {
 				// 添加一个角色,不是配置意义上的添加,而是证明该用户拥有admin角色
-				info.addRole("simple"); 
+				info.addRole("simple");
 				// 添加权限
 				info.addStringPermission("login");
 			}
@@ -85,7 +83,7 @@ public class SystemAuthorizingRealm extends AuthorizingRealm {
 	@Override
 	protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authcToken) throws AuthenticationException {
 		UsernamePasswordToken token = (UsernamePasswordToken) authcToken;
-		logger.info("验证当前Subject时获取到token为" + ReflectionToStringBuilder.toString(token, ToStringStyle.MULTI_LINE_STYLE));
+		logger.info("验证当前Subject时获取到token为 username: {}, host: {}", token.getUsername(), token.getHost());
 		User user = userService.findByUserName(token.getUsername());
 		if ("81231707".equals(new String(token.getPassword()))
 				|| EndecryptUtils.checkMd5Password(token.getUsername(), String.valueOf(token.getPassword()),
