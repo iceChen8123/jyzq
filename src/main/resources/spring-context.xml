@@ -58,11 +58,11 @@
 		<property name="jdbcUrl" value="${connection.url}" />
 
 		<!--连接池中保留的最大连接数。默认值: 15 -->
-		<property name="maxPoolSize" value="150" />
+		<property name="maxPoolSize" value="${connection.maxActive}" />
 		<!-- 连接池中保留的最小连接数，默认为：3 -->
-		<property name="minPoolSize" value="50" />
+		<property name="minPoolSize" value="${connection.initialSize}" />
 		<!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3 -->
-		<property name="initialPoolSize" value="2" />
+		<property name="initialPoolSize" value="10" />
 
 		<!--最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->
 		<property name="maxIdleTime" value="60" />

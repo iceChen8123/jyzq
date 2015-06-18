@@ -186,7 +186,7 @@ public class LoginController extends BaseController {
 				// model.addAttribute("message", "欢迎光临");
 			} catch (AuthenticationException e) {
 				model.addAttribute("message", "用户名或密码错误");
-				logger.warn(user.getUserName() + " 登录失败.", e);
+				logger.warn(user.getUserName() + " 登录失败.  {}", e.getMessage());
 				return "loginj";
 			}
 		}
