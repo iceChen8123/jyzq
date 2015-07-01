@@ -49,56 +49,61 @@
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
 
-	<bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
-		<!-- 用户名 -->
+<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">  
+        <property name="driverClassName" value="${driverClassName}"/>  
+        <property name="url" value="${connection.url}"/>  
+        <property name="username" value="${connection.username}"/>  
+        <property name="password" value="${connection.password}"/>  
+        <!--maxActive: 最大连接数量-->    
+        <property name="maxActive" value="${connection.maxActive}"/>  
+        <!--minIdle: 最小空闲连接-->    
+        <property name="minIdle" value="5"/>  
+        <!--maxIdle: 最大空闲连接-->    
+        <property name="maxIdle" value="${connection.initialSize}"/>  
+        <!--initialSize: 初始化连接-->    
+        <property name="initialSize" value="${connection.initialSize}"/>  
+        <!-- 连接被泄露时是否打印 -->  
+        <property name="logAbandoned" value="true"/>  
+        <!--removeAbandoned: 是否自动回收超时连接-->    
+        <property name="removeAbandoned"  value="true"/>  
+        <!--removeAbandonedTimeout: 超时时间(以秒数为单位)-->    
+        <property name="removeAbandonedTimeout" value="10"/>  
+        <!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒-->  
+        <property name="maxWait" value="1000"/>  
+        <!-- 在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位. -->  
+        <property name="timeBetweenEvictionRunsMillis" value="10000"/>  
+        <!--  在每次空闲连接回收器线程(如果有)运行时检查的连接数量 -->  
+        <property name="numTestsPerEvictionRun" value="10"/>  
+        <!-- 1000 * 60 * 30  连接在池中保持空闲而不被空闲连接回收器线程-->  
+        <property name="minEvictableIdleTimeMillis" value="10000"/>  
+    <property name="validationQuery" value="SELECT NOW() FROM DUAL"/>  
+    </bean>  
+    
+	<!-- <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
 		<property name="user" value="${connection.username}" />
-		<!-- 用户密码 -->
 		<property name="password" value="${connection.password}" />
 		<property name="driverClass" value="${driverClassName}" />
 		<property name="jdbcUrl" value="${connection.url}" />
 
-		<!--连接池中保留的最大连接数。默认值: 15 -->
 		<property name="maxPoolSize" value="${connection.maxActive}" />
-		<!-- 连接池中保留的最小连接数，默认为：3 -->
 		<property name="minPoolSize" value="${connection.initialSize}" />
-		<!-- 初始化连接池中的连接数，取值应在minPoolSize与maxPoolSize之间，默认为3 -->
 		<property name="initialPoolSize" value="10" />
 
-		<!--最大空闲时间，60秒内未使用则连接被丢弃。若为0则永不丢弃。默认值: 0 -->
 		<property name="maxIdleTime" value="60" />
 
-		<!-- 当连接池连接耗尽时，客户端调用getConnection()后等待获取新连接的时间，超时后将抛出SQLException，如设为0则无限期等待。单位毫秒。默认: 
-			0 -->
 		<property name="checkoutTimeout" value="3000" />
 
-		<!--当连接池中的连接耗尽的时候c3p0一次同时获取的连接数。默认值: 3 -->
 		<property name="acquireIncrement" value="2" />
 
-		<!--定义在从数据库获取新连接失败后重复尝试的次数。默认值: 30 ；小于等于0表示无限次 -->
 		<property name="acquireRetryAttempts" value="0" />
 
-		<!--重新尝试的时间间隔，默认为：1000毫秒 -->
 		<property name="acquireRetryDelay" value="1000" />
 
-		<!--关闭连接时，是否提交未提交的事务，默认为false，即关闭连接，回滚未提交的事务 -->
 		<property name="autoCommitOnClose" value="false" />
 
-		<!--c3p0将建一张名为Test的空表，并使用其自带的查询语句进行测试。如果定义了这个参数那么属性preferredTestQuery将被忽略。你不能在这张Test表上进行任何操作，它将只供c3p0测试使用。默认值: 
-			null -->
-		<!-- <property name="automaticTestTable" value="Test" /> -->
-
-		<!--如果为false，则获取连接失败将会引起所有等待连接池来获取连接的线程抛出异常，但是数据源仍有效保留，并在下次调用getConnection()的时候继续尝试获取连接。如果设为true，那么在尝试获取连接失败后该数据源将申明已断开并永久关闭。默认: 
-			false -->
-		<!-- <property name="breakAfterAcquireFailure">false</property> -->
-
-		<!--每60秒检查所有连接池中的空闲连接。默认值: 0，不检查 -->
-		<!-- <property name="idleConnectionTestPeriod">60</property> -->
-		<!--c3p0全局的PreparedStatements缓存的大小。如果maxStatements与maxStatementsPerConnection均为0，则缓存不生效，只要有一个不为0，则语句的缓存就能生效。如果默认值: 
-			0 -->
 		<property name="maxStatements" value="0" />
-		<!--maxStatementsPerConnection定义了连接池内单个连接所拥有的最大缓存statements数。默认值: 0 -->
 		<property name="maxStatementsPerConnection" value="50" />
-	</bean>
+	</bean> -->
 
 	<!-- Hibernate对Jpa的实现 -->
 	<bean id="hibernateJpaVendorAdapter"
