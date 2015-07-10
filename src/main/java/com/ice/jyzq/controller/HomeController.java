@@ -5,6 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,22 @@ public class HomeController {
 	@RequestMapping(value = { "/hello", "", "/b/hello" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String home(Model model) {
 		return "home";
+	}
+
+	@RequestMapping(value = { "/ip" }, method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
+	public String getIp(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getHeader("Proxy-Client-IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getHeader("WL-Proxy-Client-IP");
+	    }
+	    if(ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)){
+	        ip = request.getRemoteAddr();
+	    }
+		return JsonMapper.toJsonString(ip);
 	}
 
 	@RequestMapping(value = "/getonlinenumber", method = { RequestMethod.GET, RequestMethod.POST })
