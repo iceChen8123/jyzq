@@ -107,26 +107,17 @@ public class LoginController extends BaseController {
 				}
 			}
 
-			// HttpGet httpGet = new
-			// HttpGet("http://api.duoshuo.com/users/profile.json?user_id=" +
-			// userId);
-			// try {
-			// HttpResponse responset = httpclient.execute(httpGet);
-			//
-			// JSONObject userinforesponse =
-			// JSON.parseObject(EntityUtils.toString(responset.getEntity()));
-			// userinforesponse = (JSONObject) userinforesponse.get("response");
-			// // System.out.println(jsonObject.get("user_id"));
-			// // System.out.println(jsonObject.get("name"));
-			// // System.out.println(jsonObject.get("url"));
-			// // jsonObject = (JSONObject)
-			// // jsonObject.get("connected_services");
-			// // System.out.println(jsonObject.toJSONString());
-			// } catch (ClientProtocolException e) {
-			// e.printStackTrace();
-			// } catch (IOException e) {
-			// e.printStackTrace();
-			// }
+			try {
+				HttpGet httpGet = new HttpGet("http://api.duoshuo.com/users/profile.json?user_id=" + dsId);
+				HttpResponse responset = httpclient.execute(httpGet);
+				JSONObject userinforesponse = JSON.parseObject(EntityUtils.toString(responset.getEntity()));
+				userinforesponse = (JSONObject) userinforesponse.get("response");
+				logger.info("dsid:{}; dsInfo: {}", dsId, userinforesponse.toJSONString());
+			} catch (ClientProtocolException e) {
+				logger.error(" getDsIdByDsCode ClientProtocolException: ", e);
+			} catch (IOException e) {
+				logger.error(" getDsIdByDsCode IOException: ", e);
+			}
 
 		} catch (Exception e) {
 			logger.warn("loginFromDuoshuo: ", e);
