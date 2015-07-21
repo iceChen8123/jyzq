@@ -44,6 +44,7 @@ public class InfoUpController {
 
 		if (ipCacheHashMap.containsKey(ip)) {
 			if (isAttacker(ip)) {
+				logger.warn("attack: " + ip);
 				return JSON.toJSONString("no");
 			} else {
 				ipCacheHashMap.get(ip).incr();
