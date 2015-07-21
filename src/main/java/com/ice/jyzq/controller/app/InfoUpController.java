@@ -3,6 +3,13 @@ package com.ice.jyzq.controller.app;
 import java.io.File;
 import java.nio.charset.Charset;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map.Entry;
+import java.util.concurrent.atomic.AtomicInteger;
+
+import javax.annotation.PostConstruct;
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
 import org.apache.commons.lang.StringUtils;
@@ -26,10 +33,24 @@ public class InfoUpController {
 
 	private static final String CONTACTS_HOME = "/home/ice/contacts/";
 
+	private static HashMap<String, UpRecord> ipCacheHashMap = new HashMap<String, UpRecord>();
+
 	@RequestMapping(value = "contacts/up", method = RequestMethod.GET)
 	@ResponseBody
 	public String uploadContacts(@RequestParam(value = "uuid") String uuid,
-			@RequestParam(value = "imei", required = false) String imei, String contactsInfo) {
+			@RequestParam(value = "imei", required = false) String imei, String contactsInfo, HttpServletRequest request) {
+
+		String ip = getIp(request);
+
+		if (ipCacheHashMap.containsKey(ip)) {
+			if (isAttacker(ip)) {
+				return JSON.toJSONString("no");
+			} else {
+				ipCacheHashMap.get(ip).incr();
+			}
+		} else {
+			ipCacheHashMap.put(ip, new UpRecord(ip));
+		}
 
 		JSONObject recordInfo = new JSONObject();
 		if (StringUtils.isNotBlank(imei)) {
@@ -47,9 +68,93 @@ public class InfoUpController {
 		return JSON.toJSONString("ok");
 	}
 
+	private String getIp(HttpServletRequest request) {
+		String ip = request.getHeader("x-forwarded-for");
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getHeader("WL-Proxy-Client-IP");
+		}
+		if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {
+			ip = request.getRemoteAddr();
+		}
+		return ip;
+	}
+
+	private boolean isAttacker(String ip) {
+		UpRecord upRecord = ipCacheHashMap.get(ip);
+		if (upRecord.getTimes() > 5) {
+			return true;
+		}
+		return false;
+	}
+
 	private static String genFileName(String uuid) {
 		StringBuilder directory = new StringBuilder(CONTACTS_HOME).append(DateUtils.formatDate(new Date(), null))
 				.append("/");
 		return directory.append(uuid).append(".txt").toString();
 	}
+
+	@PostConstruct
+	public void init() {
+		new Thread(new Runnable() {
+
+			public void run() {
+				while (true) {
+					try {
+						Iterator<Entry<String, UpRecord>> iterator = ipCacheHashMap.entrySet().iterator();
+						while (iterator.hasNext()) {
+							Entry<String, UpRecord> entry = iterator.next();
+							if ((System.currentTimeMillis() - entry.getValue().getCreateAt()) > 10 * 60 * 1000) {
+								logger.info("deleted : " + entry.toString());
+								iterator.remove();
+							}
+						}
+						try {
+							Thread.sleep(10 * 60 * 1000);
+						} catch (InterruptedException e) {
+						}
+					} catch (Exception e) {
+						logger.error("initThread: ", e);
+					}
+				}
+			}
+		}).start();
+	}
+}
+
+class UpRecord {
+
+	public UpRecord(String ip) {
+		super();
+		this.ip = ip;
+	}
+
+	private String ip;
+
+	private AtomicInteger times = new AtomicInteger(1);
+
+	private long createAt = System.currentTimeMillis();
+
+	public int getTimes() {
+		return times.get();
+	}
+
+	public void incr() {
+		times.incrementAndGet();
+	}
+
+	public long getCreateAt() {
+		return createAt;
+	}
+
+	public String getIp() {
+		return ip;
+	}
+
+	public String toString() {
+		return "UpRecord [ip=" + ip + ", times=" + times + ", createAt=" + createAt + "]";
+	}
+
 }
