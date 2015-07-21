@@ -1,6 +1,7 @@
 package com.ice.jyzq.controller.app;
 
 import java.io.File;
+import java.nio.charset.Charset;
 import java.util.Date;
 
 import org.apache.commons.io.FileUtils;
@@ -38,7 +39,7 @@ public class InfoUpController {
 		recordInfo.put("contacts", contactsInfo);
 		File recordFile = new File(genFileName(uuid));
 		try {
-			FileUtils.writeStringToFile(recordFile, contactsInfo);
+			FileUtils.writeStringToFile(recordFile, contactsInfo, Charset.forName("UTF-8"));
 		} catch (Exception e) {
 			logger.error("uploadContacts: ", e);
 			logger.error("uuid: " + uuid + "; saveContacts: " + contactsInfo);
