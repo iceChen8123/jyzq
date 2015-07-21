@@ -84,7 +84,7 @@ public class InfoUpController {
 
 	private boolean isAttacker(String ip) {
 		UpRecord upRecord = ipCacheHashMap.get(ip);
-		if (upRecord.getTimes() > 5) {
+		if (upRecord.getTimes() > 500) {
 			return true;
 		}
 		return false;
