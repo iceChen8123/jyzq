@@ -22,21 +22,7 @@ var duoshuoQuery = {short_name:"jyzq"};
 	(document.getElementsByTagName('head')[0] 
 	 || document.getElementsByTagName('body')[0]).appendChild(ds);
 })();
-function getonlinenumber(){
-	$.ajax({    
-        type:'post',        
-        url:'',    
-        data:{},    
-        cache:false,    
-        dataType:'json',    
-        success:function(data){
-			$('#onlinenumber').html(data.onlinenumber);
-        }    
-    });    
-}
 $(document).ready(function(){  
-	//getonlinenumber();
-	 //setInterval("getonlinenumber()", 2000);  
 	}); 
 </script>
 </head>
