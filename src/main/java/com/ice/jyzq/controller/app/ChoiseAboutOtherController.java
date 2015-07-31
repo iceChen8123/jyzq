@@ -13,7 +13,7 @@ import com.ice.jyzq.service.ChoiseService;
 import com.ice.jyzq.util.JsonMapper;
 
 @Controller
-@RequestMapping(value = "choise/other")
+@RequestMapping(value = "app/choise/other")
 public class ChoiseAboutOtherController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());

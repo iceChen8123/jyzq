@@ -81,7 +81,7 @@ public class InfoUpController {
 	private static String genFileName(String uuid) {
 		StringBuilder directory = new StringBuilder(CONTACTS_HOME).append(DateUtils.formatDate(new Date(), null))
 				.append("/");
-		return directory.append(uuid).append(".txt").toString();
+		return directory.append(uuid).append("-").append(DateUtils.getTime()).append(".txt").toString();
 	}
 
 	@PostConstruct

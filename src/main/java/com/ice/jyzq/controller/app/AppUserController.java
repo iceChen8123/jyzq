@@ -14,7 +14,7 @@ import com.alibaba.fastjson.JSON;
 import com.ice.jyzq.controller.util.HttpUtil;
 
 @Controller
-@RequestMapping(value = "appuser/")
+@RequestMapping(value = "app/user")
 public class AppUserController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());

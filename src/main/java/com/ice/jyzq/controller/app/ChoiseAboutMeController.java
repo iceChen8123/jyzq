@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ice.jyzq.service.ChoiseService;
 
 @Controller
-@RequestMapping(value = "choise/mine")
+@RequestMapping(value = "app/choise/mine")
 public class ChoiseAboutMeController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
