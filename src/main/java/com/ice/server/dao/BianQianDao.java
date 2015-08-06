@@ -15,7 +15,7 @@ public interface BianQianDao extends PagingAndSortingRepository<BianQian, Long>,
 
 	@Modifying
 	@Transactional
-	@Query("update BianQian b set b.bqStatus = :bqStatus where c.id = :bqId")
+	@Query("update BianQian b set b.bqStatus = :bqStatus where b.id = :bqId")
 	public void updateBQ(@Param("bqId") Long bqId, @Param("bqStatus") Integer bqStatus);
 
 }

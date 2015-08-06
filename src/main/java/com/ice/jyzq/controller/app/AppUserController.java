@@ -19,7 +19,7 @@ public class AppUserController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
 
-	@RequestMapping(value = "create", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "create", method = RequestMethod.POST)
 	@ResponseBody
 	public String create(@RequestParam("mobile") String mobile, @RequestParam("uuid") String uuid,
 			@RequestParam(value = "imei", required = false) String imei, HttpServletRequest request) {
@@ -28,14 +28,14 @@ public class AppUserController {
 		return JSON.toJSONString("token");
 	}
 
-	@RequestMapping(value = "authcode/get", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "authcode/get", method = RequestMethod.POST)
 	@ResponseBody
 	public String getAuthenticateCode(@RequestParam("token") String token, @RequestParam("mobile") String mobile,
 			@RequestParam("uuid") String uuid) {
 		return null;
 	}
 
-	@RequestMapping(value = "authenticate", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "authenticate", method = RequestMethod.POST)
 	@ResponseBody
 	public String authenticate(@RequestParam("mobile") String mobile, @RequestParam("uuid") String uuid,
 			@RequestParam("authcode") String authcode) {
