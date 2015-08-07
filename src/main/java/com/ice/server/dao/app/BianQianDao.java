@@ -1,4 +1,4 @@
-package com.ice.server.dao;
+package com.ice.server.dao.app;
 
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Modifying;

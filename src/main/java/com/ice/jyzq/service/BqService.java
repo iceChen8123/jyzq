@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 
 import com.ice.jyzq.constant.BianQianStatus;
 import com.ice.server.bean.BianQian;
-import com.ice.server.dao.BianQianDao;
+import com.ice.server.dao.app.BianQianDao;
 
 @Service
 public class BqService {
