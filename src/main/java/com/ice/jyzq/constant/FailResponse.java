@@ -2,7 +2,7 @@ package com.ice.jyzq.constant;
 
 public enum FailResponse {
 
-	WrongToken(10001, "错误token");
+	WrongToken(10001, "错误token"), NotExistToken(10002, "不存在的token"), ;
 
 	FailResponse(int code, String desc) {
 		this.code = code;

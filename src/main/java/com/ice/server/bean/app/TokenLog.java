@@ -18,6 +18,8 @@ public class TokenLog implements Serializable {
 	private Long id;
 	@Column(name = "user_name")
 	private String userName;
+	@Column(name = "token")
+	private String token;
 	@Column(name = "imei")
 	private String imei;
 	@Column(name = "vendor")
@@ -43,6 +45,14 @@ public class TokenLog implements Serializable {
 
 	public void setUserName(String userName) {
 		this.userName = userName;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
 	}
 
 	public String getImei() {

@@ -2,6 +2,8 @@ package com.ice.jyzq.controller.util;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.ice.jyzq.controller.app.HeaderInfo;
+
 public class HttpUtil {
 
 	public static String getIp(HttpServletRequest request) {
@@ -16,6 +18,15 @@ public class HttpUtil {
 			ip = request.getRemoteAddr();
 		}
 		return ip;
+	}
+
+	public static HeaderInfo getHeaderInfo(HttpServletRequest request) {
+		HeaderInfo headerInfo = new HeaderInfo();
+		headerInfo.setImei(request.getHeader("imei"));
+		headerInfo.setModel(request.getHeader("model"));
+		headerInfo.setUuid(request.getHeader("uuid"));
+		headerInfo.setVendor(request.getHeader("vendor"));
+		return headerInfo;
 	}
 
 }

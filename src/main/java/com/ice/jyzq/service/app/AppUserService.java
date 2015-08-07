@@ -2,6 +2,8 @@ package com.ice.jyzq.service.app;
 
 import java.util.Date;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,11 +17,16 @@ import com.ice.server.dao.app.AppUserTokenDao;
 @Service
 public class AppUserService {
 
+	Logger logger = LoggerFactory.getLogger(getClass());
+
 	@Autowired
 	private AppUserTokenDao appUserTokenDao;
 
 	@Autowired
 	private AppUserDao appUserDao;
+
+	@Autowired
+	private TokenService tokenService;
 
 	public String createUser(String userName, HeaderInfo headerInfo) {
 		AppUser user = new AppUser();
@@ -41,6 +48,15 @@ public class AppUserService {
 		TokenCache.getInstance().cacheAppUserToken(token);
 
 		return appUserToken;
+	}
+
+	public void recordLogin(String token) {
+		try {
+			String userName = tokenService.getUserNameFromToken(token);
+			appUserDao.updateLastLogin(userName);
+		} catch (Exception e) {
+			logger.error("recordLogin: ", e);
+		}
 	}
 
 }

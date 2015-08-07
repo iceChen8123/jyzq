@@ -13,18 +13,8 @@ public class AppBaseController {
 	@Autowired
 	TokenService tokenService;
 
-	HeaderInfo getHeaderInfo(HttpServletRequest request) {
-		HeaderInfo headerInfo = new HeaderInfo();
-		headerInfo.setImei(request.getHeader("imei"));
-		headerInfo.setModel(request.getHeader("model"));
-		headerInfo.setUuid(request.getHeader("uuid"));
-		headerInfo.setVendor(request.getHeader("vendor"));
-		return headerInfo;
-	}
-
 	boolean isRightToken(HttpServletRequest request, String token) {
-		HeaderInfo headerInfo = getHeaderInfo(request);
-		return token.equals(TokenUtil.genToken(headerInfo));
+		return TokenUtil.isRightToken(request, token);
 	}
 
 }

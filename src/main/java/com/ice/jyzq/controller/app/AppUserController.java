@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import com.ice.jyzq.controller.util.HttpUtil;
 import com.ice.jyzq.service.app.AppUserService;
 import com.ice.jyzq.service.app.TokenService;
 
@@ -29,7 +30,7 @@ public class AppUserController extends AppBaseController {
 	@RequestMapping(value = "create", method = RequestMethod.POST)
 	@ResponseBody
 	public String createAppUser(HttpServletRequest request, String userName) {
-		HeaderInfo headerInfo = getHeaderInfo(request);
+		HeaderInfo headerInfo = HttpUtil.getHeaderInfo(request);
 		logger.info("createAppUser : {}  userName: {}", new Object[] { JSON.toJSONString(headerInfo), userName });
 		String token = appUserService.createUser(userName, headerInfo);
 		return JSON.toJSONString(Response.successResponse(token));

@@ -7,19 +7,30 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
+import com.ice.jyzq.constant.FailResponse;
+import com.ice.jyzq.service.app.AppUserService;
+import com.ice.jyzq.service.app.TokenService;
 import com.ice.jyzq.util.JsonMapper;
+import com.ice.server.bean.app.AppUserToken;
 
 @Controller
 @RequestMapping(value = "app")
-public class AppHomeController {
+public class AppHomeController extends AppBaseController {
 
 	Logger logger = LoggerFactory.getLogger(getClass());
+
+	@Autowired
+	private TokenService tokenService;
+
+	@Autowired
+	private AppUserService appUserService;
 
 	private static final SimpleDateFormat DATE_FORMAT_FOR_SHOWAPI = new SimpleDateFormat("yyyyMMddHHmmss");
 	private static final String SHOWAPI_APPID = "3901";
@@ -27,8 +38,17 @@ public class AppHomeController {
 
 	@RequestMapping(value = { "/hello", "" }, method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
-	public String home(Model model) {
-		return JsonMapper.toJsonString("ok");
+	public String home(HttpServletRequest request, String token) {
+		appUserService.recordLogin(token);
+		AppUserToken appUserToken = tokenService.getAppUserTokenByToken(token);
+		if (appUserToken.getId() == 0) {
+			return JsonMapper.toJsonString(Response.failResponse(FailResponse.NotExistToken));
+		}
+		if (isRightToken(request, token) && TokenUtil.isNeedNewToken(appUserToken)) {
+			String newToken = TokenUtil.genToken(request);
+			return JSON.toJSONString(Response.successResponse(newToken));
+		}
+		return JsonMapper.toJsonString(Response.failResponse(FailResponse.WrongToken));
 	}
 
 	@RequestMapping(value = { "/ip" }, method = { RequestMethod.GET, RequestMethod.POST })
