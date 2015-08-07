@@ -5,6 +5,7 @@ import java.text.SimpleDateFormat;
 
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.lang.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,9 +40,12 @@ public class AppHomeController extends AppBaseController {
 	@RequestMapping(value = { "/hello", "" }, method = { RequestMethod.GET, RequestMethod.POST })
 	@ResponseBody
 	public String home(HttpServletRequest request, String token) {
+		if (StringUtils.isBlank(token)) {
+			return JsonMapper.toJsonString(Response.failResponse(FailResponse.NotExistToken));
+		}
 		appUserService.recordLogin(token);
 		AppUserToken appUserToken = tokenService.getAppUserTokenByToken(token);
-		if (appUserToken.getId() == 0) {
+		if (appUserToken.getId() == null || appUserToken.getId().longValue() == 0) {
 			return JsonMapper.toJsonString(Response.failResponse(FailResponse.NotExistToken));
 		}
 		if (isRightToken(request, token) && TokenUtil.isNeedNewToken(appUserToken)) {
