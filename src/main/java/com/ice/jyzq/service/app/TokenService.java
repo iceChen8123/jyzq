@@ -19,7 +19,7 @@ public class TokenService {
 	private AppUserTokenDao appUserTokenDao;
 
 	public String getUserNameFromToken(String token) {
-		AppUserToken appUserToken = TokenCache.getInstance().getAppUserToken(token);
+		AppUserToken appUserToken = TokenCache.getAppUserToken(token);
 		if (appUserToken != null) {
 			logger.info("getUserNameFromToken fromCache.");
 			return appUserToken.getUserName();
@@ -30,13 +30,13 @@ public class TokenService {
 		if (appUserTokens.size() != 1) {
 			return "";
 		} else {
-			TokenCache.getInstance().cacheAppUserToken(appUserTokens.get(0));
+			TokenCache.cacheAppUserToken(appUserTokens.get(0));
 			return appUserTokens.get(0).getUserName();
 		}
 	}
 
 	public AppUserToken getAppUserTokenByToken(String token) {
-		AppUserToken appUserToken = TokenCache.getInstance().getAppUserToken(token);
+		AppUserToken appUserToken = TokenCache.getAppUserToken(token);
 		if (appUserToken != null) {
 			logger.info("getUserNameFromToken fromCache.");
 			return appUserToken;
@@ -47,7 +47,7 @@ public class TokenService {
 		if (appUserTokens.size() != 1) {
 			return new AppUserToken();
 		} else {
-			TokenCache.getInstance().cacheAppUserToken(appUserTokens.get(0));
+			TokenCache.cacheAppUserToken(appUserTokens.get(0));
 			return appUserTokens.get(0);
 		}
 	}

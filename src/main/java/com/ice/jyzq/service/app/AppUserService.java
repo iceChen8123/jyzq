@@ -45,7 +45,7 @@ public class AppUserService {
 		token.setVendor(headerInfo.getVendor());
 		appUserTokenDao.save(token);
 
-		TokenCache.getInstance().cacheAppUserToken(token);
+		TokenCache.cacheAppUserToken(token);
 
 		return appUserToken;
 	}

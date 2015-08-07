@@ -9,27 +9,16 @@ import com.ice.server.bean.app.AppUserToken;
 
 public class TokenCache {
 
-	private static TokenCache tokenCache;
+	private static TokenCache tokenCache = new TokenCache();;
 
 	private static Map<String, AppUserTokenRef> appUsertokenRefs = new HashMap<String, AppUserTokenRef>();
 
-	private ReferenceQueue q;// 垃圾Reference的队列
+	private static ReferenceQueue q = new ReferenceQueue();// 垃圾Reference的队列
 
 	private TokenCache() {
 	}
 
-	public static TokenCache getInstance() {
-		if (tokenCache == null) {
-			synchronized (tokenCache) {
-				if (tokenCache == null) {
-					tokenCache = new TokenCache();
-				}
-			}
-		}
-		return tokenCache;
-	}
-
-	private class AppUserTokenRef extends SoftReference {
+	private static class AppUserTokenRef extends SoftReference {
 		private String _key = "";
 
 		public AppUserTokenRef(AppUserToken appUserToken, ReferenceQueue q) {
@@ -38,13 +27,13 @@ public class TokenCache {
 		}
 	}
 
-	public void cacheAppUserToken(AppUserToken appUserToken) {
+	public static void cacheAppUserToken(AppUserToken appUserToken) {
 		cleanCache();// 清除垃圾引用
 		AppUserTokenRef ref = new AppUserTokenRef(appUserToken, q);
 		appUsertokenRefs.put(appUserToken.getToken(), ref);
 	}
 
-	public AppUserToken getAppUserToken(String token) {
+	public static AppUserToken getAppUserToken(String token) {
 		AppUserToken em = null;
 		// 缓存中是否有该Employee实例的软引用，如果有，从软引用中取得。
 		if (appUsertokenRefs.containsKey(token)) {
@@ -54,7 +43,7 @@ public class TokenCache {
 		return em;
 	}
 
-	private void cleanCache() {
+	private static void cleanCache() {
 		AppUserTokenRef ref = null;
 		while ((ref = (AppUserTokenRef) q.poll()) != null) {
 			appUsertokenRefs.remove(ref._key);
