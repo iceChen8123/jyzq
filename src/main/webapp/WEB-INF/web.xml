@@ -16,6 +16,10 @@
 	<!-- 激活Tomcat的defaultServlet来处理静态文件 -->
 	<servlet-mapping>
 		<servlet-name>default</servlet-name>
+		<url-pattern>*.pdf</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>default</servlet-name>
 		<url-pattern>*.jpg</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
