@@ -13,8 +13,10 @@
 var money=0;
 var s = function(m,n){ return (m/n)%100 }
 var ran = function getRandom(n){
-    return Math.floor(Math.random()*n+1)
+    return Math.floor(Math.random()*n)
     }
+var slice = 5;
+var up = true;
 $(function(){  
     run();            
     var interval;  
@@ -22,11 +24,21 @@ $(function(){
            interval = setInterval(chat, "100");  
         }  
         function chat() {  
-        	money++;
-            $('#barbar1').attr("style", "width: "+s(money,ran(4))+"%");
-            $('#barbar2').attr("style", "width: "+s(money,ran(4))+"%");
-            $('#barbar3').attr("style", "width: "+s(money,ran(4))+"%");
-            $('#barbar4').attr("style", "width: "+s(money,ran(4))+"%");
+        	if(up){
+	        	money++;
+        		if(money == 100*slice){
+        			up = false;
+        		}
+        	}else{
+	        	money--
+        		if(money == 0){
+        			up = true;
+        		}
+        	}
+            $('#barbar1').attr("style", "width: "+s(money,ran(slice))+"%");
+            $('#barbar2').attr("style", "width: "+s(money,ran(slice))+"%");
+            $('#barbar3').attr("style", "width: "+s(money,ran(slice))+"%");
+            $('#barbar4').attr("style", "width: "+s(money,ran(slice))+"%");
         }  
 }); 
 </script>
