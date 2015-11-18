@@ -11,22 +11,22 @@
 <script charset="Shift_JIS"src="http://chabudai.sakura.ne.jp/blogparts/honehoneclock/honehone_clock_tr.js"></script>
 <script type="text/javascript">
 var money=0;
-var s1 = function(m){ return m%100 }
-var s2 = function(m){ return (m/2)%100 }
-var s3 = function(m){ return (m/4)%100 }
-var s4 = function(m){ return (m/8)%100 }
+var s = function(m,n){ return (m/n)%100 }
+var ran = function getRandom(n){
+    return Math.floor(Math.random()*n+1)
+    }
 $(function(){  
-    run();             //加载页面时启动定时器  
+    run();            
     var interval;  
         function run() {  
            interval = setInterval(chat, "100");  
         }  
         function chat() {  
         	money++;
-            $('#barbar1').attr("style", "width: "+s1(money)+"%");
-            $('#barbar2').attr("style", "width: "+s2(money)+"%");
-            $('#barbar3').attr("style", "width: "+s3(money)+"%");
-            $('#barbar4').attr("style", "width: "+s4(money)+"%");
+            $('#barbar1').attr("style", "width: "+s(money,ran(4))+"%");
+            $('#barbar2').attr("style", "width: "+s(money,ran(4))+"%");
+            $('#barbar3').attr("style", "width: "+s(money,ran(4))+"%");
+            $('#barbar4').attr("style", "width: "+s(money,ran(4))+"%");
         }  
 }); 
 </script>
