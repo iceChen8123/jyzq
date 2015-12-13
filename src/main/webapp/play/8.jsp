@@ -14,8 +14,6 @@
 
 <div style="text-align:center;font:normal 14px/24px 'MicroSoft YaHei';clear:both;width:560px;margin:0 auto;">
 	<a href="#"><img class="ShakeAndBorder" alt="大饼"  src="<%=request.getContextPath()%>/resources/shakeimage/1.png" /></a>
-	<a href="#"><img class="ShakeAndBorder" alt="中饼" src="<%=request.getContextPath()%>/resources/shakeimage/1.png" /></a>
-	<a href="#"><img class="ShakeAndBorder" alt="小饼" src="<%=request.getContextPath()%>/resources/shakeimage/1.png" /></a>
 </div>
 <script type="text/javascript">$('.ShakeAndBorder').ShakeBorder();</script>
  

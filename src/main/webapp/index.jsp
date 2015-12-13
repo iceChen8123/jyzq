@@ -101,9 +101,28 @@ $(function(){
 </div>
   <p align="center"><button type="button" class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">点我没毛用</button></p>
   <br>
-  <%-- <p align="center"><a href="http://www.baidu.com" class="btn btn-success btn-lg active" role="button">我们也穷</a></p>
-  <br>
-  <p align="center"><a href="<%=request.getContextPath()%>/qiong/upload" class="btn btn-danger btn-lg active" role="button">我要穷一把</a></p> --%>
+  <div class="col-md-2 alert alert-success" role="alert">无聊点点看<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+  	<ul>
+	  <li><a href="play/1.jsp">跟随鼠标的点点</a></li>
+	  <li><a href="play/2.jsp">随意拖动小球球</a></li>
+	  <li><a href="play/4.jsp">随意拖拽的小树</a></li>
+	  <li><a href="play/5.jsp">女生必备素质</a></li>
+	  <li><a href="play/6.jsp">催眠波浪线</a></li>
+	  <li><a href="play/7.jsp">那天下着雪</a></li>
+	  <li><a href="play/8.jsp">晃动的大饼</a></li>
+	  <li><a href="play/9.jsp">疯狂抖动的屏幕</a></li>
+	  <li><a href="play/10.jsp">艺术钟表</a></li>
+	  <li><a href="play/11.jsp">时尚计时器</a></li>
+	  <li><a href="play/12.jsp">微信飞机大战</a></li>
+	</ul>
+</div>
+	<div class="col-md-2 alert alert-info" role="alert">秒表不错<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
+	<ul>
+	  <li><a href="play/stopwatch/1.jsp">坑爹秒表</a></li>
+	  <li><a href="play/stopwatch/3.jsp">高级秒表</a></li>
+	  <li><a href="play/stopwatch/4.jsp">倒计时</a></li>
+	</ul>
+  </div>
 </div>
 </div>
 </body>
