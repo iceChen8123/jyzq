@@ -1,10 +1,12 @@
 <%@ page contentType="text/html;charset=UTF-8"%>
 <html xmlns="http://www.w3.org/1999/xhtml" lang="zh-CN">
 <head>
+<title>穷在当下</title>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<%@include file="/WEB-INF/views/include/include.jsp"%>
+
+<%@include file="navi.jsp"%>
 <script type="text/javascript">
 var money=0;
 var s = function(m,n){ return (m/n)%100 }
@@ -109,20 +111,14 @@ $(function(){
 	  <li><a href="play/5.jsp">女生必备素质</a></li>
 	  <li><a href="play/6.jsp">催眠波浪线</a></li>
 	  <li><a href="play/7.jsp">那天下着雪</a></li>
-	  <li><a href="play/8.jsp">晃动的大饼</a></li>
+	  <!-- <li><a href="play/8.jsp">晃动的大饼</a></li> -->
 	  <li><a href="play/9.jsp">疯狂抖动的屏幕</a></li>
 	  <li><a href="play/10.jsp">艺术钟表</a></li>
 	  <li><a href="play/11.jsp">时尚计时器</a></li>
 	  <li><a href="play/12.jsp">微信飞机大战</a></li>
+	  <li><a href="play/stopwatch/3.jsp">高级秒表</a></li>
 	</ul>
 </div>
-	<div class="col-md-2 alert alert-info" role="alert">秒表不错<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
-	<ul>
-	  <li><a href="play/stopwatch/1.jsp">坑爹秒表</a></li>
-	  <li><a href="play/stopwatch/3.jsp">高级秒表</a></li>
-	  <li><a href="play/stopwatch/4.jsp">倒计时</a></li>
-	</ul>
-  </div>
 </div>
 </div>
 </body>
