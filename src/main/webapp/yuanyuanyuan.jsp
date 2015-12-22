@@ -9,6 +9,24 @@
 <%@include file="navi.jsp"%>
 </head>
 <body>
-
+<ul class="list-group">
+  <li class="list-group-item list-group-item-info">
+  <div class="media-left">
+      <a href="#">
+        <img class="media-object" src="<%=request.getContextPath()%>/resources/head.jpg">
+      </a>
+    </div>
+    <div class="media-body">
+      <h3 class="media-heading">猿某某</h3>
+      	<p>小猿一只.</p>
+    </div>
+  </li>
+  <li> <div class="btn-group btn-group-justified" role="group" aria-label="...">
+  <div class="btn-group" role="group">
+  	<a class="btn btn-info" href="#" role="button">Link</a>
+  </div>
+</div>
+  </li>
+</ul>
 </body>
 </html>
