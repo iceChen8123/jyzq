@@ -105,6 +105,7 @@ $(function(){
   <br>
   <div class="col-md-2 alert alert-success" role="alert">无聊点点看<span class="glyphicon glyphicon-hand-up" aria-hidden="true"></span>
   	<ul>
+	  <li><a href="play/hacker.jsp">黑客帝国效果</a></li>
 	  <li><a href="play/1.jsp">跟随鼠标的点点</a></li>
 	  <li><a href="play/2.jsp">随意拖动小球球</a></li>
 	  <li><a href="play/4.jsp">随意拖拽的小树</a></li>
