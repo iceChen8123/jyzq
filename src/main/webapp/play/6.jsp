@@ -12,3 +12,4 @@
 
 </body>
 </html>
+<%@include file="../foot.jsp"%>

@@ -31,3 +31,4 @@
 <script type="text/javascript" src="plane/main.js"></script>
 </body>
 </html>
+<%@include file="../foot.jsp"%>

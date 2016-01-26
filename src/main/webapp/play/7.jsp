@@ -138,3 +138,4 @@ for(var i = 0; i<particles.length; i++)
 
 </body>
 </html>
+<%@include file="../foot.jsp"%>

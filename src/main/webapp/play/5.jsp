@@ -73,3 +73,4 @@ $(document).ready(function(){
 </script>
 </body>
 </html>
+<%@include file="../foot.jsp"%>

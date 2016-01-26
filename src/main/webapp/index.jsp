@@ -40,7 +40,6 @@ $(function(){
         }  
 }); 
 
-
 </script>
 </head>
 <body>
@@ -124,3 +123,4 @@ $(function(){
 </div>
 </body>
 </html>
+<%@include file="foot.jsp"%>

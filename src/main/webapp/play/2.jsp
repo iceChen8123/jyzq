@@ -20,3 +20,4 @@ body{font:12px/180% Arial, Helvetica, sans-serif, "新宋体";overflow-x:hidden;
 	</div>
 </body>
 </html>
+<%@include file="../foot.jsp"%>
