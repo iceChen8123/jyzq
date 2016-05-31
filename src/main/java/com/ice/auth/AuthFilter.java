@@ -60,6 +60,7 @@ public class AuthFilter implements Filter {
 			response1.addCookie(cookietmp);
 			LogonCache.recordLoginId(cookieId);
 		}
+		chain.doFilter(request, response);
 	}
 
 	private String genCookieId() {
