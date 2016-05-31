@@ -45,5 +45,6 @@ public class EncryptablePropertyPlaceholderConfigurer extends PropertyPlaceholde
 		}
 		return "";
 	}
+	
 
 }

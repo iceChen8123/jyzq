@@ -19,8 +19,10 @@ public class Advice implements Serializable {
 	private Long id;
 	@Column(name = "user_name")
 	private String userName;
-	@Column(name = "title")
-	private String title;
+	@Column(name = "mail")
+	private String mail;
+	@Column(name = "qq")
+	private String qq;
 	@Column(name = "advice")
 	private String advice;
 	@Column(name = "create_time")
@@ -42,12 +44,20 @@ public class Advice implements Serializable {
 		this.userName = userName;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getMail() {
+		return mail;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setMail(String mail) {
+		this.mail = mail;
+	}
+
+	public String getQq() {
+		return qq;
+	}
+
+	public void setQq(String qq) {
+		this.qq = qq;
 	}
 
 	public String getAdvice() {

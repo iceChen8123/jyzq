@@ -12,13 +12,8 @@
 		http://www.springframework.org/schema/data/jpa http://www.springframework.org/schema/data/jpa/spring-jpa-1.0.xsd
 		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.2.xsd">
 
-	<!-- Enables the Spring MVC @Controller programming model -->
 	<context:annotation-config />
-	<!-- 使用Annotation自动注册Bean，解决事物失效问题：在主容器中不扫描@Controller注解，在SpringMvc中只扫描@Controller注解。 -->
-	<context:component-scan base-package="com.ice"><!-- base-package 
-			如果多个，用“,”分隔 -->
-		<context:exclude-filter type="annotation"
-			expression="org.springframework.stereotype.Controller" />
+		<context:component-scan base-package="com.ice">
 	</context:component-scan>
 
 	<task:annotation-driven />
@@ -31,103 +26,17 @@
 		<property name="locations">
 			<list>
 				<value>classpath:log4j.properties</value>
-				<value>classpath:jdbc.properties</value>
 			</list>
 		</property>
 	</bean>
 
-	<aop:aspectj-autoproxy proxy-target-class="true" />
-
-	<!-- 配置 JSR303 Bean Validator 定义 -->
 	<bean id="validator"
 		class="org.springframework.validation.beanvalidation.LocalValidatorFactoryBean" />
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
-		in the /WEB-INF/views directory -->
 	<beans:bean
 		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
 		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
 	</beans:bean>
-
-	<bean id="myDataSource" class="org.apache.commons.dbcp.BasicDataSource"
-		destroy-method="close">
-		<property name="driverClassName" value="${driverClassName}" />
-		<property name="url" value="${connection.url}" />
-		<property name="username" value="${connection.username}" />
-		<property name="password" value="${connection.password}" />
-		<!--maxActive: 最大连接数量 -->
-		<property name="maxActive" value="${connection.maxActive}" />
-		<!--minIdle: 最小空闲连接 -->
-		<property name="minIdle" value="5" />
-		<!--maxIdle: 最大空闲连接 -->
-		<property name="maxIdle" value="${connection.initialSize}" />
-		<!--initialSize: 初始化连接 -->
-		<property name="initialSize" value="${connection.initialSize}" />
-		<!-- 连接被泄露时是否打印 -->
-		<property name="logAbandoned" value="true" />
-		<!--removeAbandoned: 是否自动回收超时连接 -->
-		<property name="removeAbandoned" value="true" />
-		<!--removeAbandonedTimeout: 超时时间(以秒数为单位) -->
-		<property name="removeAbandonedTimeout" value="10" />
-		<!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒 -->
-		<property name="maxWait" value="1000" />
-		<!-- 在空闲连接回收器线程运行期间休眠的时间值,以毫秒为单位. -->
-		<property name="timeBetweenEvictionRunsMillis" value="10000" />
-		<!-- 在每次空闲连接回收器线程(如果有)运行时检查的连接数量 -->
-		<property name="numTestsPerEvictionRun" value="10" />
-		<!-- 1000 * 60 * 30 连接在池中保持空闲而不被空闲连接回收器线程 -->
-		<property name="minEvictableIdleTimeMillis" value="10000" />
-		<property name="validationQuery" value="SELECT NOW() FROM DUAL" />
-	</bean>
-
-	<!-- <bean id="myDataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource"> 
-		<property name="user" value="${connection.username}" /> <property name="password" 
-		value="${connection.password}" /> <property name="driverClass" value="${driverClassName}" 
-		/> <property name="jdbcUrl" value="${connection.url}" /> <property name="maxPoolSize" 
-		value="${connection.maxActive}" /> <property name="minPoolSize" value="${connection.initialSize}" 
-		/> <property name="initialPoolSize" value="10" /> <property name="maxIdleTime" 
-		value="60" /> <property name="checkoutTimeout" value="3000" /> <property 
-		name="acquireIncrement" value="2" /> <property name="acquireRetryAttempts" 
-		value="0" /> <property name="acquireRetryDelay" value="1000" /> <property 
-		name="autoCommitOnClose" value="false" /> <property name="maxStatements" 
-		value="0" /> <property name="maxStatementsPerConnection" value="50" /> </bean> -->
-
-	<!-- Hibernate对Jpa的实现 -->
-	<bean id="hibernateJpaVendorAdapter"
-		class="org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter" />
-
-	<!-- 定义实体管理器工厂 Jpa配置 LocalContainerEntityManagerFactoryBean这个选项Spring扮演了容器的角色。完全掌管JPA -->
-	<bean id="entityManagerFactory"
-		class="org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean">
-		<!-- 指定数据源 -->
-		<property name="dataSource" ref="myDataSource" />
-		<!-- 指定Jpa持久化实现厂商类,这里以Hibernate为例 -->
-		<property name="jpaVendorAdapter" ref="hibernateJpaVendorAdapter" />
-		<!-- 指定Entity实体类包路径 -->
-		<property name="packagesToScan">
-			<array>
-				<value>com.ice.server.bean</value>
-			</array>
-		</property>
-		<!-- 指定JPA属性；如Hibernate中指定是否显示SQL的是否显示、方言等 -->
-		<property name="jpaProperties">
-			<props>
-				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
-				<prop key="hibernate.ejb.naming_strategy">org.hibernate.cfg.ImprovedNamingStrategy</prop>
-				<prop key="hibernate.cache.provider_class">org.hibernate.cache.NoCacheProvider</prop>
-				<prop key="hibernate.show_sql">false</prop>
-				<prop key="hibernate.format_sql">true</prop>
-			</props>
-		</property>
-	</bean>
-
-	<jpa:repositories base-package="com.ice.server.dao"
-		entity-manager-factory-ref="entityManagerFactory"
-		transaction-manager-ref="transactionManagerjpa" />
-
-	<bean id="transactionManagerjpa" class="org.springframework.orm.jpa.JpaTransactionManager">
-		<property name="entityManagerFactory" ref="entityManagerFactory" />
-	</bean>
 
 </beans:beans>
