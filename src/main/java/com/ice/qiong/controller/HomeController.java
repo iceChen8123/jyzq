@@ -19,6 +19,7 @@ public class HomeController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@RequestMapping(value = { "/hello" }, method = { RequestMethod.GET, RequestMethod.POST })
+	@ResponseBody
 	public String home(HttpServletRequest request, HttpServletResponse response) {
 		return "home";
 	}

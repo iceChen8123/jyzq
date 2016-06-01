@@ -201,6 +201,11 @@ $(function(){
 	</ul>
 </div>
 </div>
+
+<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="whq-index" data-title="我很穷首页" data-url="www.wohenqiong.com"></div>
+<!-- 多说评论框 end -->
+
 </div>
 </body>
 </html>
