@@ -11,7 +11,10 @@
 
 <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 <script type="text/javascript">
-var duoshuoQuery = {short_name:"wohenqiong"};
+var duoshuoQuery = {short_name:"wohenqiong",sso: { 
+    login: "http://www.wohenqiong.com/login",
+    logout: "http://www.wohenqiong.com/logout"
+}};
 	(function() {
 		var ds = document.createElement('script');
 		ds.type = 'text/javascript';ds.async = true;
