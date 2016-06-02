@@ -35,9 +35,8 @@ public class LoginController {
 	@RequestMapping(value = { "/login" }, method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(HttpServletRequest request, Model model,
 			@RequestParam(value = "code", required = false) String code) {
-		logger.info("loginFromDuoshuo: {}", code);
 		try {
-			String dsId = getDsIdByDsCode(code);
+			getDsIdByDsCode(code);
 		} catch (Exception e) {
 			logger.warn("login: ", e);
 		}
@@ -53,7 +52,7 @@ public class LoginController {
 
 		List<BasicNameValuePair> nvps = new ArrayList<BasicNameValuePair>();
 		nvps.add(new BasicNameValuePair("code", code));
-		nvps.add(new BasicNameValuePair("client_id", "jyzq"));
+		nvps.add(new BasicNameValuePair("client_id", "wohenqiong"));
 		try {
 			httpost.setEntity(new UrlEncodedFormEntity(nvps, "UTF-8"));
 		} catch (UnsupportedEncodingException e1) {
@@ -65,7 +64,7 @@ public class LoginController {
 			String response = EntityUtils.toString(httpResponse.getEntity());
 			JSONObject jsonObject = JSON.parseObject(response);
 			if (jsonObject.get("code") != null && "990002".equals(jsonObject.get("code"))) {
-				logger.warn("loginFromDuoshuo: " + jsonObject);
+				logger.warn("duoshuologin failed: " + jsonObject);
 			} else {
 				if (jsonObject.get("user_id") != null) {
 					dsId = jsonObject.get("user_id").toString();
@@ -77,7 +76,7 @@ public class LoginController {
 				HttpResponse responset = httpclient.execute(httpGet);
 				JSONObject userinforesponse = JSON.parseObject(EntityUtils.toString(responset.getEntity()));
 				userinforesponse = (JSONObject) userinforesponse.get("response");
-				logger.info("dsid:{}; dsInfo: {}", dsId, userinforesponse.toJSONString());
+				logger.info("duoshuoid:{}; duoshuoinfo: {}", dsId, userinforesponse.toJSONString());
 			} catch (ClientProtocolException e) {
 				logger.error(" getDsIdByDsCode ClientProtocolException: ", e);
 			} catch (IOException e) {
@@ -90,8 +89,8 @@ public class LoginController {
 	}
 
 	@RequestMapping(value = { "/logout" }, method = { RequestMethod.GET, RequestMethod.POST })
-	public String logout(HttpServletRequest request, @RequestParam(value = "code", required = false) String code) {
-		logger.info("logoutFromDuoshuo: {}", code);
+	public String logout(HttpServletRequest request) {
+		// TODO 这个登出目前没意义
 		return "toindex";
 	}
 
