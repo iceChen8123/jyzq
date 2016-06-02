@@ -28,6 +28,7 @@
 </div>
   </li>
 </ul>
+<div class="ds-thread" data-thread-key="whq-message" data-title="我很穷简介" data-url="www.wohenqiong.com/yuanyuanyuan.jsp"></div>
 </body>
 </html>
 <%@include file="foot.jsp"%>
