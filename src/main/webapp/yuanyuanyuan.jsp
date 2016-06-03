@@ -22,9 +22,6 @@
     </div>
   </li>
   <li> <div class="btn-group btn-group-justified" role="group" aria-label="...">
-  <div class="btn-group" role="group">
-  	<a class="btn btn-info" href="#" role="button">Link</a>
-  </div>
 </div>
   </li>
 </ul>
