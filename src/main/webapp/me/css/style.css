@@ -40,7 +40,7 @@ body a{
   margin:0
 }
 .banner {
-  background: url(../images/9.jpg) no-repeat 0px 0px;
+  background: url(../images/me.jpg) no-repeat 0px 0px;
   background-size: cover;
   -webkit-background-size: cover;
   -moz-background-size: cover;
@@ -729,7 +729,7 @@ div#portfoliolist {
   font-size: 1.5em;
 }
 .banner {
-  background: url(../images/9.jpg) no-repeat -49px 0px;
+  background: url(../images/me.jpg) no-repeat -49px 0px;
   background-size:cover;
 }
 }
@@ -817,7 +817,7 @@ div#portfoliolist {
   font-size: 1.23em;
 }
 .banner {
-  background: url(../images/9.jpg) no-repeat -95px 0px;
+  background: url(../images/me.jpg) no-repeat -95px 0px;
   background-size:cover;
 }
 }

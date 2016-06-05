@@ -126,51 +126,52 @@
 <!-- services -->
 	<div class="services">
 		<div class="container">
-			<h3>干的咋样</h3>
+			<h3>干过啥</h3>
 			<div class="service-grids">
 							<div class="col-md-4 service-grid">
 									<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-								<h4>开发能力</h4>
-								<span> </span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem Ipsum passages containing of Letraset sheets</p>
+								<h4>Coding in JAVA</h4>
+								<span></span>
+								<p>代码敲了6年多,喜欢敲击键盘,生产代码的感觉,同事也是为了实现自身的价值,不仅仅是出卖劳力,挣命生活.随着时间的推移,对代码越来越敬畏,想一直coding下去.</p>
 							</div>
 							<div class="col-md-4 service-grid">
 								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
-								<h4>THE BEST SUPPORT</h4>
-								<span> </span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem Ipsum passages containing of Letraset sheets</p>
+								<h4>多线程开发</h4>
+								<span></span>
+								<p>基本开发,线程调优,线程安全,线程协同.对于多线程开发有不少的经验和心得.对于ringbuffer也有所了解,也很不错的东西,了解原理、思想。
+								</p>
 							</div>
 							<div class="col-md-4 service-grid">
 								<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
-								<h4>THE BEST SOLUTIONS</h4>
+								<h4>数据库设计</h4>
 								<span> </span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem Ipsum passages containing of Letraset sheets</p>
+								<p>参与过系统的设计,经历过从0到1的旅程.对表设计、索引、分表、分库等有不少经验和心得.调优sql自然也是会的.不过具体DBA,还相差不少,毕竟术业有专攻^_^</p>
 							</div>
 							<div class="col-md-4 service-grid">
 								<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
-								<h4>THE BEST SOLUTIONS</h4>
-								<span> </span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem Ipsum passages containing of Letraset sheets</p>
+								<h4>敏捷开发</h4>
+								<span></span>
+								<p>喜欢真正的敏捷,在每个迭代中快速得到反馈,进行修正,感受迭代成功的喜悦.曾做过scrum master,做过具体的执行.对看板、卡片、迭代会议有一定的经验,也有自己的认识.</p>
 							</div>
 							<div class="col-md-4 service-grid">
 								<span class="glyphicon glyphicon-globe" aria-hidden="true"></span>
-								<h4>THE BEST SOLUTIONS</h4>
+								<h4>持续集成</h4>
 								<span> </span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem Ipsum passages containing of Letraset sheets</p>
+								<p>虽然对其理论知识理解不深刻,但是实践中一直在遵循,也深刻知道其优点和带来的巨大好处.会长期的执行下去,就像一种习惯.当然,也会搭建持续集成的环境,并实践过.</p>
 							</div>
 							<div class="col-md-4 service-grid">
 								<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
-								<h4>THE BEST SOLUTIONS</h4>
+								<h4>代码质量</h4>
 								<span> </span>
-								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem Ipsum passages containing of Letraset sheets</p>
+								<p><b>放在最后,不是不重,而是太重!</b>我写的代码,一定会去雕琢它,不管有没有人看!因为你对它敬畏了,它自然会以一种方式反馈给你的!我爱高质量的代码,轻微洁癖!一般会用sonar撸一遍代码~</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
 		</div>
 	</div>
 <!-- services -->
-<!-- portfolio -->
-	<div class="gallery">
+<!-- portfolio 后端工程师。。。没这多可炫的，可耻的hidden了。。。。-->
+	<div class="gallery" hidden="hidden">
 		<div class="container">
 			<h3>Portfolio</h3>
 			<div class="portfolio">
@@ -224,52 +225,38 @@
 	</div>
 <!-- portfolio -->	
 <!-- client -->
+<style>
+img{
+border-radius: 9px;
+-webkit-border-radius: 9px;
+-moz-border-radius: 9px;
+}
+</style>
 	<div class="client">
 		<div class="container">
-			<h3>Clients</h3>
+			<h3>哪待过</h3>
 			<div class="nbs-flexisel-container"><div class="nbs-flexisel-inner"><ul id="flexiselDemo1" class="nbs-flexisel-ul" style="left: -228px; display: block;">			
 					
 					<li class="nbs-flexisel-item" style="width: 300px;">
 						<div class="sliderfig-grid">
-							<img src="me/images/5.png" alt=" " class="img-responsive">
+							<a href="http://www.shuyun.com/" target="view_window1"><img src="me/images/shuyun.jpg" alt=" " class="img-responsive"></a>
 						</div>
 					</li>
 					<li class="nbs-flexisel-item" style="width: 300px;">
 						<div class="sliderfig-grid">
-							<img src="me/images/2.png" alt=" " class="img-responsive">
+							<a href="http://www.ericsson.com/cn/" target="view_window2"><img src="me/images/ericsson.jpg" alt=" " class="img-responsive"></a>
 						</div>
 					</li>
 					<li class="nbs-flexisel-item" style="width: 300px;">
 						<div class="sliderfig-grid">
-							<img src="me/images/3.png" alt=" " class="img-responsive">
+							<a href="http://www.ctrip.com/" target="view_window3"><img src="me/images/ctrip.jpg" alt=" " class="img-responsive"></a>
 						</div>
 					</li>
 					<li class="nbs-flexisel-item" style="width: 300px;">
 						<div class="sliderfig-grid">
-							<img src="me/images/4.png" alt=" " class="img-responsive">
+							<a href="http://www.jme.com/" target="view_window4"><img src="me/images/jme.jpg" alt=" " class="img-responsive"></a>
 						</div>
 					</li>
-					<li class="nbs-flexisel-item" style="width: 300px;">
-						<div class="sliderfig-grid">
-							<img src="me/images/6.png" alt=" " class="img-responsive">
-						</div>
-					</li>
-					<li class="nbs-flexisel-item" style="width: 300px;">
-						<div class="sliderfig-grid">
-							<img src="me/images/7.png" alt=" " class="img-responsive">
-						</div>
-					</li>
-					<li class="nbs-flexisel-item" style="width: 300px;">
-						<div class="sliderfig-grid">
-							<img src="me/images/5.png" alt=" " class="img-responsive">
-						</div>
-					</li>
-					<li class="nbs-flexisel-item" style="width: 300px;">
-						<div class="sliderfig-grid">
-							<img src="me/images/1.png" alt=" " class="img-responsive">
-						</div>
-					</li>
-					
 					
 					</ul>
 					<div class="nbs-flexisel-nav-left" style="top: 27.5px;"></div><div class="nbs-flexisel-nav-right" style="top: 27.5px;"></div></div></div>
