@@ -66,56 +66,58 @@
 			<h3>会干啥</h3>
 			<div class="study2">
 			<div class="col-md-6 about-left">
-						<h4>html</h4>
+						<h4>javaEE</h4>
 							<div class="progress">
-							  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 40%">
-								<span class="sr-only">40% Complete (success)</span>
+							  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 							  </div>
 							</div>
-						<h4>css</h4>
+						<h4>代码质量</h4>
+							<div class="progress">
+							  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+							  </div>
+							</div>
+						<h4>java多线程</h4>
+							<div class="progress">
+							  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+							  </div>
+							</div>
+						<h4>bootstrap+jquery</h4>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 20%">
-							<span class="sr-only">20% Complete</span>
+						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 67%">
 						  </div>
 						</div>
-						<h4>js</h4>
+						<h4>scrum</h4>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="30" aria-valuemin="0" aria-valuemax="100" style="width: 30%">
-							<span class="sr-only">30% Complete (warning)</span>
-						  </div>
-						</div>
-						<h4>php</h4>
-						<div class="progress">
-						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 50%">
-							<span class="sr-only">50% Complete (danger)</span>
+						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 64%">
 						  </div>
 						</div>
 					</div>
 					<div class="col-md-6 about-right">
-						<h4>illustrate</h4>
+						<h4>spring</h4>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="70" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
-							<span class="sr-only">70% Complete (danger)</span>
+						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 						  </div>
 						</div>
-						<h4>print</h4>
+						<h4>持续集成</h4>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 60%">
-							<span class="sr-only">60% Complete (danger)</span>
+						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
 						  </div>
 						</div>
-						<h4>photoshop</h4>
+						<h4>数据库设计</h4>
 						<div class="progress">
-						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 90%">
-							<span class="sr-only">90% Complete (danger)</span>
+						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="20" aria-valuemin="0" aria-valuemax="100" style="width: 76%">
 						  </div>
 						</div>
-						<h4>media</h4>
-							<div class="progress">
-							  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" style="width: 75%">
-								<span class="sr-only">75% Complete (success)</span>
-							  </div>
-							</div>
+						<h4>linux</h4>
+						<div class="progress">
+						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="60" aria-valuemin="0" aria-valuemax="100" style="width: 73%">
+						  </div>
+						</div>
+						<h4>svn+git</h4>
+						<div class="progress">
+						  <div class="progress-bar progress-bar-danger-3" role="progressbar" aria-valuenow="90" aria-valuemin="0" aria-valuemax="100" style="width: 70%">
+						  </div>
+						</div>
 					</div>
 		</div>
 	</div>
@@ -124,11 +126,11 @@
 <!-- services -->
 	<div class="services">
 		<div class="container">
-			<h3>Services</h3>
+			<h3>干的咋样</h3>
 			<div class="service-grids">
 							<div class="col-md-4 service-grid">
 									<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
-								<h4>THE BEST DESIGN</h4>
+								<h4>开发能力</h4>
 								<span> </span>
 								<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod Lorem Ipsum passages containing of Letraset sheets</p>
 							</div>
