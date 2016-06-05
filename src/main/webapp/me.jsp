@@ -132,20 +132,20 @@
 									<span class="glyphicon glyphicon-time" aria-hidden="true"></span>
 								<h4>Coding in JAVA</h4>
 								<span></span>
-								<p>代码敲了6年多,喜欢敲击键盘,生产代码的感觉,同事也是为了实现自身的价值,不仅仅是出卖劳力,挣命生活.随着时间的推移,对代码越来越敬畏,想一直coding下去.</p>
+								<p>代码敲了6年多,喜欢敲击键盘,生产代码的感觉,同时也是为了实现自身的价值,不仅仅是出卖劳力,挣命生活.随着时间的推移,对代码也越来越敬畏,想一直coding下去.</p>
 							</div>
 							<div class="col-md-4 service-grid">
 								<span class="glyphicon glyphicon-star" aria-hidden="true"></span>
 								<h4>多线程开发</h4>
 								<span></span>
-								<p>基本开发,线程调优,线程安全,线程协同.对于多线程开发有不少的经验和心得.对于ringbuffer也有所了解,也很不错的东西,了解原理、思想。
+								<p>基本开发,线程调优,线程安全,线程协同.对于多线程开发有不少的经验和心得.对于ringbuffer也有所了解,是很不错的东西,了解原理、思想。
 								</p>
 							</div>
 							<div class="col-md-4 service-grid">
 								<span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
 								<h4>数据库设计</h4>
 								<span> </span>
-								<p>参与过系统的设计,经历过从0到1的旅程.对表设计、索引、分表、分库等有不少经验和心得.调优sql自然也是会的.不过具体DBA,还相差不少,毕竟术业有专攻^_^</p>
+								<p>参与过系统的设计,经历过从0到1的旅程.对表设计、索引、分表、分库等有不少经验和心得.调优sql自然也是会的.不过距离DBA,还相差不少,毕竟术业有专攻^_^</p>
 							</div>
 							<div class="col-md-4 service-grid">
 								<span class="glyphicon glyphicon-eye-open" aria-hidden="true"></span>
@@ -163,7 +163,7 @@
 								<span class="glyphicon glyphicon-wrench" aria-hidden="true"></span>
 								<h4>代码质量</h4>
 								<span> </span>
-								<p><b>放在最后,不是不重,而是太重!</b>我写的代码,一定会去雕琢它,不管有没有人看!因为你对它敬畏了,它自然会以一种方式反馈给你的!我爱高质量的代码,轻微洁癖!一般会用sonar撸一遍代码~</p>
+								<p><b>放在最后,不是不重,而是太重!</b>我写的代码,一定会去雕琢它,不管有没有人看!因为你对它敬畏了,它自然会以一种方式反馈给你的!我爱高质量的代码,中度代码洁癖症患者!一般会用sonar撸一遍代码~</p>
 							</div>
 							<div class="clearfix"> </div>
 						</div>
