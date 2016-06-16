@@ -10,7 +10,7 @@
 		<li style="font-family: '幼圆'; font-weight: bolder;"><a href="<%=request.getContextPath()%>/")">首页</a></li>
 		<%-- <li style="font-family: '幼圆'; font-weight: bolder;"><a href="<%=request.getContextPath()%>/rubbish.jsp")">别被自己讨厌</a></li> --%>
 		<%-- <li style="font-family: '幼圆'; font-weight: bolder;"><a href="<%=request.getContextPath()%>/smallguy/guy.jsp")">小人</a></li> --%>
-		<li style="font-family: '幼圆'; font-weight: bolder;"><a href="chat.wohenqiong.com")">随说</a></li>
+		<li style="font-family: '幼圆'; font-weight: bolder;"><a href="http://chat.wohenqiong.com")" target="_blank">随说</a></li>
 		<li style="font-family: '幼圆'; font-weight: bolder;"><a href="<%=request.getContextPath()%>/me.jsp")">猿简介</a></li>
 	</ul>
 </nav>
