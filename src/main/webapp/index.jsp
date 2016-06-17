@@ -5,7 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="keywords" content="ice,多线程,并发,java后端,数据库设计,bootstrap,jquery,兼职" />
+<meta name="keywords" content="穷在当下,ice,多线程,并发,java后端,数据库设计,bootstrap,jquery,兼职" />
 
 <%@include file="navi.jsp"%>
 <script type="text/javascript">
