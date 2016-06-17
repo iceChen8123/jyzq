@@ -338,3 +338,4 @@ border-radius: 9px;
 	
 </body>
 </html>
+<%@include file="foot.jsp"%>
