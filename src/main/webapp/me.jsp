@@ -244,11 +244,6 @@ border-radius: 9px;
 					</li>
 					<li class="nbs-flexisel-item" style="width: 300px;">
 						<div class="sliderfig-grid">
-							<a href="http://www.ericsson.com/cn/" target="view_window2"><img src="me/images/ericsson.jpg" alt=" " class="img-responsive"></a>
-						</div>
-					</li>
-					<li class="nbs-flexisel-item" style="width: 300px;">
-						<div class="sliderfig-grid">
 							<a href="http://www.ctrip.com/" target="view_window3"><img src="me/images/ctrip.jpg" alt=" " class="img-responsive"></a>
 						</div>
 					</li>
